@@ -1,19 +1,26 @@
-import { CanActivate, ExecutionContext, ForbiddenException, Injectable } from '@nestjs/common';
+import {
+  CanActivate,
+  ExecutionContext,
+  ForbiddenException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { AdminService } from './admin.service';
-import { Observable } from 'rxjs';
 
 @Injectable()
 export class AdminGuard implements CanActivate {
-  constructor(private AdminService: AdminService) {}
+  constructor(private readonly adminService: AdminService) {}
 
-  canActivate(context: ExecutionContext): boolean {
+  async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest();
-    const email = request.user.email;
-    if (!this.AdminService.isAdmin(email)) {
+    const email = request.user?.email;
+    if (!email) {
+      throw new UnauthorizedException('Authentication required. Please log in.');
+    }
+    const isAdmin = await this.adminService.isAdmin(email);
+    if (!isAdmin) {
       throw new ForbiddenException('Access denied. Not an admin.');
     }
-    return this.AdminService.isAdmin(email);
+    return true;
   }
-
-
 }

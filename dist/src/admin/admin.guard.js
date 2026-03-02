@@ -13,17 +13,21 @@ exports.AdminGuard = void 0;
 const common_1 = require("@nestjs/common");
 const admin_service_1 = require("./admin.service");
 let AdminGuard = class AdminGuard {
-    AdminService;
-    constructor(AdminService) {
-        this.AdminService = AdminService;
+    adminService;
+    constructor(adminService) {
+        this.adminService = adminService;
     }
-    canActivate(context) {
+    async canActivate(context) {
         const request = context.switchToHttp().getRequest();
-        const email = request.user.email;
-        if (!this.AdminService.isAdmin(email)) {
+        const email = request.user?.email;
+        if (!email) {
+            throw new common_1.UnauthorizedException('Authentication required. Please log in.');
+        }
+        const isAdmin = await this.adminService.isAdmin(email);
+        if (!isAdmin) {
             throw new common_1.ForbiddenException('Access denied. Not an admin.');
         }
-        return this.AdminService.isAdmin(email);
+        return true;
     }
 };
 exports.AdminGuard = AdminGuard;

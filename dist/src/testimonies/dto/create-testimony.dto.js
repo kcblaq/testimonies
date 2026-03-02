@@ -14,74 +14,55 @@ const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 class CreateTestimonyDto {
     title;
+    content;
     authorName;
     authorEmail;
-    content;
-    date;
-    status;
-    updatedByEmail;
 }
 exports.CreateTestimonyDto = CreateTestimonyDto;
 __decorate([
     (0, swagger_1.ApiProperty)({
-        name: 'title',
-        description: 'The title of the testimony',
-        example: 'My Testimony',
+        description: 'Title of the testimony',
+        example: 'How this service changed my life',
+        minLength: 5,
+        maxLength: 200,
     }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)({ message: 'Title is required' }),
+    (0, class_validator_1.MinLength)(5, { message: 'Title must be at least 5 characters' }),
+    (0, class_validator_1.MaxLength)(200, { message: 'Title must be at most 200 characters' }),
     __metadata("design:type", String)
 ], CreateTestimonyDto.prototype, "title", void 0);
 __decorate([
-    (0, class_validator_1.IsString)({ message: 'Name must be a string' }),
-    (0, class_validator_1.MaxLength)(50, { message: 'Name must be at most 50 characters' }),
-    (0, class_validator_1.MinLength)(10, { message: 'Name must be at least 10 characters' }),
     (0, swagger_1.ApiProperty)({
-        name: 'authorName',
-        description: 'The name of the person giving the testimony',
-        example: 'Kelechi Ugwu',
+        description: 'Full content of the testimony',
+        example: 'I am grateful for the support I received. It made a real difference.',
     }),
-    __metadata("design:type", String)
-], CreateTestimonyDto.prototype, "authorName", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        name: 'authorEmail',
-        description: 'The email of the person giving the testimony',
-        example: 'kelechi@example.com',
-    }),
-    (0, class_validator_1.IsEmail)({}, { message: 'Invalid email format' }),
-    (0, class_validator_1.IsString)({ message: 'Email must be a string' }),
-    __metadata("design:type", String)
-], CreateTestimonyDto.prototype, "authorEmail", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        name: 'content',
-        description: 'The content of the testimony',
-        example: 'This is a testimony about how great this service is.',
-    }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)({ message: 'Content is required' }),
+    (0, class_validator_1.MinLength)(20, { message: 'Content must be at least 20 characters' }),
+    (0, class_validator_1.MaxLength)(5000, { message: 'Content must be at most 5000 characters' }),
     __metadata("design:type", String)
 ], CreateTestimonyDto.prototype, "content", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
-        description: 'The date of the testimony',
-        example: '2024-06-01',
+        description: 'Full name of the person giving the testimony',
+        example: 'Kelechi Ugwu',
+        minLength: 2,
+        maxLength: 100,
     }),
-    __metadata("design:type", Date)
-], CreateTestimonyDto.prototype, "date", void 0);
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)({ message: 'Author name is required' }),
+    (0, class_validator_1.MinLength)(2, { message: 'Author name must be at least 2 characters' }),
+    (0, class_validator_1.MaxLength)(100, { message: 'Author name must be at most 100 characters' }),
+    __metadata("design:type", String)
+], CreateTestimonyDto.prototype, "authorName", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
-        name: 'status',
-        description: 'Whether the testimony is approved by an admin',
-        example: false,
-    }),
-    __metadata("design:type", Boolean)
-], CreateTestimonyDto.prototype, "status", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        name: 'updatedByEmail',
-        description: 'The email of the person who updated the testimony',
+        description: 'Email of the person giving the testimony',
         example: 'kelechi@example.com',
     }),
-    (0, class_validator_1.IsEmail)({}, { message: 'Invalid email format' }),
-    (0, class_validator_1.IsString)({ message: 'Email must be a string' }),
+    (0, class_validator_1.IsEmail)({}, { message: 'Please provide a valid email address' }),
+    (0, class_validator_1.IsNotEmpty)({ message: 'Author email is required' }),
     __metadata("design:type", String)
-], CreateTestimonyDto.prototype, "updatedByEmail", void 0);
+], CreateTestimonyDto.prototype, "authorEmail", void 0);
 //# sourceMappingURL=create-testimony.dto.js.map

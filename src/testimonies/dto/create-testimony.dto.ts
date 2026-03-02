@@ -1,64 +1,52 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsString, MaxLength, MinLength } from 'class-validator';
-
+import {
+  IsEmail,
+  IsString,
+  MaxLength,
+  MinLength,
+  IsNotEmpty,
+} from 'class-validator';
 
 export class CreateTestimonyDto {
+  @ApiProperty({
+    description: 'Title of the testimony',
+    example: 'How this service changed my life',
+    minLength: 5,
+    maxLength: 200,
+  })
+  @IsString()
+  @IsNotEmpty({ message: 'Title is required' })
+  @MinLength(5, { message: 'Title must be at least 5 characters' })
+  @MaxLength(200, { message: 'Title must be at most 200 characters' })
+  title: string;
 
-    @ApiProperty({
-        name: 'title',
-        description: 'The title of the testimony',
-        example: 'My Testimony',
-    })
-    title: string;
-    @IsString({ message: 'Name must be a string' })
-    @MaxLength(50, { message: 'Name must be at most 50 characters' })
-    @MinLength(10, { message: 'Name must be at least 10 characters' })
+  @ApiProperty({
+    description: 'Full content of the testimony',
+    example: 'I am grateful for the support I received. It made a real difference.',
+  })
+  @IsString()
+  @IsNotEmpty({ message: 'Content is required' })
+  @MinLength(20, { message: 'Content must be at least 20 characters' })
+  @MaxLength(5000, { message: 'Content must be at most 5000 characters' })
+  content: string;
 
-    @ApiProperty({
-        name: 'authorName',
-        description: 'The name of the person giving the testimony',
-        example: 'Kelechi Ugwu',
-    })
-    authorName: string;
+  @ApiProperty({
+    description: 'Full name of the person giving the testimony',
+    example: 'Kelechi Ugwu',
+    minLength: 2,
+    maxLength: 100,
+  })
+  @IsString()
+  @IsNotEmpty({ message: 'Author name is required' })
+  @MinLength(2, { message: 'Author name must be at least 2 characters' })
+  @MaxLength(100, { message: 'Author name must be at most 100 characters' })
+  authorName: string;
 
-    @ApiProperty({
-        name: 'authorEmail',
-        description: 'The email of the person giving the testimony',
-        example: 'kelechi@example.com',
-    })
-    @IsEmail({}, { message: 'Invalid email format' })
-    @IsString({ message: 'Email must be a string' })
-    authorEmail: string;
-
-    @ApiProperty({
-        name: 'content',
-        description: 'The content of the testimony',
-        example: 'This is a testimony about how great this service is.',
-    })
-    content: string;
-
-    @ApiProperty({
-        description: 'The date of the testimony',
-        example: '2024-06-01',
-    })
-    date: Date;
-    
-    @ApiProperty({
-        name: 'status',
-        description: 'Whether the testimony is approved by an admin',
-        example: false,
-    })
-    status: boolean;
-
-
-    @ApiProperty({
-        name: 'updatedByEmail',
-        description: 'The email of the person who updated the testimony',
-        example: 'kelechi@example.com',
-    })
-    @IsEmail({}, { message: 'Invalid email format' })
-    @IsString({ message: 'Email must be a string' })
-    updatedByEmail: string;
-
-
+  @ApiProperty({
+    description: 'Email of the person giving the testimony',
+    example: 'kelechi@example.com',
+  })
+  @IsEmail({}, { message: 'Please provide a valid email address' })
+  @IsNotEmpty({ message: 'Author email is required' })
+  authorEmail: string;
 }

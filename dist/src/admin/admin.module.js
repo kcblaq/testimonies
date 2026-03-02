@@ -8,16 +8,28 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AdminModule = void 0;
 const common_1 = require("@nestjs/common");
+const jwt_1 = require("@nestjs/jwt");
+const passport_1 = require("@nestjs/passport");
 const admin_service_1 = require("./admin.service");
 const admin_controller_1 = require("./admin.controller");
+const admin_guard_1 = require("./admin.guard");
+const jwt_strategy_1 = require("./jwt.strategy");
+const jwt_auth_guard_1 = require("./jwt-auth.guard");
 let AdminModule = class AdminModule {
 };
 exports.AdminModule = AdminModule;
 exports.AdminModule = AdminModule = __decorate([
     (0, common_1.Module)({
+        imports: [
+            passport_1.PassportModule.register({ defaultStrategy: 'jwt' }),
+            jwt_1.JwtModule.register({
+                secret: process.env.JWT_SECRET || 'change-me-in-production',
+                signOptions: { expiresIn: '7d' },
+            }),
+        ],
         controllers: [admin_controller_1.AdminController],
-        providers: [admin_service_1.AdminService],
-        exports: [admin_service_1.AdminService],
+        providers: [admin_service_1.AdminService, admin_guard_1.AdminGuard, jwt_strategy_1.JwtStrategy, jwt_auth_guard_1.JwtAuthGuard],
+        exports: [admin_service_1.AdminService, admin_guard_1.AdminGuard, jwt_auth_guard_1.JwtAuthGuard],
     })
 ], AdminModule);
 //# sourceMappingURL=admin.module.js.map

@@ -5,8 +5,7 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -20,13 +19,18 @@ enum ReviewStatus {
 }
 
 model Admin {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  password  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id                           Int       @id @default(autoincrement())
+  email                        String    @unique
+  password                     String
+  name                         String
+  emailVerified                Boolean   @default(false)
+  emailVerificationToken       String?
+  emailVerificationTokenExpiresAt DateTime?
+  createdAt                    DateTime  @default(now())
+  updatedAt                    DateTime  @updatedAt
 
   @@index([email])
+  @@index([emailVerificationToken])
 }
 
 model Testimony {
@@ -38,7 +42,7 @@ model Testimony {
   status ReviewStatus @default(PENDING)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  updatedByEmail String
+  updatedByEmail String?
 
 @@index([status])
 @@index([createdAt])

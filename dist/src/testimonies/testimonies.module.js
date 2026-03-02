@@ -10,11 +10,13 @@ exports.TestimoniesModule = void 0;
 const common_1 = require("@nestjs/common");
 const testimonies_service_1 = require("./testimonies.service");
 const testimonies_controller_1 = require("./testimonies.controller");
+const admin_module_1 = require("../admin/admin.module");
 let TestimoniesModule = class TestimoniesModule {
 };
 exports.TestimoniesModule = TestimoniesModule;
 exports.TestimoniesModule = TestimoniesModule = __decorate([
     (0, common_1.Module)({
+        imports: [admin_module_1.AdminModule],
         controllers: [testimonies_controller_1.TestimoniesController],
         providers: [testimonies_service_1.TestimoniesService],
     })
