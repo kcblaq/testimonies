@@ -19,6 +19,7 @@ exports.TestimoniesModule = TestimoniesModule = __decorate([
         imports: [admin_module_1.AdminModule],
         controllers: [testimonies_controller_1.TestimoniesController],
         providers: [testimonies_service_1.TestimoniesService],
+        exports: [testimonies_service_1.TestimoniesService],
     })
 ], TestimoniesModule);
 //# sourceMappingURL=testimonies.module.js.map

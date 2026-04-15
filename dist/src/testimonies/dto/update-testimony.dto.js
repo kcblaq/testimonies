@@ -12,8 +12,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UpdateTestimonyDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
+const class_transformer_1 = require("class-transformer");
 class UpdateTestimonyDto {
     status;
+    categoryId;
 }
 exports.UpdateTestimonyDto = UpdateTestimonyDto;
 __decorate([
@@ -28,4 +30,15 @@ __decorate([
     }),
     __metadata("design:type", String)
 ], UpdateTestimonyDto.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Category ID. Omit to leave unchanged.',
+        example: 1,
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_transformer_1.Type)(() => Number),
+    (0, class_validator_1.IsInt)(),
+    (0, class_validator_1.Min)(1),
+    __metadata("design:type", Number)
+], UpdateTestimonyDto.prototype, "categoryId", void 0);
 //# sourceMappingURL=update-testimony.dto.js.map

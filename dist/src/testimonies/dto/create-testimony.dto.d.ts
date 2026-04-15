@@ -3,4 +3,5 @@ export declare class CreateTestimonyDto {
     content: string;
     authorName: string;
     authorEmail: string;
+    categoryId: number;
 }

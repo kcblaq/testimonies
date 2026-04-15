@@ -1,0 +1,44 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Admin {
+  email                           String    @unique
+  createdAt                       DateTime  @default(now())
+  updatedAt                       DateTime  @updatedAt
+  password                        String
+  id                              Int       @id @default(autoincrement())
+  name                            String
+  emailVerified                   Boolean   @default(false)
+  emailVerificationToken          String?
+  emailVerificationTokenExpiresAt DateTime?
+
+  @@index([email])
+  @@index([emailVerificationToken])
+}
+
+model Testimony {
+  id             Int          @id @default(autoincrement())
+  title          String
+  content        String
+  status         ReviewStatus @default(PENDING)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  authorEmail    String
+  authorName     String
+  updatedByEmail String?
+
+  @@index([status])
+  @@index([createdAt])
+}
+
+enum ReviewStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}

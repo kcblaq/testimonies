@@ -8,11 +8,12 @@ import {
   Delete,
   UseGuards,
   Req,
+  Query,
   ParseIntPipe,
   HttpCode,
   HttpStatus,
 } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth, ApiQuery } from '@nestjs/swagger';
 import { TestimoniesService } from './testimonies.service';
 import { CreateTestimonyDto } from './dto/create-testimony.dto';
 import { UpdateTestimonyDto } from './dto/update-testimony.dto';
@@ -38,43 +39,90 @@ export class TestimoniesController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'List all testimonies' })
-  @ApiResponse({ status: 200, description: 'List of testimonies.' })
-  findAll() {
-    return this.testimoniesService.findAll();
+  @ApiOperation({
+    summary: 'List all testimonies',
+    description: 'Filter by category using categoryId or categorySlug (slug takes precedence if both provided).',
+  })
+  @ApiQuery({ name: 'categoryId', required: false, type: Number, description: 'Filter by category ID' })
+  @ApiQuery({ name: 'categorySlug', required: false, type: String, description: 'Filter by category slug (e.g. healing)' })
+  @ApiResponse({ status: 200, description: 'List of testimonies (each includes category).' })
+  @ApiResponse({ status: 404, description: 'Category not found (when using categorySlug).' })
+  async findAll(
+    @Query('categoryId') categoryId?: string,
+    @Query('categorySlug') categorySlug?: string,
+  ) {
+    const id = categoryId ? parseInt(categoryId, 10) : undefined;
+    const resolvedId = await this.testimoniesService.resolveCategoryId(
+      Number.isNaN(id) ? undefined : id,
+      categorySlug,
+    );
+    return this.testimoniesService.findAll(resolvedId);
   }
 
   @Get('approved')
   @ApiOperation({
     summary: 'List approved testimonies',
-    description: 'Returns only testimonies that have been approved by an admin. Public endpoint.',
+    description: 'Returns only approved testimonies. Filter by categoryId or categorySlug.',
   })
+  @ApiQuery({ name: 'categoryId', required: false, type: Number, description: 'Filter by category ID' })
+  @ApiQuery({ name: 'categorySlug', required: false, type: String, description: 'Filter by category slug' })
   @ApiResponse({ status: 200, description: 'List of approved testimonies.' })
+  @ApiResponse({ status: 404, description: 'Category not found (when using categorySlug).' })
   @ApiResponse({ status: 500, description: 'Server error.' })
-  findAllApproved() {
-    return this.testimoniesService.findAllApproved();
+  async findAllApproved(
+    @Query('categoryId') categoryId?: string,
+    @Query('categorySlug') categorySlug?: string,
+  ) {
+    const id = categoryId ? parseInt(categoryId, 10) : undefined;
+    const resolvedId = await this.testimoniesService.resolveCategoryId(
+      Number.isNaN(id) ? undefined : id,
+      categorySlug,
+    );
+    return this.testimoniesService.findAllApproved(resolvedId);
   }
 
   @Get('rejected')
   @ApiOperation({
     summary: 'List rejected testimonies',
-    description: 'Returns only testimonies that have been rejected by an admin.',
+    description: 'Returns only rejected testimonies. Filter by categoryId or categorySlug.',
   })
+  @ApiQuery({ name: 'categoryId', required: false, type: Number, description: 'Filter by category ID' })
+  @ApiQuery({ name: 'categorySlug', required: false, type: String, description: 'Filter by category slug' })
   @ApiResponse({ status: 200, description: 'List of rejected testimonies.' })
+  @ApiResponse({ status: 404, description: 'Category not found (when using categorySlug).' })
   @ApiResponse({ status: 500, description: 'Server error.' })
-  findAllRejected() {
-    return this.testimoniesService.findAllRejected();
+  async findAllRejected(
+    @Query('categoryId') categoryId?: string,
+    @Query('categorySlug') categorySlug?: string,
+  ) {
+    const id = categoryId ? parseInt(categoryId, 10) : undefined;
+    const resolvedId = await this.testimoniesService.resolveCategoryId(
+      Number.isNaN(id) ? undefined : id,
+      categorySlug,
+    );
+    return this.testimoniesService.findAllRejected(resolvedId);
   }
 
   @Get('pending')
   @ApiOperation({
     summary: 'List pending testimonies',
-    description: 'Returns only testimonies awaiting admin review (status PENDING).',
+    description: 'Returns only testimonies awaiting review. Filter by categoryId or categorySlug.',
   })
+  @ApiQuery({ name: 'categoryId', required: false, type: Number, description: 'Filter by category ID' })
+  @ApiQuery({ name: 'categorySlug', required: false, type: String, description: 'Filter by category slug' })
   @ApiResponse({ status: 200, description: 'List of pending testimonies.' })
+  @ApiResponse({ status: 404, description: 'Category not found (when using categorySlug).' })
   @ApiResponse({ status: 500, description: 'Server error.' })
-  findAllPending() {
-    return this.testimoniesService.findAllPending();
+  async findAllPending(
+    @Query('categoryId') categoryId?: string,
+    @Query('categorySlug') categorySlug?: string,
+  ) {
+    const id = categoryId ? parseInt(categoryId, 10) : undefined;
+    const resolvedId = await this.testimoniesService.resolveCategoryId(
+      Number.isNaN(id) ? undefined : id,
+      categorySlug,
+    );
+    return this.testimoniesService.findAllPending(resolvedId);
   }
 
   @Get(':id')
