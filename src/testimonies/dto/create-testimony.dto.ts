@@ -1,11 +1,15 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import {
   IsEmail,
   IsString,
   MaxLength,
   MinLength,
   IsNotEmpty,
+  IsOptional,
+  IsInt,
+  Min,
 } from 'class-validator';
+import { Type } from 'class-transformer';
 
 export class CreateTestimonyDto {
   @ApiProperty({
@@ -49,4 +53,14 @@ export class CreateTestimonyDto {
   @IsEmail({}, { message: 'Please provide a valid email address' })
   @IsNotEmpty({ message: 'Author email is required' })
   authorEmail: string;
+
+  @ApiPropertyOptional({
+    description: 'ID of the category this testimony belongs to. Use GET /categories to list options.',
+    example: 1,
+  })
+  @IsOptional()
+  @Type(() => Number)
+  @IsInt()
+  @Min(1)
+  categoryId?: number;
 }

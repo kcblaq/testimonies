@@ -7,5 +7,6 @@ import { AdminModule } from '../admin/admin.module';
   imports: [AdminModule],
   controllers: [TestimoniesController],
   providers: [TestimoniesService],
+  exports: [TestimoniesService],
 })
 export class TestimoniesModule {}

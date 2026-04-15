@@ -29,6 +29,7 @@ Content-Type: application/json
 | content     | string | yes      | 20–5000 characters                   |
 | authorName  | string | yes      | 2–100 characters                     |
 | authorEmail | string | yes      | Valid email                          |
+| categoryId  | number | no       | ID of category (use `GET /categories` for list) |
 
 **Example:**
 
@@ -37,7 +38,8 @@ Content-Type: application/json
   "title": "How this service changed my life",
   "content": "I am grateful for the support I received. It made a real difference in my daily routine.",
   "authorName": "Kelechi Ugwu",
-  "authorEmail": "kelechi@example.com"
+  "authorEmail": "kelechi@example.com",
+  "categoryId": 1
 }
 ```
 
@@ -50,34 +52,38 @@ Content-Type: application/json
 #### List all testimonies
 
 ```http
-GET /testimonies
+GET /testimonies?categoryId=1
+GET /testimonies?categorySlug=healing
 ```
 
-Returns all testimonies (any status).
+Returns all testimonies (any status). Filter by **categoryId** (number) or **categorySlug** (e.g. `healing`). If both are provided, `categorySlug` is used. Each testimony includes a `category` object when set.
 
 #### List approved testimonies
 
 ```http
-GET /testimonies/approved
+GET /testimonies/approved?categoryId=1
+GET /testimonies/approved?categorySlug=healing
 ```
 
-Returns only testimonies with status `APPROVED`. Use this for public display.
+Returns only approved testimonies. Optional filter by **categoryId** or **categorySlug**.
 
 #### List rejected testimonies
 
 ```http
-GET /testimonies/rejected
+GET /testimonies/rejected?categoryId=1
+GET /testimonies/rejected?categorySlug=healing
 ```
 
-Returns only testimonies with status `REJECTED`.
+Same filtering by category.
 
 #### List pending testimonies
 
 ```http
-GET /testimonies/pending
+GET /testimonies/pending?categoryId=1
+GET /testimonies/pending?categorySlug=healing
 ```
 
-Returns only testimonies awaiting admin review (status `PENDING`).
+Same filtering by category.
 
 #### Get one testimony
 
@@ -85,8 +91,67 @@ Returns only testimonies awaiting admin review (status `PENDING`).
 GET /testimonies/:id
 ```
 
-- `200` – Testimony.
+- `200` – Testimony (includes `category` when set).
 - `404` – Not found.
+
+---
+
+### Categories (public + admin)
+
+#### List categories
+
+```http
+GET /categories
+```
+
+Returns all categories with testimony count. Public.
+
+#### Get category by ID or slug
+
+```http
+GET /categories/:idOrSlug
+```
+
+Use numeric ID or slug (e.g. `healing`). Returns category with testimony count.
+
+#### List testimonies in a category (filter by category)
+
+```http
+GET /categories/:idOrSlug/testimonies
+GET /categories/:idOrSlug/testimonies/approved
+GET /categories/:idOrSlug/testimonies/rejected
+GET /categories/:idOrSlug/testimonies/pending
+```
+
+`:idOrSlug` is the category ID or slug (e.g. `healing`). Returns testimonies in that category (all, or by status). Public.
+
+#### Create category (admin only)
+
+```http
+POST /categories
+Authorization: Bearer <token>
+Content-Type: application/json
+```
+
+**Body:** `{ "name": "Healing", "slug": "healing", "description": "Optional" }`. `slug` is optional (defaults from name).
+
+#### Update category (admin only)
+
+```http
+PATCH /categories/:id
+Authorization: Bearer <token>
+```
+
+**Body:** Partial `{ "name", "slug", "description" }`.
+
+#### Delete category (admin only)
+
+```http
+DELETE /categories/:id
+Authorization: Bearer <token>
+```
+
+Testimonies in this category will have `categoryId` set to null.
 
 ---
 
@@ -188,9 +253,10 @@ Content-Type: application/json
 
 **Body:**
 
-| Field  | Type   | Required | Description                    |
-|--------|--------|----------|--------------------------------|
-| status | string | no       | `APPROVED` or `REJECTED`      |
+| Field      | Type   | Required | Description                              |
+|------------|--------|----------|------------------------------------------|
+| status     | string | no       | `APPROVED` or `REJECTED`                 |
+| categoryId | number | no       | Category ID; use `null` to clear        |
 
 **Responses:**
 
@@ -226,6 +292,7 @@ Authorization: Bearer <token>
 
 ## Schema note
 
-- New testimonies are created with `status: PENDING`.
+- New testimonies are created with `status: PENDING`. Optional `categoryId` links to a category.
 - `updatedByEmail` is optional and set when an admin approves or rejects.
+- **Categories** have `name`, `slug`, and optional `description`. Testimonies can optionally belong to one category; listing/filtering by `categoryId` is supported.
 - Admins have `name`, `emailVerified`, and email verification token fields. Login is allowed only when `emailVerified` is true (after calling verify-email).

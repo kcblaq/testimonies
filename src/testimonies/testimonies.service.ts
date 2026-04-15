@@ -13,10 +13,34 @@ import { ReviewStatus } from '@prisma/client';
 export class TestimoniesService {
   constructor(private readonly prisma: PrismaService) {}
 
+  private includeCategory = { category: { select: { id: true, name: true, slug: true } } };
+
+  /** Resolve categorySlug to category id. Throws if slug not found. */
+  async resolveCategoryId(categoryId?: number, categorySlug?: string): Promise<number | undefined> {
+    if (categorySlug != null && categorySlug.trim() !== '') {
+      const category = await this.prisma.category.findUnique({
+        where: { slug: categorySlug.trim().toLowerCase() },
+      });
+      if (!category) {
+        throw new NotFoundException(`Category with slug "${categorySlug}" not found.`);
+      }
+      return category.id;
+    }
+    return categoryId;
+  }
+
   /**
    * Create a new testimony (public). Status is always PENDING until admin approves.
    */
   async create(createTestimonyDto: CreateTestimonyDto) {
+    if (createTestimonyDto.categoryId != null) {
+      const category = await this.prisma.category.findUnique({
+        where: { id: createTestimonyDto.categoryId },
+      });
+      if (!category) {
+        throw new BadRequestException(`Category with id ${createTestimonyDto.categoryId} not found.`);
+      }
+    }
     try {
       const testimony = await this.prisma.testimony.create({
         data: {
@@ -25,7 +49,9 @@ export class TestimoniesService {
           authorName: createTestimonyDto.authorName.trim(),
           authorEmail: createTestimonyDto.authorEmail.trim().toLowerCase(),
           status: ReviewStatus.PENDING,
+          categoryId: createTestimonyDto.categoryId ?? undefined,
         },
+        include: this.includeCategory,
       });
       return testimony;
     } catch (error: unknown) {
@@ -46,10 +72,12 @@ export class TestimoniesService {
     }
   }
 
-  async findAll() {
+  async findAll(categoryId?: number) {
     try {
       return this.prisma.testimony.findMany({
+        where: categoryId != null ? { categoryId } : undefined,
         orderBy: { createdAt: 'desc' },
+        include: this.includeCategory,
       });
     } catch {
       throw new InternalServerErrorException(
@@ -58,11 +86,15 @@ export class TestimoniesService {
     }
   }
 
-  async findAllApproved() {
+  async findAllApproved(categoryId?: number) {
     try {
       return this.prisma.testimony.findMany({
-        where: { status: ReviewStatus.APPROVED },
+        where: {
+          status: ReviewStatus.APPROVED,
+          ...(categoryId != null && { categoryId }),
+        },
         orderBy: { createdAt: 'desc' },
+        include: this.includeCategory,
       });
     } catch {
       throw new InternalServerErrorException(
@@ -71,11 +103,15 @@ export class TestimoniesService {
     }
   }
 
-  async findAllRejected() {
+  async findAllRejected(categoryId?: number) {
     try {
       return this.prisma.testimony.findMany({
-        where: { status: ReviewStatus.REJECTED },
+        where: {
+          status: ReviewStatus.REJECTED,
+          ...(categoryId != null && { categoryId }),
+        },
         orderBy: { createdAt: 'desc' },
+        include: this.includeCategory,
       });
     } catch {
       throw new InternalServerErrorException(
@@ -84,11 +120,15 @@ export class TestimoniesService {
     }
   }
 
-  async findAllPending() {
+  async findAllPending(categoryId?: number) {
     try {
       return this.prisma.testimony.findMany({
-        where: { status: ReviewStatus.PENDING },
+        where: {
+          status: ReviewStatus.PENDING,
+          ...(categoryId != null && { categoryId }),
+        },
         orderBy: { createdAt: 'desc' },
+        include: this.includeCategory,
       });
     } catch {
       throw new InternalServerErrorException(
@@ -100,6 +140,7 @@ export class TestimoniesService {
   async findOne(id: number) {
     const testimony = await this.prisma.testimony.findUnique({
       where: { id },
+      include: this.includeCategory,
     });
     if (!testimony) {
       throw new NotFoundException(`Testimony with id ${id} not found.`);
@@ -109,16 +150,28 @@ export class TestimoniesService {
 
   async update(id: number, updateTestimonyDto: UpdateTestimonyDto, adminEmail?: string) {
     await this.findOne(id);
+    if (updateTestimonyDto.categoryId != null) {
+      const category = await this.prisma.category.findUnique({
+        where: { id: updateTestimonyDto.categoryId },
+      });
+      if (!category) {
+        throw new BadRequestException(`Category with id ${updateTestimonyDto.categoryId} not found.`);
+      }
+    }
     try {
       return this.prisma.testimony.update({
         where: { id },
         data: {
           ...(updateTestimonyDto.status && { status: updateTestimonyDto.status as ReviewStatus }),
           ...(adminEmail && { updatedByEmail: adminEmail }),
+          ...(updateTestimonyDto.categoryId !== undefined && {
+            categoryId: updateTestimonyDto.categoryId ?? null,
+          }),
         },
+        include: this.includeCategory,
       });
     } catch (error: unknown) {
-      if (error instanceof NotFoundException) throw error;
+      if (error instanceof NotFoundException || error instanceof BadRequestException) throw error;
       throw new InternalServerErrorException(
         'Failed to update testimony. Please try again later.',
       );
@@ -135,5 +188,49 @@ export class TestimoniesService {
         'Failed to delete testimony. Please try again later.',
       );
     }
+  }
+
+  async approveMany(ids: number[]) {
+    try {
+      await this.prisma.testimony.updateMany({
+        where: { id: { in: ids } },
+        data: { status: ReviewStatus.APPROVED },
+      });
+    } catch (error: unknown) {
+      throw new InternalServerErrorException('Failed to approve testimonies. Please try again later.');
+    }
+    return { message: 'Testimonies approved successfully' };
+  }
+
+  async rejectMany(ids: number[]) {
+    try {
+      await this.prisma.testimony.updateMany({
+        where: { id: { in: ids } },
+        data: { status: ReviewStatus.REJECTED },
+      });
+    } catch (error: unknown) {
+      throw new InternalServerErrorException('Failed to reject testimonies. Please try again later.');
+    }
+  return { message: 'Testimonies rejected successfully' };
+  }
+
+  async deleteMany(ids: number[]) {
+    try {
+      await this.prisma.testimony.deleteMany({
+        where: { id: { in: ids } },
+      });
+    } catch (error: unknown) {
+      throw new InternalServerErrorException('Failed to delete testimonies. Please try again later.');
+    }
+    return { message: 'Testimonies deleted successfully' };
+  }
+
+  async deleteAll() {
+    try {
+      await this.prisma.testimony.deleteMany();
+    } catch (error: unknown) {
+      throw new InternalServerErrorException('Failed to delete all testimonies. Please try again later.');
+    }
+    return { message: 'All testimonies deleted successfully' };
   }
 }
