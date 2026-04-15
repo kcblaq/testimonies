@@ -12,11 +12,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateTestimonyDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
+const class_transformer_1 = require("class-transformer");
 class CreateTestimonyDto {
     title;
     content;
     authorName;
     authorEmail;
+    categoryId;
 }
 exports.CreateTestimonyDto = CreateTestimonyDto;
 __decorate([
@@ -65,4 +67,15 @@ __decorate([
     (0, class_validator_1.IsNotEmpty)({ message: 'Author email is required' }),
     __metadata("design:type", String)
 ], CreateTestimonyDto.prototype, "authorEmail", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'ID of the category this testimony belongs to. Use GET /categories to list options.',
+        example: 1,
+    }),
+    (0, class_validator_1.IsNotEmpty)({ message: 'Category is required' }),
+    (0, class_transformer_1.Type)(() => Number),
+    (0, class_validator_1.IsInt)(),
+    (0, class_validator_1.Min)(1),
+    __metadata("design:type", Number)
+], CreateTestimonyDto.prototype, "categoryId", void 0);
 //# sourceMappingURL=create-testimony.dto.js.map

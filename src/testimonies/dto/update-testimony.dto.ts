@@ -18,13 +18,12 @@ export class UpdateTestimonyDto {
   status?: 'APPROVED' | 'REJECTED';
 
   @ApiPropertyOptional({
-    description: 'Category ID. Omit to leave unchanged; send null to clear category.',
+    description: 'Category ID. Omit to leave unchanged.',
     example: 1,
   })
   @IsOptional()
-  @ValidateIf((_, v) => v != null)
   @Type(() => Number)
   @IsInt()
   @Min(1)
-  categoryId?: number | null;
+  categoryId?: number;
 }

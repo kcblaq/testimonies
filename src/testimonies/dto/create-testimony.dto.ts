@@ -54,13 +54,13 @@ export class CreateTestimonyDto {
   @IsNotEmpty({ message: 'Author email is required' })
   authorEmail: string;
 
-  @ApiPropertyOptional({
+  @ApiProperty({
     description: 'ID of the category this testimony belongs to. Use GET /categories to list options.',
     example: 1,
   })
-  @IsOptional()
+  @IsNotEmpty({ message: 'Category is required' })
   @Type(() => Number)
   @IsInt()
   @Min(1)
-  categoryId?: number;
+  categoryId: number;
 }

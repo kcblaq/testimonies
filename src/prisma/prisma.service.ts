@@ -1,59 +1,57 @@
+// src/prisma/prisma.service.ts
 import { Injectable, OnModuleInit, OnModuleDestroy, Logger } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 import { PrismaPg } from '@prisma/adapter-pg';
 import { Pool } from 'pg';
 
 @Injectable()
-export class PrismaService
-  extends PrismaClient
-  implements OnModuleInit, OnModuleDestroy
-{
+export class PrismaService extends PrismaClient implements OnModuleInit, OnModuleDestroy {
   private readonly logger = new Logger(PrismaService.name);
-  private readonly maxConnectAttempts = Number(process.env.PRISMA_CONNECT_RETRIES ?? 8);
-  private readonly baseBackoffMs = Number(process.env.PRISMA_CONNECT_BACKOFF_MS ?? 2000);
 
   constructor() {
-    const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+    // 1. Check if the URL exists before even trying to build the pool
+    const connectionString = process.env.DATABASE_URL;
+    if (!connectionString) {
+      throw new Error('DATABASE_URL is not defined in environment variables');
+    }
+
+    const pool = new Pool({ connectionString });
+    
+    // Add an error listener to the PG Pool itself
+    pool.on('error', (err) => {
+      this.logger.error('Unexpected error on idle Supabase client', err.stack);
+    });
+
     const adapter = new PrismaPg(pool);
     super({ adapter });
   }
 
   async onModuleInit() {
-    await this.connectWithRetry();
+    try {
+      this.logger.log('Attempting to connect to Supabase...');
+      
+      // 2. This is where the actual connection is established
+      await this.$connect();
+      
+      this.logger.log('✅ Prisma connected successfully to Supabase');
+    } catch (error) {
+      // 3. Detailed error logging
+      this.logger.error('❌ Prisma failed to connect to the database');
+      this.logger.error(error.message);
+      
+      if (error.message.includes('password authentication failed')) {
+        this.logger.warn('Check if your database password is correct and URL-encoded.');
+      }
+      if (error.message.includes('ETIMEDOUT')) {
+        this.logger.warn('Connection timed out. Check if your IP is whitelisted in Supabase or if you are using the correct port.');
+      }
+      
+      // Optionally exit the process if the DB is critical
+      // process.exit(1); 
+    }
   }
 
   async onModuleDestroy() {
     await this.$disconnect();
-  }
-
-  private async connectWithRetry() {
-    let attempt = 1;
-    let lastError: unknown;
-
-    while (attempt <= this.maxConnectAttempts) {
-      try {
-        await this.$connect();
-        this.logger.log(`Prisma connected (attempt ${attempt}/${this.maxConnectAttempts})`);
-        return;
-      } catch (error) {
-        lastError = error;
-        const waitMs = Math.min(this.baseBackoffMs * attempt, 15000);
-        this.logger.warn(
-          `Prisma connection attempt ${attempt}/${this.maxConnectAttempts} failed. Retrying in ${waitMs}ms...`,
-        );
-        await this.sleep(waitMs);
-        attempt += 1;
-      }
-    }
-
-    this.logger.error(
-      `Failed to connect to database after ${this.maxConnectAttempts} attempts.`,
-      lastError instanceof Error ? lastError.stack : String(lastError),
-    );
-    throw lastError;
-  }
-
-  private sleep(ms: number) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 }
