@@ -23,6 +23,7 @@ const jwt_auth_guard_1 = require("../admin/jwt-auth.guard");
 const admin_guard_1 = require("../admin/admin.guard");
 const category_entity_1 = require("./entities/category.entity");
 const testimony_entity_1 = require("../testimonies/entities/testimony.entity");
+const testimony_query_dto_1 = require("../testimonies/dto/testimony-query.dto");
 let CategoriesController = class CategoriesController {
     categoriesService;
     testimoniesService;
@@ -33,21 +34,21 @@ let CategoriesController = class CategoriesController {
     findAll() {
         return this.categoriesService.findAll();
     }
-    async getCategoryTestimonies(idOrSlug) {
+    async getCategoryTestimonies(idOrSlug, query) {
         const categoryId = await this.resolveCategoryId(idOrSlug);
-        return this.testimoniesService.findAll(categoryId);
+        return this.testimoniesService.findAll(query, categoryId);
     }
-    async getCategoryTestimoniesApproved(idOrSlug) {
+    async getCategoryTestimoniesApproved(idOrSlug, query) {
         const categoryId = await this.resolveCategoryId(idOrSlug);
-        return this.testimoniesService.findAllApproved(categoryId);
+        return this.testimoniesService.findAllApproved(query, categoryId);
     }
-    async getCategoryTestimoniesRejected(idOrSlug) {
+    async getCategoryTestimoniesRejected(idOrSlug, query) {
         const categoryId = await this.resolveCategoryId(idOrSlug);
-        return this.testimoniesService.findAllRejected(categoryId);
+        return this.testimoniesService.findAllRejected(query, categoryId);
     }
-    async getCategoryTestimoniesPending(idOrSlug) {
+    async getCategoryTestimoniesPending(idOrSlug, query) {
         const categoryId = await this.resolveCategoryId(idOrSlug);
-        return this.testimoniesService.findAllPending(categoryId);
+        return this.testimoniesService.findAllPending(query, categoryId);
     }
     findOne(idOrSlug) {
         const num = parseInt(idOrSlug, 10);
@@ -93,8 +94,9 @@ __decorate([
     (0, swagger_1.ApiResponse)({ status: 200, description: 'List of testimonies in the category.', type: [testimony_entity_1.TestimonyEntity] }),
     (0, swagger_1.ApiResponse)({ status: 404, description: 'Category not found.' }),
     __param(0, (0, common_1.Param)('idOrSlug')),
+    __param(1, (0, common_1.Query)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [String, testimony_query_dto_1.TestimonyQueryDto]),
     __metadata("design:returntype", Promise)
 ], CategoriesController.prototype, "getCategoryTestimonies", null);
 __decorate([
@@ -106,8 +108,9 @@ __decorate([
     (0, swagger_1.ApiResponse)({ status: 200, description: 'List of approved testimonies.', type: [testimony_entity_1.TestimonyEntity] }),
     (0, swagger_1.ApiResponse)({ status: 404, description: 'Category not found.' }),
     __param(0, (0, common_1.Param)('idOrSlug')),
+    __param(1, (0, common_1.Query)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [String, testimony_query_dto_1.TestimonyQueryDto]),
     __metadata("design:returntype", Promise)
 ], CategoriesController.prototype, "getCategoryTestimoniesApproved", null);
 __decorate([
@@ -116,8 +119,9 @@ __decorate([
     (0, swagger_1.ApiResponse)({ status: 200, description: 'List of rejected testimonies.', type: [testimony_entity_1.TestimonyEntity] }),
     (0, swagger_1.ApiResponse)({ status: 404, description: 'Category not found.' }),
     __param(0, (0, common_1.Param)('idOrSlug')),
+    __param(1, (0, common_1.Query)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [String, testimony_query_dto_1.TestimonyQueryDto]),
     __metadata("design:returntype", Promise)
 ], CategoriesController.prototype, "getCategoryTestimoniesRejected", null);
 __decorate([
@@ -126,8 +130,9 @@ __decorate([
     (0, swagger_1.ApiResponse)({ status: 200, description: 'List of pending testimonies.', type: [testimony_entity_1.TestimonyEntity] }),
     (0, swagger_1.ApiResponse)({ status: 404, description: 'Category not found.' }),
     __param(0, (0, common_1.Param)('idOrSlug')),
+    __param(1, (0, common_1.Query)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [String, testimony_query_dto_1.TestimonyQueryDto]),
     __metadata("design:returntype", Promise)
 ], CategoriesController.prototype, "getCategoryTestimoniesPending", null);
 __decorate([

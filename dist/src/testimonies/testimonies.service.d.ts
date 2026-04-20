@@ -1,6 +1,7 @@
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateTestimonyDto } from './dto/create-testimony.dto';
 import { UpdateTestimonyDto } from './dto/update-testimony.dto';
+import { TestimonyQueryDto } from './dto/testimony-query.dto';
 export declare class TestimoniesService {
     private readonly prisma;
     constructor(prisma: PrismaService);
@@ -18,84 +19,118 @@ export declare class TestimoniesService {
         updatedAt: Date;
         title: string;
         content: string;
-        authorName: string;
         authorEmail: string;
-        categoryId: number | null;
+        authorName: string;
         status: import(".prisma/client").$Enums.ReviewStatus;
         updatedByEmail: string | null;
+        categoryId: number | null;
     }>;
-    findAll(categoryId?: number): Promise<({
-        category: {
+    private buildWhereClause;
+    private paginate;
+    findAll(query: TestimonyQueryDto, categoryId?: number): Promise<{
+        data: ({
+            category: {
+                id: number;
+                name: string;
+                slug: string;
+            } | null;
+        } & {
             id: number;
-            name: string;
-            slug: string;
-        } | null;
-    } & {
-        id: number;
-        createdAt: Date;
-        updatedAt: Date;
-        title: string;
-        content: string;
-        authorName: string;
-        authorEmail: string;
-        categoryId: number | null;
-        status: import(".prisma/client").$Enums.ReviewStatus;
-        updatedByEmail: string | null;
-    })[]>;
-    findAllApproved(categoryId?: number): Promise<({
-        category: {
+            createdAt: Date;
+            updatedAt: Date;
+            title: string;
+            content: string;
+            authorEmail: string;
+            authorName: string;
+            status: import(".prisma/client").$Enums.ReviewStatus;
+            updatedByEmail: string | null;
+            categoryId: number | null;
+        })[];
+        meta: {
+            total: number;
+            page: number;
+            limit: number;
+            totalPages: number;
+        };
+    }>;
+    findAllApproved(query: TestimonyQueryDto, categoryId?: number): Promise<{
+        data: ({
+            category: {
+                id: number;
+                name: string;
+                slug: string;
+            } | null;
+        } & {
             id: number;
-            name: string;
-            slug: string;
-        } | null;
-    } & {
-        id: number;
-        createdAt: Date;
-        updatedAt: Date;
-        title: string;
-        content: string;
-        authorName: string;
-        authorEmail: string;
-        categoryId: number | null;
-        status: import(".prisma/client").$Enums.ReviewStatus;
-        updatedByEmail: string | null;
-    })[]>;
-    findAllRejected(categoryId?: number): Promise<({
-        category: {
+            createdAt: Date;
+            updatedAt: Date;
+            title: string;
+            content: string;
+            authorEmail: string;
+            authorName: string;
+            status: import(".prisma/client").$Enums.ReviewStatus;
+            updatedByEmail: string | null;
+            categoryId: number | null;
+        })[];
+        meta: {
+            total: number;
+            page: number;
+            limit: number;
+            totalPages: number;
+        };
+    }>;
+    findAllRejected(query: TestimonyQueryDto, categoryId?: number): Promise<{
+        data: ({
+            category: {
+                id: number;
+                name: string;
+                slug: string;
+            } | null;
+        } & {
             id: number;
-            name: string;
-            slug: string;
-        } | null;
-    } & {
-        id: number;
-        createdAt: Date;
-        updatedAt: Date;
-        title: string;
-        content: string;
-        authorName: string;
-        authorEmail: string;
-        categoryId: number | null;
-        status: import(".prisma/client").$Enums.ReviewStatus;
-        updatedByEmail: string | null;
-    })[]>;
-    findAllPending(categoryId?: number): Promise<({
-        category: {
+            createdAt: Date;
+            updatedAt: Date;
+            title: string;
+            content: string;
+            authorEmail: string;
+            authorName: string;
+            status: import(".prisma/client").$Enums.ReviewStatus;
+            updatedByEmail: string | null;
+            categoryId: number | null;
+        })[];
+        meta: {
+            total: number;
+            page: number;
+            limit: number;
+            totalPages: number;
+        };
+    }>;
+    findAllPending(query: TestimonyQueryDto, categoryId?: number): Promise<{
+        data: ({
+            category: {
+                id: number;
+                name: string;
+                slug: string;
+            } | null;
+        } & {
             id: number;
-            name: string;
-            slug: string;
-        } | null;
-    } & {
-        id: number;
-        createdAt: Date;
-        updatedAt: Date;
-        title: string;
-        content: string;
-        authorName: string;
-        authorEmail: string;
-        categoryId: number | null;
-        status: import(".prisma/client").$Enums.ReviewStatus;
-        updatedByEmail: string | null;
-    })[]>;
+            createdAt: Date;
+            updatedAt: Date;
+            title: string;
+            content: string;
+            authorEmail: string;
+            authorName: string;
+            status: import(".prisma/client").$Enums.ReviewStatus;
+            updatedByEmail: string | null;
+            categoryId: number | null;
+        })[];
+        meta: {
+            total: number;
+            page: number;
+            limit: number;
+            totalPages: number;
+        };
+    }>;
     findOne(id: number): Promise<{
         category: {
             id: number;
@@ -108,11 +143,11 @@ export declare class TestimoniesService {
         updatedAt: Date;
         title: string;
         content: string;
-        authorName: string;
         authorEmail: string;
-        categoryId: number | null;
+        authorName: string;
         status: import(".prisma/client").$Enums.ReviewStatus;
         updatedByEmail: string | null;
+        categoryId: number | null;
     }>;
     update(id: number, updateTestimonyDto: UpdateTestimonyDto, adminEmail?: string): Promise<{
         category: {
@@ -126,11 +161,11 @@ export declare class TestimoniesService {
         updatedAt: Date;
         title: string;
         content: string;
-        authorName: string;
         authorEmail: string;
-        categoryId: number | null;
+        authorName: string;
         status: import(".prisma/client").$Enums.ReviewStatus;
         updatedByEmail: string | null;
+        categoryId: number | null;
     }>;
     remove(id: number): Promise<void>;
     approveMany(ids: number[]): Promise<{

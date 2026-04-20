@@ -67,58 +67,80 @@ let TestimoniesService = class TestimoniesService {
             throw new common_1.InternalServerErrorException('Failed to create testimony. Please try again later.');
         }
     }
-    async findAll(categoryId) {
-        try {
-            return this.prisma.testimony.findMany({
-                where: categoryId != null ? { categoryId } : undefined,
+    buildWhereClause(query, status, resolvedCategoryId) {
+        const where = {};
+        if (status) {
+            where.status = status;
+        }
+        if (resolvedCategoryId != null) {
+            where.categoryId = resolvedCategoryId;
+        }
+        if (query.search) {
+            const searchMode = { contains: query.search, mode: 'insensitive' };
+            where.OR = [
+                { title: searchMode },
+                { content: searchMode },
+                { authorName: searchMode },
+                { category: { name: searchMode } },
+            ];
+        }
+        return where;
+    }
+    async paginate(where, query) {
+        const page = query.page && query.page > 0 ? query.page : 1;
+        const limit = query.limit && query.limit > 0 ? query.limit : 10;
+        const skip = (page - 1) * limit;
+        const [data, total] = await Promise.all([
+            this.prisma.testimony.findMany({
+                where,
+                skip,
+                take: limit,
                 orderBy: { createdAt: 'desc' },
                 include: this.includeCategory,
-            });
+            }),
+            this.prisma.testimony.count({ where }),
+        ]);
+        return {
+            data,
+            meta: {
+                total,
+                page,
+                limit,
+                totalPages: Math.ceil(total / limit),
+            },
+        };
+    }
+    async findAll(query, categoryId) {
+        try {
+            const where = this.buildWhereClause(query, undefined, categoryId);
+            return await this.paginate(where, query);
         }
         catch {
             throw new common_1.InternalServerErrorException('Failed to fetch testimonies. Please try again later.');
         }
     }
-    async findAllApproved(categoryId) {
+    async findAllApproved(query, categoryId) {
         try {
-            return this.prisma.testimony.findMany({
-                where: {
-                    status: client_1.ReviewStatus.APPROVED,
-                    ...(categoryId != null && { categoryId }),
-                },
-                orderBy: { createdAt: 'desc' },
-                include: this.includeCategory,
-            });
+            const where = this.buildWhereClause(query, client_1.ReviewStatus.APPROVED, categoryId);
+            return await this.paginate(where, query);
         }
         catch {
             throw new common_1.InternalServerErrorException('Failed to fetch approved testimonies. Please try again later.');
         }
     }
-    async findAllRejected(categoryId) {
+    async findAllRejected(query, categoryId) {
         try {
-            return this.prisma.testimony.findMany({
-                where: {
-                    status: client_1.ReviewStatus.REJECTED,
-                    ...(categoryId != null && { categoryId }),
-                },
-                orderBy: { createdAt: 'desc' },
-                include: this.includeCategory,
-            });
+            const where = this.buildWhereClause(query, client_1.ReviewStatus.REJECTED, categoryId);
+            return await this.paginate(where, query);
         }
         catch {
             throw new common_1.InternalServerErrorException('Failed to fetch rejected testimonies. Please try again later.');
         }
     }
-    async findAllPending(categoryId) {
+    async findAllPending(query, categoryId) {
         try {
-            return this.prisma.testimony.findMany({
-                where: {
-                    status: client_1.ReviewStatus.PENDING,
-                    ...(categoryId != null && { categoryId }),
-                },
-                orderBy: { createdAt: 'desc' },
-                include: this.includeCategory,
-            });
+            const where = this.buildWhereClause(query, client_1.ReviewStatus.PENDING, categoryId);
+            return await this.paginate(where, query);
         }
         catch {
             throw new common_1.InternalServerErrorException('Failed to fetch pending testimonies. Please try again later.');

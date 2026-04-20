@@ -10,6 +10,7 @@ import {
   ParseIntPipe,
   HttpCode,
   HttpStatus,
+  Query,
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { CategoriesService } from './categories.service';
@@ -20,6 +21,7 @@ import { JwtAuthGuard } from '../admin/jwt-auth.guard';
 import { AdminGuard } from '../admin/admin.guard';
 import { CategoryEntity } from './entities/category.entity';
 import { TestimonyEntity } from '../testimonies/entities/testimony.entity';
+import { TestimonyQueryDto } from '../testimonies/dto/testimony-query.dto';
 
 @ApiTags('categories')
 @Controller('categories')
@@ -43,9 +45,9 @@ export class CategoriesController {
   })
   @ApiResponse({ status: 200, description: 'List of testimonies in the category.', type: [TestimonyEntity] })
   @ApiResponse({ status: 404, description: 'Category not found.' })
-  async getCategoryTestimonies(@Param('idOrSlug') idOrSlug: string) {
+  async getCategoryTestimonies(@Param('idOrSlug') idOrSlug: string, @Query() query: TestimonyQueryDto) {
     const categoryId = await this.resolveCategoryId(idOrSlug);
-    return this.testimoniesService.findAll(categoryId);
+    return this.testimoniesService.findAll(query, categoryId);
   }
 
   @Get(':idOrSlug/testimonies/approved')
@@ -55,27 +57,27 @@ export class CategoriesController {
   })
   @ApiResponse({ status: 200, description: 'List of approved testimonies.', type: [TestimonyEntity] })
   @ApiResponse({ status: 404, description: 'Category not found.' })
-  async getCategoryTestimoniesApproved(@Param('idOrSlug') idOrSlug: string) {
+  async getCategoryTestimoniesApproved(@Param('idOrSlug') idOrSlug: string, @Query() query: TestimonyQueryDto) {
     const categoryId = await this.resolveCategoryId(idOrSlug);
-    return this.testimoniesService.findAllApproved(categoryId);
+    return this.testimoniesService.findAllApproved(query, categoryId);
   }
 
   @Get(':idOrSlug/testimonies/rejected')
   @ApiOperation({ summary: 'List rejected testimonies in this category' })
   @ApiResponse({ status: 200, description: 'List of rejected testimonies.', type: [TestimonyEntity] })
   @ApiResponse({ status: 404, description: 'Category not found.' })
-  async getCategoryTestimoniesRejected(@Param('idOrSlug') idOrSlug: string) {
+  async getCategoryTestimoniesRejected(@Param('idOrSlug') idOrSlug: string, @Query() query: TestimonyQueryDto) {
     const categoryId = await this.resolveCategoryId(idOrSlug);
-    return this.testimoniesService.findAllRejected(categoryId);
+    return this.testimoniesService.findAllRejected(query, categoryId);
   }
 
   @Get(':idOrSlug/testimonies/pending')
   @ApiOperation({ summary: 'List pending testimonies in this category' })
   @ApiResponse({ status: 200, description: 'List of pending testimonies.', type: [TestimonyEntity] })
   @ApiResponse({ status: 404, description: 'Category not found.' })
-  async getCategoryTestimoniesPending(@Param('idOrSlug') idOrSlug: string) {
+  async getCategoryTestimoniesPending(@Param('idOrSlug') idOrSlug: string, @Query() query: TestimonyQueryDto) {
     const categoryId = await this.resolveCategoryId(idOrSlug);
-    return this.testimoniesService.findAllPending(categoryId);
+    return this.testimoniesService.findAllPending(query, categoryId);
   }
 
   @Get(':idOrSlug')

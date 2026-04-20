@@ -18,6 +18,7 @@ const swagger_1 = require("@nestjs/swagger");
 const testimonies_service_1 = require("./testimonies.service");
 const create_testimony_dto_1 = require("./dto/create-testimony.dto");
 const update_testimony_dto_1 = require("./dto/update-testimony.dto");
+const testimony_query_dto_1 = require("./dto/testimony-query.dto");
 const admin_guard_1 = require("../admin/admin.guard");
 const jwt_auth_guard_1 = require("../admin/jwt-auth.guard");
 let TestimoniesController = class TestimoniesController {
@@ -28,25 +29,25 @@ let TestimoniesController = class TestimoniesController {
     create(createTestimonyDto) {
         return this.testimoniesService.create(createTestimonyDto);
     }
-    async findAll(categoryId, categorySlug) {
-        const id = categoryId ? parseInt(categoryId, 10) : undefined;
-        const resolvedId = await this.testimoniesService.resolveCategoryId(Number.isNaN(id) ? undefined : id, categorySlug);
-        return this.testimoniesService.findAll(resolvedId);
+    async findAll(query) {
+        const id = query.categoryId;
+        const resolvedId = await this.testimoniesService.resolveCategoryId(Number.isNaN(id) ? undefined : id, query.categorySlug);
+        return this.testimoniesService.findAll(query, resolvedId);
     }
-    async findAllApproved(categoryId, categorySlug) {
-        const id = categoryId ? parseInt(categoryId, 10) : undefined;
-        const resolvedId = await this.testimoniesService.resolveCategoryId(Number.isNaN(id) ? undefined : id, categorySlug);
-        return this.testimoniesService.findAllApproved(resolvedId);
+    async findAllApproved(query) {
+        const id = query.categoryId;
+        const resolvedId = await this.testimoniesService.resolveCategoryId(Number.isNaN(id) ? undefined : id, query.categorySlug);
+        return this.testimoniesService.findAllApproved(query, resolvedId);
     }
-    async findAllRejected(categoryId, categorySlug) {
-        const id = categoryId ? parseInt(categoryId, 10) : undefined;
-        const resolvedId = await this.testimoniesService.resolveCategoryId(Number.isNaN(id) ? undefined : id, categorySlug);
-        return this.testimoniesService.findAllRejected(resolvedId);
+    async findAllRejected(query) {
+        const id = query.categoryId;
+        const resolvedId = await this.testimoniesService.resolveCategoryId(Number.isNaN(id) ? undefined : id, query.categorySlug);
+        return this.testimoniesService.findAllRejected(query, resolvedId);
     }
-    async findAllPending(categoryId, categorySlug) {
-        const id = categoryId ? parseInt(categoryId, 10) : undefined;
-        const resolvedId = await this.testimoniesService.resolveCategoryId(Number.isNaN(id) ? undefined : id, categorySlug);
-        return this.testimoniesService.findAllPending(resolvedId);
+    async findAllPending(query) {
+        const id = query.categoryId;
+        const resolvedId = await this.testimoniesService.resolveCategoryId(Number.isNaN(id) ? undefined : id, query.categorySlug);
+        return this.testimoniesService.findAllPending(query, resolvedId);
     }
     findOne(id) {
         return this.testimoniesService.findOne(id);
@@ -77,67 +78,55 @@ __decorate([
     (0, common_1.Get)(),
     (0, swagger_1.ApiOperation)({
         summary: 'List all testimonies',
-        description: 'Filter by category using categoryId or categorySlug (slug takes precedence if both provided).',
+        description: 'Filter by category using categoryId or categorySlug (slug takes precedence if both provided). Includes pagination and search filtering.',
     }),
-    (0, swagger_1.ApiQuery)({ name: 'categoryId', required: false, type: Number, description: 'Filter by category ID' }),
-    (0, swagger_1.ApiQuery)({ name: 'categorySlug', required: false, type: String, description: 'Filter by category slug (e.g. healing)' }),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'List of testimonies (each includes category).' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'List of testimonies (each includes category) with pagination metadata.' }),
     (0, swagger_1.ApiResponse)({ status: 404, description: 'Category not found (when using categorySlug).' }),
-    __param(0, (0, common_1.Query)('categoryId')),
-    __param(1, (0, common_1.Query)('categorySlug')),
+    __param(0, (0, common_1.Query)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:paramtypes", [testimony_query_dto_1.TestimonyQueryDto]),
     __metadata("design:returntype", Promise)
 ], TestimoniesController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)('approved'),
     (0, swagger_1.ApiOperation)({
         summary: 'List approved testimonies',
-        description: 'Returns only approved testimonies. Filter by categoryId or categorySlug.',
+        description: 'Returns only approved testimonies. Filter by categoryId or categorySlug. Includes pagination and search filtering.',
     }),
-    (0, swagger_1.ApiQuery)({ name: 'categoryId', required: false, type: Number, description: 'Filter by category ID' }),
-    (0, swagger_1.ApiQuery)({ name: 'categorySlug', required: false, type: String, description: 'Filter by category slug' }),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'List of approved testimonies.' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'List of approved testimonies with pagination metadata.' }),
     (0, swagger_1.ApiResponse)({ status: 404, description: 'Category not found (when using categorySlug).' }),
     (0, swagger_1.ApiResponse)({ status: 500, description: 'Server error.' }),
-    __param(0, (0, common_1.Query)('categoryId')),
-    __param(1, (0, common_1.Query)('categorySlug')),
+    __param(0, (0, common_1.Query)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:paramtypes", [testimony_query_dto_1.TestimonyQueryDto]),
     __metadata("design:returntype", Promise)
 ], TestimoniesController.prototype, "findAllApproved", null);
 __decorate([
     (0, common_1.Get)('rejected'),
     (0, swagger_1.ApiOperation)({
         summary: 'List rejected testimonies',
-        description: 'Returns only rejected testimonies. Filter by categoryId or categorySlug.',
+        description: 'Returns only rejected testimonies. Filter by categoryId or categorySlug. Includes pagination and search filtering.',
     }),
-    (0, swagger_1.ApiQuery)({ name: 'categoryId', required: false, type: Number, description: 'Filter by category ID' }),
-    (0, swagger_1.ApiQuery)({ name: 'categorySlug', required: false, type: String, description: 'Filter by category slug' }),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'List of rejected testimonies.' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'List of rejected testimonies with pagination metadata.' }),
     (0, swagger_1.ApiResponse)({ status: 404, description: 'Category not found (when using categorySlug).' }),
     (0, swagger_1.ApiResponse)({ status: 500, description: 'Server error.' }),
-    __param(0, (0, common_1.Query)('categoryId')),
-    __param(1, (0, common_1.Query)('categorySlug')),
+    __param(0, (0, common_1.Query)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:paramtypes", [testimony_query_dto_1.TestimonyQueryDto]),
     __metadata("design:returntype", Promise)
 ], TestimoniesController.prototype, "findAllRejected", null);
 __decorate([
     (0, common_1.Get)('pending'),
     (0, swagger_1.ApiOperation)({
         summary: 'List pending testimonies',
-        description: 'Returns only testimonies awaiting review. Filter by categoryId or categorySlug.',
+        description: 'Returns only testimonies awaiting review. Filter by categoryId or categorySlug. Includes pagination and search filtering.',
     }),
-    (0, swagger_1.ApiQuery)({ name: 'categoryId', required: false, type: Number, description: 'Filter by category ID' }),
-    (0, swagger_1.ApiQuery)({ name: 'categorySlug', required: false, type: String, description: 'Filter by category slug' }),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'List of pending testimonies.' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'List of pending testimonies with pagination metadata.' }),
     (0, swagger_1.ApiResponse)({ status: 404, description: 'Category not found (when using categorySlug).' }),
     (0, swagger_1.ApiResponse)({ status: 500, description: 'Server error.' }),
-    __param(0, (0, common_1.Query)('categoryId')),
-    __param(1, (0, common_1.Query)('categorySlug')),
+    __param(0, (0, common_1.Query)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:paramtypes", [testimony_query_dto_1.TestimonyQueryDto]),
     __metadata("design:returntype", Promise)
 ], TestimoniesController.prototype, "findAllPending", null);
 __decorate([
