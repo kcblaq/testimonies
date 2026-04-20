@@ -113,4 +113,29 @@ export class AdminController {
   async listAdmins() {
     return this.adminService.getAllAdmins();
   }
+
+  @UseGuards(JwtAuthGuard, AdminGuard)
+  @Post('delete-all')
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Delete all admins (admin only)' })
+  @ApiResponse({ status: 200, description: 'All admins deleted.' })
+  @ApiResponse({ status: 401, description: 'Not authenticated.' })
+  @ApiResponse({ status: 403, description: 'Not an admin.' })
+  async deleteAllAdmins() {
+    return this.adminService.deleteAllAdmins();
+  }
+
+  @Post('resend-verification-token')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({
+    summary: 'Resend verification token',
+    description:
+      'Resend verification token to an admin who has not verified their email. The admin must have been added by another admin or registered previously.',
+  })
+  @ApiResponse({ status: 200, description: 'Verification token resent successfully.' })
+  @ApiResponse({ status: 400, description: 'Email is required.' })
+  @ApiResponse({ status: 404, description: 'Admin not found.' })
+  async resendVerificationToken(@Body('email') email: string) {
+    return this.adminService.resendVerificationToken(email);
+  }
 }

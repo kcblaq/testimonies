@@ -56,6 +56,12 @@ let AdminController = class AdminController {
     async listAdmins() {
         return this.adminService.getAllAdmins();
     }
+    async deleteAllAdmins() {
+        return this.adminService.deleteAllAdmins();
+    }
+    async resendVerificationToken(email) {
+        return this.adminService.resendVerificationToken(email);
+    }
 };
 exports.AdminController = AdminController;
 __decorate([
@@ -147,6 +153,33 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], AdminController.prototype, "listAdmins", null);
+__decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, admin_guard_1.AdminGuard),
+    (0, common_1.Post)('delete-all'),
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, swagger_1.ApiOperation)({ summary: 'Delete all admins (admin only)' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'All admins deleted.' }),
+    (0, swagger_1.ApiResponse)({ status: 401, description: 'Not authenticated.' }),
+    (0, swagger_1.ApiResponse)({ status: 403, description: 'Not an admin.' }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], AdminController.prototype, "deleteAllAdmins", null);
+__decorate([
+    (0, common_1.Post)('resend-verification-token'),
+    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
+    (0, swagger_1.ApiOperation)({
+        summary: 'Resend verification token',
+        description: 'Resend verification token to an admin who has not verified their email. The admin must have been added by another admin or registered previously.',
+    }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Verification token resent successfully.' }),
+    (0, swagger_1.ApiResponse)({ status: 400, description: 'Email is required.' }),
+    (0, swagger_1.ApiResponse)({ status: 404, description: 'Admin not found.' }),
+    __param(0, (0, common_1.Body)('email')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], AdminController.prototype, "resendVerificationToken", null);
 exports.AdminController = AdminController = __decorate([
     (0, swagger_1.ApiTags)('admin'),
     (0, common_1.Controller)('admin'),

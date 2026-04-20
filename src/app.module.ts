@@ -6,11 +6,12 @@ import { TestimoniesModule } from './testimonies/testimonies.module';
 import { CategoriesModule } from './categories/categories.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { ConfigModule } from '@nestjs/config';
+import { EmailModule } from './email/email.module';
 
 @Module({
   imports: [ConfigModule.forRoot({
     isGlobal: true,
-  }), PrismaModule, AdminModule, CategoriesModule, TestimoniesModule],
+  }), PrismaModule, AdminModule, CategoriesModule, TestimoniesModule, EmailModule],
   controllers: [AppController],
   providers: [AppService],
 })

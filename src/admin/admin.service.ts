@@ -7,13 +7,17 @@ import {
 import { PrismaService } from '../prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
 import { randomBytes } from 'node:crypto';
+import { EmailService } from '../email/email.service';
 
 const VERIFICATION_TOKEN_BYTES = 32;
 const VERIFICATION_EXPIRY_HOURS = 24;
 
 @Injectable()
 export class AdminService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly emailService: EmailService,
+    ) {}
 
   private readonly SALT_ROUNDS = 10;
 
@@ -48,10 +52,14 @@ export class AdminService {
     return { email: admin.email, name: admin.name };
   }
 
-  private generateVerificationToken(): { token: string; expiresAt: Date } {
+  generateVerificationToken(
+    email: string,
+    name: string,
+  ): { token: string; expiresAt: Date} {
     const token = randomBytes(VERIFICATION_TOKEN_BYTES).toString('hex');
     const expiresAt = new Date();
     expiresAt.setHours(expiresAt.getHours() + VERIFICATION_EXPIRY_HOURS);
+    this.emailService.sendMail(email, 'dff86133-65ec-4d5c-b8fc-ba2d669382f5', {token, name, expiresAt})
     return { token, expiresAt };
   }
 
@@ -74,7 +82,7 @@ export class AdminService {
       throw new ConflictException('An admin with this email already exists.');
     }
     const hashed = await bcrypt.hash(password, this.SALT_ROUNDS);
-    const { token, expiresAt } = this.generateVerificationToken();
+    const { token, expiresAt } = this.generateVerificationToken(email, name);
     await this.prisma.admin.create({
       data: {
         name: name.trim(),
@@ -106,7 +114,7 @@ export class AdminService {
       throw new ConflictException('An admin with this email already exists.');
     }
     const hashed = await bcrypt.hash(password, this.SALT_ROUNDS);
-    const { token, expiresAt } = this.generateVerificationToken();
+    const { token, expiresAt } = this.generateVerificationToken(email, name);
     await this.prisma.admin.create({
       data: {
         name: name.trim(),
@@ -163,4 +171,35 @@ export class AdminService {
     });
     return admins;
   }
+
+  async deleteAllAdmins(): Promise<{ message: string }> {
+    await this.prisma.admin.deleteMany();
+    return { message: 'All admins deleted successfully.' };
+  }
+
+  async resendVerificationToken(email: string): Promise<{ message: string }> {
+    const admin = await this.prisma.admin.findUnique({
+      where: { email: email.trim().toLowerCase() },
+    });
+    if (!admin) {
+      throw new UnauthorizedException('Invalid or expired verification token.');
+    }
+    if (admin.emailVerified) {
+      throw new UnauthorizedException('Email already verified.');
+    }
+    const { token, expiresAt } = this.generateVerificationToken(admin.email, admin.name);
+    await this.prisma.admin.update({
+      where: { id: admin.id },
+      data: {
+        emailVerificationToken: token,
+        emailVerificationTokenExpiresAt: expiresAt,
+      },
+    });
+
+    this.emailService.sendMail(admin.email, 'dff86133-65ec-4d5c-b8fc-ba2d669382f5', {name: admin.name, token, expiresAt})
+    return { message: 'Verification token resent successfully.' };
+  }
 }
+
+
+

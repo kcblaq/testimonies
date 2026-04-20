@@ -18,6 +18,8 @@ import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { JwtAuthGuard } from '../admin/jwt-auth.guard';
 import { AdminGuard } from '../admin/admin.guard';
+import { CategoryEntity } from './entities/category.entity';
+import { TestimonyEntity } from '../testimonies/entities/testimony.entity';
 
 @ApiTags('categories')
 @Controller('categories')
@@ -29,7 +31,7 @@ export class CategoriesController {
 
   @Get()
   @ApiOperation({ summary: 'List all categories', description: 'Public. Returns categories with testimony count.' })
-  @ApiResponse({ status: 200, description: 'List of categories.' })
+  @ApiResponse({ status: 200, description: 'List of categories.', type: [CategoryEntity] })
   findAll() {
     return this.categoriesService.findAll();
   }
@@ -39,7 +41,7 @@ export class CategoriesController {
     summary: 'List testimonies in this category',
     description: 'Returns all testimonies (any status) for the category. Use category ID or slug (e.g. healing).',
   })
-  @ApiResponse({ status: 200, description: 'List of testimonies in the category.' })
+  @ApiResponse({ status: 200, description: 'List of testimonies in the category.', type: [TestimonyEntity] })
   @ApiResponse({ status: 404, description: 'Category not found.' })
   async getCategoryTestimonies(@Param('idOrSlug') idOrSlug: string) {
     const categoryId = await this.resolveCategoryId(idOrSlug);
@@ -51,7 +53,7 @@ export class CategoriesController {
     summary: 'List approved testimonies in this category',
     description: 'Returns only approved testimonies for the category.',
   })
-  @ApiResponse({ status: 200, description: 'List of approved testimonies.' })
+  @ApiResponse({ status: 200, description: 'List of approved testimonies.', type: [TestimonyEntity] })
   @ApiResponse({ status: 404, description: 'Category not found.' })
   async getCategoryTestimoniesApproved(@Param('idOrSlug') idOrSlug: string) {
     const categoryId = await this.resolveCategoryId(idOrSlug);
@@ -60,7 +62,7 @@ export class CategoriesController {
 
   @Get(':idOrSlug/testimonies/rejected')
   @ApiOperation({ summary: 'List rejected testimonies in this category' })
-  @ApiResponse({ status: 200, description: 'List of rejected testimonies.' })
+  @ApiResponse({ status: 200, description: 'List of rejected testimonies.', type: [TestimonyEntity] })
   @ApiResponse({ status: 404, description: 'Category not found.' })
   async getCategoryTestimoniesRejected(@Param('idOrSlug') idOrSlug: string) {
     const categoryId = await this.resolveCategoryId(idOrSlug);
@@ -69,7 +71,7 @@ export class CategoriesController {
 
   @Get(':idOrSlug/testimonies/pending')
   @ApiOperation({ summary: 'List pending testimonies in this category' })
-  @ApiResponse({ status: 200, description: 'List of pending testimonies.' })
+  @ApiResponse({ status: 200, description: 'List of pending testimonies.', type: [TestimonyEntity] })
   @ApiResponse({ status: 404, description: 'Category not found.' })
   async getCategoryTestimoniesPending(@Param('idOrSlug') idOrSlug: string) {
     const categoryId = await this.resolveCategoryId(idOrSlug);
@@ -78,7 +80,7 @@ export class CategoriesController {
 
   @Get(':idOrSlug')
   @ApiOperation({ summary: 'Get category by ID or slug' })
-  @ApiResponse({ status: 200, description: 'The category.' })
+  @ApiResponse({ status: 200, description: 'The category.', type: CategoryEntity })
   @ApiResponse({ status: 404, description: 'Category not found.' })
   findOne(@Param('idOrSlug') idOrSlug: string) {
     const num = parseInt(idOrSlug, 10);
@@ -102,7 +104,7 @@ export class CategoriesController {
   @Post()
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Create category (admin only)' })
-  @ApiResponse({ status: 201, description: 'Category created.' })
+  @ApiResponse({ status: 201, description: 'Category created.', type: CategoryEntity })
   @ApiResponse({ status: 401, description: 'Not authenticated.' })
   @ApiResponse({ status: 403, description: 'Not an admin.' })
   @ApiResponse({ status: 409, description: 'Name or slug already exists.' })
@@ -114,7 +116,7 @@ export class CategoriesController {
   @Patch(':id')
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Update category (admin only)' })
-  @ApiResponse({ status: 200, description: 'Category updated.' })
+  @ApiResponse({ status: 200, description: 'Category updated.', type: CategoryEntity })
   @ApiResponse({ status: 401, description: 'Not authenticated.' })
   @ApiResponse({ status: 403, description: 'Not an admin.' })
   @ApiResponse({ status: 404, description: 'Category not found.' })

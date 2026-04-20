@@ -13,10 +13,10 @@ export declare class CategoriesController {
     } & {
         id: number;
         name: string;
-        slug: string;
-        description: string | null;
         createdAt: Date;
         updatedAt: Date;
+        description: string | null;
+        slug: string;
     })[]>;
     getCategoryTestimonies(idOrSlug: string): Promise<({
         category: {
@@ -28,13 +28,13 @@ export declare class CategoriesController {
         id: number;
         createdAt: Date;
         updatedAt: Date;
-        title: string;
         content: string;
+        title: string;
         authorEmail: string;
         authorName: string;
         status: import(".prisma/client").$Enums.ReviewStatus;
-        categoryId: number | null;
         updatedByEmail: string | null;
+        categoryId: number | null;
     })[]>;
     getCategoryTestimoniesApproved(idOrSlug: string): Promise<({
         category: {
@@ -46,13 +46,13 @@ export declare class CategoriesController {
         id: number;
         createdAt: Date;
         updatedAt: Date;
-        title: string;
         content: string;
+        title: string;
         authorEmail: string;
         authorName: string;
         status: import(".prisma/client").$Enums.ReviewStatus;
-        categoryId: number | null;
         updatedByEmail: string | null;
+        categoryId: number | null;
     })[]>;
     getCategoryTestimoniesRejected(idOrSlug: string): Promise<({
         category: {
@@ -64,13 +64,13 @@ export declare class CategoriesController {
         id: number;
         createdAt: Date;
         updatedAt: Date;
-        title: string;
         content: string;
+        title: string;
         authorEmail: string;
         authorName: string;
         status: import(".prisma/client").$Enums.ReviewStatus;
-        categoryId: number | null;
         updatedByEmail: string | null;
+        categoryId: number | null;
     })[]>;
     getCategoryTestimoniesPending(idOrSlug: string): Promise<({
         category: {
@@ -82,13 +82,13 @@ export declare class CategoriesController {
         id: number;
         createdAt: Date;
         updatedAt: Date;
-        title: string;
         content: string;
+        title: string;
         authorEmail: string;
         authorName: string;
         status: import(".prisma/client").$Enums.ReviewStatus;
-        categoryId: number | null;
         updatedByEmail: string | null;
+        categoryId: number | null;
     })[]>;
     findOne(idOrSlug: string): Promise<{
         _count: {
@@ -97,27 +97,27 @@ export declare class CategoriesController {
     } & {
         id: number;
         name: string;
-        slug: string;
-        description: string | null;
         createdAt: Date;
         updatedAt: Date;
+        description: string | null;
+        slug: string;
     }>;
     private resolveCategoryId;
     create(dto: CreateCategoryDto): Promise<{
         id: number;
         name: string;
-        slug: string;
-        description: string | null;
         createdAt: Date;
         updatedAt: Date;
+        description: string | null;
+        slug: string;
     }>;
     update(id: number, dto: UpdateCategoryDto): Promise<{
         id: number;
         name: string;
-        slug: string;
-        description: string | null;
         createdAt: Date;
         updatedAt: Date;
+        description: string | null;
+        slug: string;
     }>;
     remove(id: number): Promise<void>;
 }

@@ -21,6 +21,8 @@ const create_category_dto_1 = require("./dto/create-category.dto");
 const update_category_dto_1 = require("./dto/update-category.dto");
 const jwt_auth_guard_1 = require("../admin/jwt-auth.guard");
 const admin_guard_1 = require("../admin/admin.guard");
+const category_entity_1 = require("./entities/category.entity");
+const testimony_entity_1 = require("../testimonies/entities/testimony.entity");
 let CategoriesController = class CategoriesController {
     categoriesService;
     testimoniesService;
@@ -77,7 +79,7 @@ exports.CategoriesController = CategoriesController;
 __decorate([
     (0, common_1.Get)(),
     (0, swagger_1.ApiOperation)({ summary: 'List all categories', description: 'Public. Returns categories with testimony count.' }),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'List of categories.' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'List of categories.', type: [category_entity_1.CategoryEntity] }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
@@ -88,7 +90,7 @@ __decorate([
         summary: 'List testimonies in this category',
         description: 'Returns all testimonies (any status) for the category. Use category ID or slug (e.g. healing).',
     }),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'List of testimonies in the category.' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'List of testimonies in the category.', type: [testimony_entity_1.TestimonyEntity] }),
     (0, swagger_1.ApiResponse)({ status: 404, description: 'Category not found.' }),
     __param(0, (0, common_1.Param)('idOrSlug')),
     __metadata("design:type", Function),
@@ -101,7 +103,7 @@ __decorate([
         summary: 'List approved testimonies in this category',
         description: 'Returns only approved testimonies for the category.',
     }),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'List of approved testimonies.' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'List of approved testimonies.', type: [testimony_entity_1.TestimonyEntity] }),
     (0, swagger_1.ApiResponse)({ status: 404, description: 'Category not found.' }),
     __param(0, (0, common_1.Param)('idOrSlug')),
     __metadata("design:type", Function),
@@ -111,7 +113,7 @@ __decorate([
 __decorate([
     (0, common_1.Get)(':idOrSlug/testimonies/rejected'),
     (0, swagger_1.ApiOperation)({ summary: 'List rejected testimonies in this category' }),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'List of rejected testimonies.' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'List of rejected testimonies.', type: [testimony_entity_1.TestimonyEntity] }),
     (0, swagger_1.ApiResponse)({ status: 404, description: 'Category not found.' }),
     __param(0, (0, common_1.Param)('idOrSlug')),
     __metadata("design:type", Function),
@@ -121,7 +123,7 @@ __decorate([
 __decorate([
     (0, common_1.Get)(':idOrSlug/testimonies/pending'),
     (0, swagger_1.ApiOperation)({ summary: 'List pending testimonies in this category' }),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'List of pending testimonies.' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'List of pending testimonies.', type: [testimony_entity_1.TestimonyEntity] }),
     (0, swagger_1.ApiResponse)({ status: 404, description: 'Category not found.' }),
     __param(0, (0, common_1.Param)('idOrSlug')),
     __metadata("design:type", Function),
@@ -131,7 +133,7 @@ __decorate([
 __decorate([
     (0, common_1.Get)(':idOrSlug'),
     (0, swagger_1.ApiOperation)({ summary: 'Get category by ID or slug' }),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'The category.' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'The category.', type: category_entity_1.CategoryEntity }),
     (0, swagger_1.ApiResponse)({ status: 404, description: 'Category not found.' }),
     __param(0, (0, common_1.Param)('idOrSlug')),
     __metadata("design:type", Function),
@@ -143,7 +145,7 @@ __decorate([
     (0, common_1.Post)(),
     (0, swagger_1.ApiBearerAuth)(),
     (0, swagger_1.ApiOperation)({ summary: 'Create category (admin only)' }),
-    (0, swagger_1.ApiResponse)({ status: 201, description: 'Category created.' }),
+    (0, swagger_1.ApiResponse)({ status: 201, description: 'Category created.', type: category_entity_1.CategoryEntity }),
     (0, swagger_1.ApiResponse)({ status: 401, description: 'Not authenticated.' }),
     (0, swagger_1.ApiResponse)({ status: 403, description: 'Not an admin.' }),
     (0, swagger_1.ApiResponse)({ status: 409, description: 'Name or slug already exists.' }),
@@ -157,7 +159,7 @@ __decorate([
     (0, common_1.Patch)(':id'),
     (0, swagger_1.ApiBearerAuth)(),
     (0, swagger_1.ApiOperation)({ summary: 'Update category (admin only)' }),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'Category updated.' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Category updated.', type: category_entity_1.CategoryEntity }),
     (0, swagger_1.ApiResponse)({ status: 401, description: 'Not authenticated.' }),
     (0, swagger_1.ApiResponse)({ status: 403, description: 'Not an admin.' }),
     (0, swagger_1.ApiResponse)({ status: 404, description: 'Category not found.' }),

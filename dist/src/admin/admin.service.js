@@ -47,12 +47,15 @@ const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../prisma/prisma.service");
 const bcrypt = __importStar(require("bcrypt"));
 const node_crypto_1 = require("node:crypto");
+const email_service_1 = require("../email/email.service");
 const VERIFICATION_TOKEN_BYTES = 32;
 const VERIFICATION_EXPIRY_HOURS = 24;
 let AdminService = class AdminService {
     prisma;
-    constructor(prisma) {
+    emailService;
+    constructor(prisma, emailService) {
         this.prisma = prisma;
+        this.emailService = emailService;
     }
     SALT_ROUNDS = 10;
     async isAdmin(email) {
@@ -80,10 +83,11 @@ let AdminService = class AdminService {
         }
         return { email: admin.email, name: admin.name };
     }
-    generateVerificationToken() {
+    generateVerificationToken(email, name) {
         const token = (0, node_crypto_1.randomBytes)(VERIFICATION_TOKEN_BYTES).toString('hex');
         const expiresAt = new Date();
         expiresAt.setHours(expiresAt.getHours() + VERIFICATION_EXPIRY_HOURS);
+        this.emailService.sendMail(email, 'dff86133-65ec-4d5c-b8fc-ba2d669382f5', { token, name, expiresAt });
         return { token, expiresAt };
     }
     async register(name, email, password) {
@@ -99,7 +103,7 @@ let AdminService = class AdminService {
             throw new common_1.ConflictException('An admin with this email already exists.');
         }
         const hashed = await bcrypt.hash(password, this.SALT_ROUNDS);
-        const { token, expiresAt } = this.generateVerificationToken();
+        const { token, expiresAt } = this.generateVerificationToken(email, name);
         await this.prisma.admin.create({
             data: {
                 name: name.trim(),
@@ -125,7 +129,7 @@ let AdminService = class AdminService {
             throw new common_1.ConflictException('An admin with this email already exists.');
         }
         const hashed = await bcrypt.hash(password, this.SALT_ROUNDS);
-        const { token, expiresAt } = this.generateVerificationToken();
+        const { token, expiresAt } = this.generateVerificationToken(email, name);
         await this.prisma.admin.create({
             data: {
                 name: name.trim(),
@@ -179,10 +183,36 @@ let AdminService = class AdminService {
         });
         return admins;
     }
+    async deleteAllAdmins() {
+        await this.prisma.admin.deleteMany();
+        return { message: 'All admins deleted successfully.' };
+    }
+    async resendVerificationToken(email) {
+        const admin = await this.prisma.admin.findUnique({
+            where: { email: email.trim().toLowerCase() },
+        });
+        if (!admin) {
+            throw new common_1.UnauthorizedException('Invalid or expired verification token.');
+        }
+        if (admin.emailVerified) {
+            throw new common_1.UnauthorizedException('Email already verified.');
+        }
+        const { token, expiresAt } = this.generateVerificationToken(admin.email, admin.name);
+        await this.prisma.admin.update({
+            where: { id: admin.id },
+            data: {
+                emailVerificationToken: token,
+                emailVerificationTokenExpiresAt: expiresAt,
+            },
+        });
+        this.emailService.sendMail(admin.email, 'dff86133-65ec-4d5c-b8fc-ba2d669382f5', { name: admin.name, token, expiresAt });
+        return { message: 'Verification token resent successfully.' };
+    }
 };
 exports.AdminService = AdminService;
 exports.AdminService = AdminService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [prisma_service_1.PrismaService])
+    __metadata("design:paramtypes", [prisma_service_1.PrismaService,
+        email_service_1.EmailService])
 ], AdminService);
 //# sourceMappingURL=admin.service.js.map

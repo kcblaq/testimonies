@@ -31,4 +31,10 @@ export declare class AdminController {
         name: string;
         emailVerified: boolean;
     }[]>;
+    deleteAllAdmins(): Promise<{
+        message: string;
+    }>;
+    resendVerificationToken(email: string): Promise<{
+        message: string;
+    }>;
 }
