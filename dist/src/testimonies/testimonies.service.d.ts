@@ -19,11 +19,11 @@ export declare class TestimoniesService {
         updatedAt: Date;
         title: string;
         content: string;
-        authorEmail: string;
         authorName: string;
+        authorEmail: string;
+        categoryId: number | null;
         status: import(".prisma/client").$Enums.ReviewStatus;
         updatedByEmail: string | null;
-        categoryId: number | null;
     }>;
     private buildWhereClause;
     private paginate;
@@ -40,11 +40,11 @@ export declare class TestimoniesService {
             updatedAt: Date;
             title: string;
             content: string;
-            authorEmail: string;
             authorName: string;
+            authorEmail: string;
+            categoryId: number | null;
             status: import(".prisma/client").$Enums.ReviewStatus;
             updatedByEmail: string | null;
-            categoryId: number | null;
         })[];
         meta: {
             total: number;
@@ -66,11 +66,11 @@ export declare class TestimoniesService {
             updatedAt: Date;
             title: string;
             content: string;
-            authorEmail: string;
             authorName: string;
+            authorEmail: string;
+            categoryId: number | null;
             status: import(".prisma/client").$Enums.ReviewStatus;
             updatedByEmail: string | null;
-            categoryId: number | null;
         })[];
         meta: {
             total: number;
@@ -92,11 +92,11 @@ export declare class TestimoniesService {
             updatedAt: Date;
             title: string;
             content: string;
-            authorEmail: string;
             authorName: string;
+            authorEmail: string;
+            categoryId: number | null;
             status: import(".prisma/client").$Enums.ReviewStatus;
             updatedByEmail: string | null;
-            categoryId: number | null;
         })[];
         meta: {
             total: number;
@@ -118,11 +118,11 @@ export declare class TestimoniesService {
             updatedAt: Date;
             title: string;
             content: string;
-            authorEmail: string;
             authorName: string;
+            authorEmail: string;
+            categoryId: number | null;
             status: import(".prisma/client").$Enums.ReviewStatus;
             updatedByEmail: string | null;
-            categoryId: number | null;
         })[];
         meta: {
             total: number;
@@ -143,11 +143,11 @@ export declare class TestimoniesService {
         updatedAt: Date;
         title: string;
         content: string;
-        authorEmail: string;
         authorName: string;
+        authorEmail: string;
+        categoryId: number | null;
         status: import(".prisma/client").$Enums.ReviewStatus;
         updatedByEmail: string | null;
-        categoryId: number | null;
     }>;
     update(id: number, updateTestimonyDto: UpdateTestimonyDto, adminEmail?: string): Promise<{
         category: {
@@ -161,11 +161,11 @@ export declare class TestimoniesService {
         updatedAt: Date;
         title: string;
         content: string;
-        authorEmail: string;
         authorName: string;
+        authorEmail: string;
+        categoryId: number | null;
         status: import(".prisma/client").$Enums.ReviewStatus;
         updatedByEmail: string | null;
-        categoryId: number | null;
     }>;
     remove(id: number): Promise<void>;
     approveMany(ids: number[]): Promise<{

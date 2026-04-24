@@ -16,6 +16,9 @@ async function bootstrap() {
     }),
   );
 
+  app.enableCors({
+    origin: "http://localhost:8080"
+  })
   const config = new DocumentBuilder()
     .setTitle('Testimonies API')
     .setDescription(

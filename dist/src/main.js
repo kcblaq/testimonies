@@ -13,6 +13,9 @@ async function bootstrap() {
         transform: true,
         transformOptions: { enableImplicitConversion: true },
     }));
+    app.enableCors({
+        origin: "http://localhost:8080"
+    });
     const config = new swagger_1.DocumentBuilder()
         .setTitle('Testimonies API')
         .setDescription('API for submitting and managing testimonies. Anyone can submit a testimony; only admins can approve, reject, or delete.')

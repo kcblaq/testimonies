@@ -13,9 +13,9 @@ export declare class CategoriesController {
         };
     } & {
         id: number;
+        name: string;
         createdAt: Date;
         updatedAt: Date;
-        name: string;
         description: string | null;
         slug: string;
     })[]>;
@@ -32,11 +32,11 @@ export declare class CategoriesController {
             updatedAt: Date;
             title: string;
             content: string;
-            authorEmail: string;
             authorName: string;
+            authorEmail: string;
+            categoryId: number | null;
             status: import(".prisma/client").$Enums.ReviewStatus;
             updatedByEmail: string | null;
-            categoryId: number | null;
         })[];
         meta: {
             total: number;
@@ -58,11 +58,11 @@ export declare class CategoriesController {
             updatedAt: Date;
             title: string;
             content: string;
-            authorEmail: string;
             authorName: string;
+            authorEmail: string;
+            categoryId: number | null;
             status: import(".prisma/client").$Enums.ReviewStatus;
             updatedByEmail: string | null;
-            categoryId: number | null;
         })[];
         meta: {
             total: number;
@@ -84,11 +84,11 @@ export declare class CategoriesController {
             updatedAt: Date;
             title: string;
             content: string;
-            authorEmail: string;
             authorName: string;
+            authorEmail: string;
+            categoryId: number | null;
             status: import(".prisma/client").$Enums.ReviewStatus;
             updatedByEmail: string | null;
-            categoryId: number | null;
         })[];
         meta: {
             total: number;
@@ -110,11 +110,11 @@ export declare class CategoriesController {
             updatedAt: Date;
             title: string;
             content: string;
-            authorEmail: string;
             authorName: string;
+            authorEmail: string;
+            categoryId: number | null;
             status: import(".prisma/client").$Enums.ReviewStatus;
             updatedByEmail: string | null;
-            categoryId: number | null;
         })[];
         meta: {
             total: number;
@@ -129,26 +129,26 @@ export declare class CategoriesController {
         };
     } & {
         id: number;
+        name: string;
         createdAt: Date;
         updatedAt: Date;
-        name: string;
         description: string | null;
         slug: string;
     }>;
     private resolveCategoryId;
     create(dto: CreateCategoryDto): Promise<{
         id: number;
+        name: string;
         createdAt: Date;
         updatedAt: Date;
-        name: string;
         description: string | null;
         slug: string;
     }>;
     update(id: number, dto: UpdateCategoryDto): Promise<{
         id: number;
+        name: string;
         createdAt: Date;
         updatedAt: Date;
-        name: string;
         description: string | null;
         slug: string;
     }>;
