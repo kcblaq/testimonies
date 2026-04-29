@@ -16,6 +16,7 @@ const class_transformer_1 = require("class-transformer");
 class UpdateTestimonyDto {
     status;
     categoryId;
+    isFeatured;
 }
 exports.UpdateTestimonyDto = UpdateTestimonyDto;
 __decorate([
@@ -41,4 +42,13 @@ __decorate([
     (0, class_validator_1.Min)(1),
     __metadata("design:type", Number)
 ], UpdateTestimonyDto.prototype, "categoryId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Whether the testimony is featured (admin only)',
+        example: true,
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], UpdateTestimonyDto.prototype, "isFeatured", void 0);
 //# sourceMappingURL=update-testimony.dto.js.map

@@ -175,8 +175,22 @@ export class TestimoniesService {
     return testimony;
   }
 
+  async findOneAndIncrementViews(id: number, viewedTestimonies: number[]) {
+    const testimony = await this.findOne(id);
+
+    if (!viewedTestimonies.includes(id)) {
+      await this.prisma.testimony.update({
+        where: { id },
+        data: { views: { increment: 1 } },
+      });
+      testimony.views += 1;
+      viewedTestimonies.push(id);
+    }
+    return testimony;
+  }
+
   async update(id: number, updateTestimonyDto: UpdateTestimonyDto, adminEmail?: string) {
-    await this.findOne(id);
+    const testimony = await this.findOne(id);
     if (updateTestimonyDto.categoryId != null) {
       const category = await this.prisma.category.findUnique({
         where: { id: updateTestimonyDto.categoryId },
@@ -185,6 +199,14 @@ export class TestimoniesService {
         throw new BadRequestException(`Category with id ${updateTestimonyDto.categoryId} not found.`);
       }
     }
+
+    const isFeaturedUpdate = updateTestimonyDto.isFeatured;
+    const featuredAtUpdate = isFeaturedUpdate === true && !testimony.isFeatured
+      ? new Date()
+      : isFeaturedUpdate === false
+      ? null
+      : undefined;
+
     try {
       return this.prisma.testimony.update({
         where: { id },
@@ -194,6 +216,10 @@ export class TestimoniesService {
           ...(updateTestimonyDto.categoryId !== undefined && {
             categoryId: updateTestimonyDto.categoryId ?? null,
           }),
+          ...(updateTestimonyDto.isFeatured !== undefined && {
+            isFeatured: updateTestimonyDto.isFeatured,
+            ...(featuredAtUpdate !== undefined && { featuredAt: featuredAtUpdate }),
+          }),
         },
         include: this.includeCategory,
       });
@@ -202,6 +228,19 @@ export class TestimoniesService {
       throw new InternalServerErrorException(
         'Failed to update testimony. Please try again later.',
       );
+    }
+  }
+
+  async incrementShares(id: number) {
+    await this.findOne(id);
+    try {
+      return await this.prisma.testimony.update({
+        where: { id },
+        data: { shared: { increment: 1 } },
+        include: this.includeCategory,
+      });
+    } catch (error: unknown) {
+      throw new InternalServerErrorException('Failed to update share count.');
     }
   }
 

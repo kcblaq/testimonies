@@ -32,6 +32,10 @@ model Testimony {
   authorEmail    String
   authorName     String
   updatedByEmail String?
+  isFeatured     Boolean      @default(false)
+  featuredAt     DateTime?
+  views          Int          @default(0)
+  shared         Int          @default(0)
 
   categoryId     Int
   category       Category     @relation(fields: [categoryId], references: [id])

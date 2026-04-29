@@ -49,8 +49,14 @@ let TestimoniesController = class TestimoniesController {
         const resolvedId = await this.testimoniesService.resolveCategoryId(Number.isNaN(id) ? undefined : id, query.categorySlug);
         return this.testimoniesService.findAllPending(query, resolvedId);
     }
-    findOne(id) {
-        return this.testimoniesService.findOne(id);
+    findOne(id, session) {
+        if (!session.viewedTestimonies) {
+            session.viewedTestimonies = [];
+        }
+        return this.testimoniesService.findOneAndIncrementViews(id, session.viewedTestimonies);
+    }
+    share(id) {
+        return this.testimoniesService.incrementShares(id);
     }
     update(id, updateTestimonyDto, req) {
         return this.testimoniesService.update(id, updateTestimonyDto, req.user.email);
@@ -135,10 +141,22 @@ __decorate([
     (0, swagger_1.ApiResponse)({ status: 200, description: 'The testimony.' }),
     (0, swagger_1.ApiResponse)({ status: 404, description: 'Testimony not found.' }),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    __param(1, (0, common_1.Session)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, Object]),
+    __metadata("design:returntype", void 0)
+], TestimoniesController.prototype, "findOne", null);
+__decorate([
+    (0, common_1.Post)(':id/share'),
+    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
+    (0, swagger_1.ApiOperation)({ summary: 'Increment share count for a testimony' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Share count incremented.' }),
+    (0, swagger_1.ApiResponse)({ status: 404, description: 'Testimony not found.' }),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
-], TestimoniesController.prototype, "findOne", null);
+], TestimoniesController.prototype, "share", null);
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, admin_guard_1.AdminGuard),
     (0, common_1.Patch)(':id'),

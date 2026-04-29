@@ -10,9 +10,9 @@ export declare class CategoriesService {
         };
     } & {
         id: number;
-        name: string;
         createdAt: Date;
         updatedAt: Date;
+        name: string;
         description: string | null;
         slug: string;
     })[]>;
@@ -22,9 +22,9 @@ export declare class CategoriesService {
         };
     } & {
         id: number;
-        name: string;
         createdAt: Date;
         updatedAt: Date;
+        name: string;
         description: string | null;
         slug: string;
     }>;
@@ -34,25 +34,25 @@ export declare class CategoriesService {
         };
     } & {
         id: number;
-        name: string;
         createdAt: Date;
         updatedAt: Date;
+        name: string;
         description: string | null;
         slug: string;
     }>;
     create(dto: CreateCategoryDto): Promise<{
         id: number;
-        name: string;
         createdAt: Date;
         updatedAt: Date;
+        name: string;
         description: string | null;
         slug: string;
     }>;
     update(id: number, dto: UpdateCategoryDto): Promise<{
         id: number;
-        name: string;
         createdAt: Date;
         updatedAt: Date;
+        name: string;
         description: string | null;
         slug: string;
     }>;

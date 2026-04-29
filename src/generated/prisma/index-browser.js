@@ -141,7 +141,21 @@ exports.Prisma.TestimonyScalarFieldEnum = {
   updatedAt: 'updatedAt',
   authorEmail: 'authorEmail',
   authorName: 'authorName',
-  updatedByEmail: 'updatedByEmail'
+  updatedByEmail: 'updatedByEmail',
+  isFeatured: 'isFeatured',
+  featuredAt: 'featuredAt',
+  views: 'views',
+  shared: 'shared',
+  categoryId: 'categoryId'
+};
+
+exports.Prisma.CategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -166,7 +180,8 @@ exports.ReviewStatus = exports.$Enums.ReviewStatus = {
 
 exports.Prisma.ModelName = {
   Admin: 'Admin',
-  Testimony: 'Testimony'
+  Testimony: 'Testimony',
+  Category: 'Category'
 };
 
 /**

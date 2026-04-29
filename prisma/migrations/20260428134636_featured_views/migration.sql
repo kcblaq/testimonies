@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "Testimony" ADD COLUMN     "featuredAt" TIMESTAMP(3),
+ADD COLUMN     "isFeatured" BOOLEAN NOT NULL DEFAULT false,
+ADD COLUMN     "shared" INTEGER NOT NULL DEFAULT 0,
+ADD COLUMN     "views" INTEGER NOT NULL DEFAULT 0;

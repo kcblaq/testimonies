@@ -156,8 +156,20 @@ let TestimoniesService = class TestimoniesService {
         }
         return testimony;
     }
+    async findOneAndIncrementViews(id, viewedTestimonies) {
+        const testimony = await this.findOne(id);
+        if (!viewedTestimonies.includes(id)) {
+            await this.prisma.testimony.update({
+                where: { id },
+                data: { views: { increment: 1 } },
+            });
+            testimony.views += 1;
+            viewedTestimonies.push(id);
+        }
+        return testimony;
+    }
     async update(id, updateTestimonyDto, adminEmail) {
-        await this.findOne(id);
+        const testimony = await this.findOne(id);
         if (updateTestimonyDto.categoryId != null) {
             const category = await this.prisma.category.findUnique({
                 where: { id: updateTestimonyDto.categoryId },
@@ -166,6 +178,12 @@ let TestimoniesService = class TestimoniesService {
                 throw new common_1.BadRequestException(`Category with id ${updateTestimonyDto.categoryId} not found.`);
             }
         }
+        const isFeaturedUpdate = updateTestimonyDto.isFeatured;
+        const featuredAtUpdate = isFeaturedUpdate === true && !testimony.isFeatured
+            ? new Date()
+            : isFeaturedUpdate === false
+                ? null
+                : undefined;
         try {
             return this.prisma.testimony.update({
                 where: { id },
@@ -175,6 +193,10 @@ let TestimoniesService = class TestimoniesService {
                     ...(updateTestimonyDto.categoryId !== undefined && {
                         categoryId: updateTestimonyDto.categoryId ?? null,
                     }),
+                    ...(updateTestimonyDto.isFeatured !== undefined && {
+                        isFeatured: updateTestimonyDto.isFeatured,
+                        ...(featuredAtUpdate !== undefined && { featuredAt: featuredAtUpdate }),
+                    }),
                 },
                 include: this.includeCategory,
             });
@@ -183,6 +205,19 @@ let TestimoniesService = class TestimoniesService {
             if (error instanceof common_1.NotFoundException || error instanceof common_1.BadRequestException)
                 throw error;
             throw new common_1.InternalServerErrorException('Failed to update testimony. Please try again later.');
+        }
+    }
+    async incrementShares(id) {
+        await this.findOne(id);
+        try {
+            return await this.prisma.testimony.update({
+                where: { id },
+                data: { shared: { increment: 1 } },
+                include: this.includeCategory,
+            });
+        }
+        catch (error) {
+            throw new common_1.InternalServerErrorException('Failed to update share count.');
         }
     }
     async remove(id) {

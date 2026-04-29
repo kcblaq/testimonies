@@ -1,5 +1,5 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
-import { IsIn, IsOptional, IsInt, Min, ValidateIf } from 'class-validator';
+import { IsIn, IsOptional, IsInt, Min, ValidateIf, IsBoolean } from 'class-validator';
 import { Type } from 'class-transformer';
 
 /**
@@ -26,4 +26,12 @@ export class UpdateTestimonyDto {
   @IsInt()
   @Min(1)
   categoryId?: number;
+
+  @ApiPropertyOptional({
+    description: 'Whether the testimony is featured (admin only)',
+    example: true,
+  })
+  @IsOptional()
+  @IsBoolean()
+  isFeatured?: boolean;
 }

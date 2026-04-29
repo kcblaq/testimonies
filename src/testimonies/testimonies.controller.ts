@@ -12,8 +12,9 @@ import {
   ParseIntPipe,
   HttpCode,
   HttpStatus,
+  Session,
 } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth, ApiQuery } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { TestimoniesService } from './testimonies.service';
 import { CreateTestimonyDto } from './dto/create-testimony.dto';
 import { UpdateTestimonyDto } from './dto/update-testimony.dto';
@@ -110,8 +111,20 @@ export class TestimoniesController {
   @ApiOperation({ summary: 'Get a testimony by ID' })
   @ApiResponse({ status: 200, description: 'The testimony.' })
   @ApiResponse({ status: 404, description: 'Testimony not found.' })
-  findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.testimoniesService.findOne(id);
+  findOne(@Param('id', ParseIntPipe) id: number, @Session() session: Record<string, any>) {
+    if (!session.viewedTestimonies) {
+      session.viewedTestimonies = [];
+    }
+    return this.testimoniesService.findOneAndIncrementViews(id, session.viewedTestimonies);
+  }
+
+  @Post(':id/share')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Increment share count for a testimony' })
+  @ApiResponse({ status: 200, description: 'Share count incremented.' })
+  @ApiResponse({ status: 404, description: 'Testimony not found.' })
+  share(@Param('id', ParseIntPipe) id: number) {
+    return this.testimoniesService.incrementShares(id);
   }
 
   @UseGuards(JwtAuthGuard, AdminGuard)
