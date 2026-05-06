@@ -16,8 +16,8 @@ export declare class CategoriesController {
         createdAt: Date;
         updatedAt: Date;
         name: string;
-        description: string | null;
         slug: string;
+        description: string | null;
     })[]>;
     getCategoryTestimonies(idOrSlug: string, query: TestimonyQueryDto): Promise<{
         data: ({
@@ -25,18 +25,22 @@ export declare class CategoriesController {
                 id: number;
                 name: string;
                 slug: string;
-            } | null;
+            };
         } & {
             id: number;
             createdAt: Date;
             updatedAt: Date;
+            status: import("../generated/prisma/enums").ReviewStatus;
             title: string;
             content: string;
             authorEmail: string;
             authorName: string;
-            status: import(".prisma/client").$Enums.ReviewStatus;
             updatedByEmail: string | null;
-            categoryId: number | null;
+            isFeatured: boolean;
+            featuredAt: Date | null;
+            views: number;
+            shared: number;
+            categoryId: number;
         })[];
         meta: {
             total: number;
@@ -51,18 +55,22 @@ export declare class CategoriesController {
                 id: number;
                 name: string;
                 slug: string;
-            } | null;
+            };
         } & {
             id: number;
             createdAt: Date;
             updatedAt: Date;
+            status: import("../generated/prisma/enums").ReviewStatus;
             title: string;
             content: string;
             authorEmail: string;
             authorName: string;
-            status: import(".prisma/client").$Enums.ReviewStatus;
             updatedByEmail: string | null;
-            categoryId: number | null;
+            isFeatured: boolean;
+            featuredAt: Date | null;
+            views: number;
+            shared: number;
+            categoryId: number;
         })[];
         meta: {
             total: number;
@@ -77,18 +85,22 @@ export declare class CategoriesController {
                 id: number;
                 name: string;
                 slug: string;
-            } | null;
+            };
         } & {
             id: number;
             createdAt: Date;
             updatedAt: Date;
+            status: import("../generated/prisma/enums").ReviewStatus;
             title: string;
             content: string;
             authorEmail: string;
             authorName: string;
-            status: import(".prisma/client").$Enums.ReviewStatus;
             updatedByEmail: string | null;
-            categoryId: number | null;
+            isFeatured: boolean;
+            featuredAt: Date | null;
+            views: number;
+            shared: number;
+            categoryId: number;
         })[];
         meta: {
             total: number;
@@ -103,18 +115,22 @@ export declare class CategoriesController {
                 id: number;
                 name: string;
                 slug: string;
-            } | null;
+            };
         } & {
             id: number;
             createdAt: Date;
             updatedAt: Date;
+            status: import("../generated/prisma/enums").ReviewStatus;
             title: string;
             content: string;
             authorEmail: string;
             authorName: string;
-            status: import(".prisma/client").$Enums.ReviewStatus;
             updatedByEmail: string | null;
-            categoryId: number | null;
+            isFeatured: boolean;
+            featuredAt: Date | null;
+            views: number;
+            shared: number;
+            categoryId: number;
         })[];
         meta: {
             total: number;
@@ -132,8 +148,8 @@ export declare class CategoriesController {
         createdAt: Date;
         updatedAt: Date;
         name: string;
-        description: string | null;
         slug: string;
+        description: string | null;
     }>;
     private resolveCategoryId;
     create(dto: CreateCategoryDto): Promise<{
@@ -141,16 +157,16 @@ export declare class CategoriesController {
         createdAt: Date;
         updatedAt: Date;
         name: string;
-        description: string | null;
         slug: string;
+        description: string | null;
     }>;
     update(id: number, dto: UpdateCategoryDto): Promise<{
         id: number;
         createdAt: Date;
         updatedAt: Date;
         name: string;
-        description: string | null;
         slug: string;
+        description: string | null;
     }>;
     remove(id: number): Promise<void>;
 }

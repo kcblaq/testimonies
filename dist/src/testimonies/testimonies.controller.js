@@ -64,6 +64,9 @@ let TestimoniesController = class TestimoniesController {
     async remove(id) {
         await this.testimoniesService.remove(id);
     }
+    async getFeaturedTestimonies() {
+        return this.testimoniesService.featuredTestimonies();
+    }
 };
 exports.TestimoniesController = TestimoniesController;
 __decorate([
@@ -189,6 +192,19 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], TestimoniesController.prototype, "remove", null);
+__decorate([
+    (0, common_1.Get)('featured'),
+    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
+    (0, swagger_1.ApiOperation)({
+        summary: 'List featured testimonies',
+        description: 'Returns testimonies marked as featured.',
+    }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'List of featured testimonies.' }),
+    (0, swagger_1.ApiResponse)({ status: 500, description: 'Server error.' }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], TestimoniesController.prototype, "getFeaturedTestimonies", null);
 exports.TestimoniesController = TestimoniesController = __decorate([
     (0, swagger_1.ApiTags)('testimonies'),
     (0, common_1.Controller)('testimonies'),

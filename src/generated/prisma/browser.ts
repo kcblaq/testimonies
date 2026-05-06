@@ -27,3 +27,8 @@ export type Admin = Prisma.AdminModel
  * 
  */
 export type Testimony = Prisma.TestimonyModel
+/**
+ * Model Category
+ * 
+ */
+export type Category = Prisma.CategoryModel

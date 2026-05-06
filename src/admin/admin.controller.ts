@@ -138,4 +138,18 @@ export class AdminController {
   async resendVerificationToken(@Body('email') email: string) {
     return this.adminService.resendVerificationToken(email);
   }
+
+  @Post('dashboard-stats')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({
+    summary: 'Get dashboard statistics',
+    description:
+      'Returns statistics for dashboard including total testimonies, approved testimonies, rejected testimonies, pending testimonies, total categories, total admins, submissions this week, submissions today, submissions by category, total views, and total shares.',
+  })
+  @ApiResponse({ status: 200, description: 'Dashboard statistics retrieved successfully.' })
+  @ApiResponse({ status: 401, description: 'Not authenticated.' })
+  @ApiResponse({ status: 403, description: 'Not an admin.' })
+  async dashboardStats() {
+    return this.adminService.dashboarddata();
+  }
 }

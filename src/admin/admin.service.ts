@@ -8,6 +8,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
 import { randomBytes } from 'node:crypto';
 import { EmailService } from '../email/email.service';
+import { ReviewStatus } from 'generated/prisma/enums';
 
 const VERIFICATION_TOKEN_BYTES = 32;
 const VERIFICATION_EXPIRY_HOURS = 24;
@@ -199,6 +200,57 @@ export class AdminService {
     this.emailService.sendMail(admin.email, 'dff86133-65ec-4d5c-b8fc-ba2d669382f5', {name: admin.name, token, expiresAt})
     return { message: 'Verification token resent successfully.' };
   }
+
+  async dashboarddata(){
+    const totalTestimonies = await this.prisma.testimony.count();
+    const approvedTestimonies = await this.prisma.testimony.count({
+      where: { status: ReviewStatus.APPROVED },
+    });
+    const rejectedTestimonies = await this.prisma.testimony.count({
+      where: { status: ReviewStatus.REJECTED },
+    });
+    const pendingTestimonies = await this.prisma.testimony.count({
+      where: { status: ReviewStatus.PENDING },
+    });
+    const totalCategories = await this.prisma.category.count();
+    const totalAdmins = await this.prisma.admin.count();
+    const submitionsThisWeek = await this.prisma.testimony.count({
+      where: { createdAt: { gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) } },
+    });
+    const submitionsToday = await this.prisma.testimony.count({
+      where: { createdAt: { gte: new Date(Date.now() - 24 * 60 * 60 * 1000) } },
+    });
+    const categories = await this.prisma.category.findMany({
+      select: { id: true, name: true },
+    });
+    const submitionByCategory = await this.prisma.testimony.groupBy({
+      by: ['categoryId'],
+      _count: {
+        id: true,
+      },
+      where: { categoryId: { in: categories.map((category) => category.id) } },
+    });
+    const categorieswithcount=categories.map((category) => {
+      const count = submitionByCategory.find((submition) => submition.categoryId === category.id);
+      return {
+        categoryId: category.id,
+        categoryName: category.name,
+        count: count?._count.id || 0,
+      };
+    });
+    const totalViews = await this.prisma.testimony.aggregate({
+      _sum: {
+        views: true,
+      },
+    });
+    const totalShares = await this.prisma.testimony.aggregate({
+      _sum: {
+        shared: true,
+      },
+    });
+    return { totalTestimonies, approvedTestimonies, rejectedTestimonies, pendingTestimonies, totalCategories, totalAdmins, submitionsThisWeek, submitionsToday, totalViews, totalShares, categorieswithcount};
+  }
+  
 }
 
 

@@ -13,8 +13,8 @@ export declare class CategoriesService {
         createdAt: Date;
         updatedAt: Date;
         name: string;
-        description: string | null;
         slug: string;
+        description: string | null;
     })[]>;
     findOne(id: number): Promise<{
         _count: {
@@ -25,8 +25,8 @@ export declare class CategoriesService {
         createdAt: Date;
         updatedAt: Date;
         name: string;
-        description: string | null;
         slug: string;
+        description: string | null;
     }>;
     findBySlug(slug: string): Promise<{
         _count: {
@@ -37,24 +37,24 @@ export declare class CategoriesService {
         createdAt: Date;
         updatedAt: Date;
         name: string;
-        description: string | null;
         slug: string;
+        description: string | null;
     }>;
     create(dto: CreateCategoryDto): Promise<{
         id: number;
         createdAt: Date;
         updatedAt: Date;
         name: string;
-        description: string | null;
         slug: string;
+        description: string | null;
     }>;
     update(id: number, dto: UpdateCategoryDto): Promise<{
         id: number;
         createdAt: Date;
         updatedAt: Date;
         name: string;
-        description: string | null;
         slug: string;
+        description: string | null;
     }>;
     remove(id: number): Promise<void>;
 }

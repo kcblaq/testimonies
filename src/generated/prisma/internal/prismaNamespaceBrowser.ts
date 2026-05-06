@@ -52,7 +52,8 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   Admin: 'Admin',
-  Testimony: 'Testimony'
+  Testimony: 'Testimony',
+  Category: 'Category'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -72,11 +73,15 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 
 
 export const AdminScalarFieldEnum = {
-  id: 'id',
   email: 'email',
-  password: 'password',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  password: 'password',
+  id: 'id',
+  name: 'name',
+  emailVerified: 'emailVerified',
+  emailVerificationToken: 'emailVerificationToken',
+  emailVerificationTokenExpiresAt: 'emailVerificationTokenExpiresAt'
 } as const
 
 export type AdminScalarFieldEnum = (typeof AdminScalarFieldEnum)[keyof typeof AdminScalarFieldEnum]
@@ -86,15 +91,32 @@ export const TestimonyScalarFieldEnum = {
   id: 'id',
   title: 'title',
   content: 'content',
-  authorEmail: 'authorEmail',
-  authorName: 'authorName',
   status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  updatedByEmail: 'updatedByEmail'
+  authorEmail: 'authorEmail',
+  authorName: 'authorName',
+  updatedByEmail: 'updatedByEmail',
+  isFeatured: 'isFeatured',
+  featuredAt: 'featuredAt',
+  views: 'views',
+  shared: 'shared',
+  categoryId: 'categoryId'
 } as const
 
 export type TestimonyScalarFieldEnum = (typeof TestimonyScalarFieldEnum)[keyof typeof TestimonyScalarFieldEnum]
+
+
+export const CategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
 
 
 export const SortOrder = {

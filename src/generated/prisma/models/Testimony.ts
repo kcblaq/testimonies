@@ -28,92 +28,134 @@ export type AggregateTestimony = {
 
 export type TestimonyAvgAggregateOutputType = {
   id: number | null
+  views: number | null
+  shared: number | null
+  categoryId: number | null
 }
 
 export type TestimonySumAggregateOutputType = {
   id: number | null
+  views: number | null
+  shared: number | null
+  categoryId: number | null
 }
 
 export type TestimonyMinAggregateOutputType = {
   id: number | null
   title: string | null
   content: string | null
-  authorEmail: string | null
-  authorName: string | null
   status: $Enums.ReviewStatus | null
   createdAt: Date | null
   updatedAt: Date | null
+  authorEmail: string | null
+  authorName: string | null
   updatedByEmail: string | null
+  isFeatured: boolean | null
+  featuredAt: Date | null
+  views: number | null
+  shared: number | null
+  categoryId: number | null
 }
 
 export type TestimonyMaxAggregateOutputType = {
   id: number | null
   title: string | null
   content: string | null
-  authorEmail: string | null
-  authorName: string | null
   status: $Enums.ReviewStatus | null
   createdAt: Date | null
   updatedAt: Date | null
+  authorEmail: string | null
+  authorName: string | null
   updatedByEmail: string | null
+  isFeatured: boolean | null
+  featuredAt: Date | null
+  views: number | null
+  shared: number | null
+  categoryId: number | null
 }
 
 export type TestimonyCountAggregateOutputType = {
   id: number
   title: number
   content: number
-  authorEmail: number
-  authorName: number
   status: number
   createdAt: number
   updatedAt: number
+  authorEmail: number
+  authorName: number
   updatedByEmail: number
+  isFeatured: number
+  featuredAt: number
+  views: number
+  shared: number
+  categoryId: number
   _all: number
 }
 
 
 export type TestimonyAvgAggregateInputType = {
   id?: true
+  views?: true
+  shared?: true
+  categoryId?: true
 }
 
 export type TestimonySumAggregateInputType = {
   id?: true
+  views?: true
+  shared?: true
+  categoryId?: true
 }
 
 export type TestimonyMinAggregateInputType = {
   id?: true
   title?: true
   content?: true
-  authorEmail?: true
-  authorName?: true
   status?: true
   createdAt?: true
   updatedAt?: true
+  authorEmail?: true
+  authorName?: true
   updatedByEmail?: true
+  isFeatured?: true
+  featuredAt?: true
+  views?: true
+  shared?: true
+  categoryId?: true
 }
 
 export type TestimonyMaxAggregateInputType = {
   id?: true
   title?: true
   content?: true
-  authorEmail?: true
-  authorName?: true
   status?: true
   createdAt?: true
   updatedAt?: true
+  authorEmail?: true
+  authorName?: true
   updatedByEmail?: true
+  isFeatured?: true
+  featuredAt?: true
+  views?: true
+  shared?: true
+  categoryId?: true
 }
 
 export type TestimonyCountAggregateInputType = {
   id?: true
   title?: true
   content?: true
-  authorEmail?: true
-  authorName?: true
   status?: true
   createdAt?: true
   updatedAt?: true
+  authorEmail?: true
+  authorName?: true
   updatedByEmail?: true
+  isFeatured?: true
+  featuredAt?: true
+  views?: true
+  shared?: true
+  categoryId?: true
   _all?: true
 }
 
@@ -207,12 +249,17 @@ export type TestimonyGroupByOutputType = {
   id: number
   title: string
   content: string
-  authorEmail: string
-  authorName: string
   status: $Enums.ReviewStatus
   createdAt: Date
   updatedAt: Date
+  authorEmail: string
+  authorName: string
   updatedByEmail: string | null
+  isFeatured: boolean
+  featuredAt: Date | null
+  views: number
+  shared: number
+  categoryId: number
   _count: TestimonyCountAggregateOutputType | null
   _avg: TestimonyAvgAggregateOutputType | null
   _sum: TestimonySumAggregateOutputType | null
@@ -242,24 +289,36 @@ export type TestimonyWhereInput = {
   id?: Prisma.IntFilter<"Testimony"> | number
   title?: Prisma.StringFilter<"Testimony"> | string
   content?: Prisma.StringFilter<"Testimony"> | string
-  authorEmail?: Prisma.StringFilter<"Testimony"> | string
-  authorName?: Prisma.StringFilter<"Testimony"> | string
   status?: Prisma.EnumReviewStatusFilter<"Testimony"> | $Enums.ReviewStatus
   createdAt?: Prisma.DateTimeFilter<"Testimony"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Testimony"> | Date | string
+  authorEmail?: Prisma.StringFilter<"Testimony"> | string
+  authorName?: Prisma.StringFilter<"Testimony"> | string
   updatedByEmail?: Prisma.StringNullableFilter<"Testimony"> | string | null
+  isFeatured?: Prisma.BoolFilter<"Testimony"> | boolean
+  featuredAt?: Prisma.DateTimeNullableFilter<"Testimony"> | Date | string | null
+  views?: Prisma.IntFilter<"Testimony"> | number
+  shared?: Prisma.IntFilter<"Testimony"> | number
+  categoryId?: Prisma.IntFilter<"Testimony"> | number
+  category?: Prisma.XOR<Prisma.CategoryScalarRelationFilter, Prisma.CategoryWhereInput>
 }
 
 export type TestimonyOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   content?: Prisma.SortOrder
-  authorEmail?: Prisma.SortOrder
-  authorName?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  authorEmail?: Prisma.SortOrder
+  authorName?: Prisma.SortOrder
   updatedByEmail?: Prisma.SortOrderInput | Prisma.SortOrder
+  isFeatured?: Prisma.SortOrder
+  featuredAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  views?: Prisma.SortOrder
+  shared?: Prisma.SortOrder
+  categoryId?: Prisma.SortOrder
+  category?: Prisma.CategoryOrderByWithRelationInput
 }
 
 export type TestimonyWhereUniqueInput = Prisma.AtLeast<{
@@ -269,24 +328,35 @@ export type TestimonyWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.TestimonyWhereInput | Prisma.TestimonyWhereInput[]
   title?: Prisma.StringFilter<"Testimony"> | string
   content?: Prisma.StringFilter<"Testimony"> | string
-  authorEmail?: Prisma.StringFilter<"Testimony"> | string
-  authorName?: Prisma.StringFilter<"Testimony"> | string
   status?: Prisma.EnumReviewStatusFilter<"Testimony"> | $Enums.ReviewStatus
   createdAt?: Prisma.DateTimeFilter<"Testimony"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Testimony"> | Date | string
+  authorEmail?: Prisma.StringFilter<"Testimony"> | string
+  authorName?: Prisma.StringFilter<"Testimony"> | string
   updatedByEmail?: Prisma.StringNullableFilter<"Testimony"> | string | null
+  isFeatured?: Prisma.BoolFilter<"Testimony"> | boolean
+  featuredAt?: Prisma.DateTimeNullableFilter<"Testimony"> | Date | string | null
+  views?: Prisma.IntFilter<"Testimony"> | number
+  shared?: Prisma.IntFilter<"Testimony"> | number
+  categoryId?: Prisma.IntFilter<"Testimony"> | number
+  category?: Prisma.XOR<Prisma.CategoryScalarRelationFilter, Prisma.CategoryWhereInput>
 }, "id">
 
 export type TestimonyOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   content?: Prisma.SortOrder
-  authorEmail?: Prisma.SortOrder
-  authorName?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  authorEmail?: Prisma.SortOrder
+  authorName?: Prisma.SortOrder
   updatedByEmail?: Prisma.SortOrderInput | Prisma.SortOrder
+  isFeatured?: Prisma.SortOrder
+  featuredAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  views?: Prisma.SortOrder
+  shared?: Prisma.SortOrder
+  categoryId?: Prisma.SortOrder
   _count?: Prisma.TestimonyCountOrderByAggregateInput
   _avg?: Prisma.TestimonyAvgOrderByAggregateInput
   _max?: Prisma.TestimonyMaxOrderByAggregateInput
@@ -301,145 +371,393 @@ export type TestimonyScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"Testimony"> | number
   title?: Prisma.StringWithAggregatesFilter<"Testimony"> | string
   content?: Prisma.StringWithAggregatesFilter<"Testimony"> | string
-  authorEmail?: Prisma.StringWithAggregatesFilter<"Testimony"> | string
-  authorName?: Prisma.StringWithAggregatesFilter<"Testimony"> | string
   status?: Prisma.EnumReviewStatusWithAggregatesFilter<"Testimony"> | $Enums.ReviewStatus
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Testimony"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Testimony"> | Date | string
+  authorEmail?: Prisma.StringWithAggregatesFilter<"Testimony"> | string
+  authorName?: Prisma.StringWithAggregatesFilter<"Testimony"> | string
   updatedByEmail?: Prisma.StringNullableWithAggregatesFilter<"Testimony"> | string | null
+  isFeatured?: Prisma.BoolWithAggregatesFilter<"Testimony"> | boolean
+  featuredAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Testimony"> | Date | string | null
+  views?: Prisma.IntWithAggregatesFilter<"Testimony"> | number
+  shared?: Prisma.IntWithAggregatesFilter<"Testimony"> | number
+  categoryId?: Prisma.IntWithAggregatesFilter<"Testimony"> | number
 }
 
 export type TestimonyCreateInput = {
   title: string
   content: string
-  authorEmail: string
-  authorName: string
   status?: $Enums.ReviewStatus
   createdAt?: Date | string
   updatedAt?: Date | string
+  authorEmail: string
+  authorName: string
   updatedByEmail?: string | null
+  isFeatured?: boolean
+  featuredAt?: Date | string | null
+  views?: number
+  shared?: number
+  category: Prisma.CategoryCreateNestedOneWithoutTestimoniesInput
 }
 
 export type TestimonyUncheckedCreateInput = {
   id?: number
   title: string
   content: string
-  authorEmail: string
-  authorName: string
   status?: $Enums.ReviewStatus
   createdAt?: Date | string
   updatedAt?: Date | string
+  authorEmail: string
+  authorName: string
   updatedByEmail?: string | null
+  isFeatured?: boolean
+  featuredAt?: Date | string | null
+  views?: number
+  shared?: number
+  categoryId: number
 }
 
 export type TestimonyUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
-  authorEmail?: Prisma.StringFieldUpdateOperationsInput | string
-  authorName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  authorEmail?: Prisma.StringFieldUpdateOperationsInput | string
+  authorName?: Prisma.StringFieldUpdateOperationsInput | string
   updatedByEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  views?: Prisma.IntFieldUpdateOperationsInput | number
+  shared?: Prisma.IntFieldUpdateOperationsInput | number
+  category?: Prisma.CategoryUpdateOneRequiredWithoutTestimoniesNestedInput
 }
 
 export type TestimonyUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
-  authorEmail?: Prisma.StringFieldUpdateOperationsInput | string
-  authorName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  authorEmail?: Prisma.StringFieldUpdateOperationsInput | string
+  authorName?: Prisma.StringFieldUpdateOperationsInput | string
   updatedByEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  views?: Prisma.IntFieldUpdateOperationsInput | number
+  shared?: Prisma.IntFieldUpdateOperationsInput | number
+  categoryId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type TestimonyCreateManyInput = {
   id?: number
   title: string
   content: string
-  authorEmail: string
-  authorName: string
   status?: $Enums.ReviewStatus
   createdAt?: Date | string
   updatedAt?: Date | string
+  authorEmail: string
+  authorName: string
   updatedByEmail?: string | null
+  isFeatured?: boolean
+  featuredAt?: Date | string | null
+  views?: number
+  shared?: number
+  categoryId: number
 }
 
 export type TestimonyUpdateManyMutationInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
-  authorEmail?: Prisma.StringFieldUpdateOperationsInput | string
-  authorName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  authorEmail?: Prisma.StringFieldUpdateOperationsInput | string
+  authorName?: Prisma.StringFieldUpdateOperationsInput | string
   updatedByEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  views?: Prisma.IntFieldUpdateOperationsInput | number
+  shared?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type TestimonyUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
-  authorEmail?: Prisma.StringFieldUpdateOperationsInput | string
-  authorName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  authorEmail?: Prisma.StringFieldUpdateOperationsInput | string
+  authorName?: Prisma.StringFieldUpdateOperationsInput | string
   updatedByEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  views?: Prisma.IntFieldUpdateOperationsInput | number
+  shared?: Prisma.IntFieldUpdateOperationsInput | number
+  categoryId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type TestimonyCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   content?: Prisma.SortOrder
-  authorEmail?: Prisma.SortOrder
-  authorName?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  authorEmail?: Prisma.SortOrder
+  authorName?: Prisma.SortOrder
   updatedByEmail?: Prisma.SortOrder
+  isFeatured?: Prisma.SortOrder
+  featuredAt?: Prisma.SortOrder
+  views?: Prisma.SortOrder
+  shared?: Prisma.SortOrder
+  categoryId?: Prisma.SortOrder
 }
 
 export type TestimonyAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  views?: Prisma.SortOrder
+  shared?: Prisma.SortOrder
+  categoryId?: Prisma.SortOrder
 }
 
 export type TestimonyMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   content?: Prisma.SortOrder
-  authorEmail?: Prisma.SortOrder
-  authorName?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  authorEmail?: Prisma.SortOrder
+  authorName?: Prisma.SortOrder
   updatedByEmail?: Prisma.SortOrder
+  isFeatured?: Prisma.SortOrder
+  featuredAt?: Prisma.SortOrder
+  views?: Prisma.SortOrder
+  shared?: Prisma.SortOrder
+  categoryId?: Prisma.SortOrder
 }
 
 export type TestimonyMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   content?: Prisma.SortOrder
-  authorEmail?: Prisma.SortOrder
-  authorName?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  authorEmail?: Prisma.SortOrder
+  authorName?: Prisma.SortOrder
   updatedByEmail?: Prisma.SortOrder
+  isFeatured?: Prisma.SortOrder
+  featuredAt?: Prisma.SortOrder
+  views?: Prisma.SortOrder
+  shared?: Prisma.SortOrder
+  categoryId?: Prisma.SortOrder
 }
 
 export type TestimonySumOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  views?: Prisma.SortOrder
+  shared?: Prisma.SortOrder
+  categoryId?: Prisma.SortOrder
+}
+
+export type TestimonyListRelationFilter = {
+  every?: Prisma.TestimonyWhereInput
+  some?: Prisma.TestimonyWhereInput
+  none?: Prisma.TestimonyWhereInput
+}
+
+export type TestimonyOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type EnumReviewStatusFieldUpdateOperationsInput = {
   set?: $Enums.ReviewStatus
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
+export type TestimonyCreateNestedManyWithoutCategoryInput = {
+  create?: Prisma.XOR<Prisma.TestimonyCreateWithoutCategoryInput, Prisma.TestimonyUncheckedCreateWithoutCategoryInput> | Prisma.TestimonyCreateWithoutCategoryInput[] | Prisma.TestimonyUncheckedCreateWithoutCategoryInput[]
+  connectOrCreate?: Prisma.TestimonyCreateOrConnectWithoutCategoryInput | Prisma.TestimonyCreateOrConnectWithoutCategoryInput[]
+  createMany?: Prisma.TestimonyCreateManyCategoryInputEnvelope
+  connect?: Prisma.TestimonyWhereUniqueInput | Prisma.TestimonyWhereUniqueInput[]
+}
+
+export type TestimonyUncheckedCreateNestedManyWithoutCategoryInput = {
+  create?: Prisma.XOR<Prisma.TestimonyCreateWithoutCategoryInput, Prisma.TestimonyUncheckedCreateWithoutCategoryInput> | Prisma.TestimonyCreateWithoutCategoryInput[] | Prisma.TestimonyUncheckedCreateWithoutCategoryInput[]
+  connectOrCreate?: Prisma.TestimonyCreateOrConnectWithoutCategoryInput | Prisma.TestimonyCreateOrConnectWithoutCategoryInput[]
+  createMany?: Prisma.TestimonyCreateManyCategoryInputEnvelope
+  connect?: Prisma.TestimonyWhereUniqueInput | Prisma.TestimonyWhereUniqueInput[]
+}
+
+export type TestimonyUpdateManyWithoutCategoryNestedInput = {
+  create?: Prisma.XOR<Prisma.TestimonyCreateWithoutCategoryInput, Prisma.TestimonyUncheckedCreateWithoutCategoryInput> | Prisma.TestimonyCreateWithoutCategoryInput[] | Prisma.TestimonyUncheckedCreateWithoutCategoryInput[]
+  connectOrCreate?: Prisma.TestimonyCreateOrConnectWithoutCategoryInput | Prisma.TestimonyCreateOrConnectWithoutCategoryInput[]
+  upsert?: Prisma.TestimonyUpsertWithWhereUniqueWithoutCategoryInput | Prisma.TestimonyUpsertWithWhereUniqueWithoutCategoryInput[]
+  createMany?: Prisma.TestimonyCreateManyCategoryInputEnvelope
+  set?: Prisma.TestimonyWhereUniqueInput | Prisma.TestimonyWhereUniqueInput[]
+  disconnect?: Prisma.TestimonyWhereUniqueInput | Prisma.TestimonyWhereUniqueInput[]
+  delete?: Prisma.TestimonyWhereUniqueInput | Prisma.TestimonyWhereUniqueInput[]
+  connect?: Prisma.TestimonyWhereUniqueInput | Prisma.TestimonyWhereUniqueInput[]
+  update?: Prisma.TestimonyUpdateWithWhereUniqueWithoutCategoryInput | Prisma.TestimonyUpdateWithWhereUniqueWithoutCategoryInput[]
+  updateMany?: Prisma.TestimonyUpdateManyWithWhereWithoutCategoryInput | Prisma.TestimonyUpdateManyWithWhereWithoutCategoryInput[]
+  deleteMany?: Prisma.TestimonyScalarWhereInput | Prisma.TestimonyScalarWhereInput[]
+}
+
+export type TestimonyUncheckedUpdateManyWithoutCategoryNestedInput = {
+  create?: Prisma.XOR<Prisma.TestimonyCreateWithoutCategoryInput, Prisma.TestimonyUncheckedCreateWithoutCategoryInput> | Prisma.TestimonyCreateWithoutCategoryInput[] | Prisma.TestimonyUncheckedCreateWithoutCategoryInput[]
+  connectOrCreate?: Prisma.TestimonyCreateOrConnectWithoutCategoryInput | Prisma.TestimonyCreateOrConnectWithoutCategoryInput[]
+  upsert?: Prisma.TestimonyUpsertWithWhereUniqueWithoutCategoryInput | Prisma.TestimonyUpsertWithWhereUniqueWithoutCategoryInput[]
+  createMany?: Prisma.TestimonyCreateManyCategoryInputEnvelope
+  set?: Prisma.TestimonyWhereUniqueInput | Prisma.TestimonyWhereUniqueInput[]
+  disconnect?: Prisma.TestimonyWhereUniqueInput | Prisma.TestimonyWhereUniqueInput[]
+  delete?: Prisma.TestimonyWhereUniqueInput | Prisma.TestimonyWhereUniqueInput[]
+  connect?: Prisma.TestimonyWhereUniqueInput | Prisma.TestimonyWhereUniqueInput[]
+  update?: Prisma.TestimonyUpdateWithWhereUniqueWithoutCategoryInput | Prisma.TestimonyUpdateWithWhereUniqueWithoutCategoryInput[]
+  updateMany?: Prisma.TestimonyUpdateManyWithWhereWithoutCategoryInput | Prisma.TestimonyUpdateManyWithWhereWithoutCategoryInput[]
+  deleteMany?: Prisma.TestimonyScalarWhereInput | Prisma.TestimonyScalarWhereInput[]
+}
+
+export type TestimonyCreateWithoutCategoryInput = {
+  title: string
+  content: string
+  status?: $Enums.ReviewStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  authorEmail: string
+  authorName: string
+  updatedByEmail?: string | null
+  isFeatured?: boolean
+  featuredAt?: Date | string | null
+  views?: number
+  shared?: number
+}
+
+export type TestimonyUncheckedCreateWithoutCategoryInput = {
+  id?: number
+  title: string
+  content: string
+  status?: $Enums.ReviewStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  authorEmail: string
+  authorName: string
+  updatedByEmail?: string | null
+  isFeatured?: boolean
+  featuredAt?: Date | string | null
+  views?: number
+  shared?: number
+}
+
+export type TestimonyCreateOrConnectWithoutCategoryInput = {
+  where: Prisma.TestimonyWhereUniqueInput
+  create: Prisma.XOR<Prisma.TestimonyCreateWithoutCategoryInput, Prisma.TestimonyUncheckedCreateWithoutCategoryInput>
+}
+
+export type TestimonyCreateManyCategoryInputEnvelope = {
+  data: Prisma.TestimonyCreateManyCategoryInput | Prisma.TestimonyCreateManyCategoryInput[]
+  skipDuplicates?: boolean
+}
+
+export type TestimonyUpsertWithWhereUniqueWithoutCategoryInput = {
+  where: Prisma.TestimonyWhereUniqueInput
+  update: Prisma.XOR<Prisma.TestimonyUpdateWithoutCategoryInput, Prisma.TestimonyUncheckedUpdateWithoutCategoryInput>
+  create: Prisma.XOR<Prisma.TestimonyCreateWithoutCategoryInput, Prisma.TestimonyUncheckedCreateWithoutCategoryInput>
+}
+
+export type TestimonyUpdateWithWhereUniqueWithoutCategoryInput = {
+  where: Prisma.TestimonyWhereUniqueInput
+  data: Prisma.XOR<Prisma.TestimonyUpdateWithoutCategoryInput, Prisma.TestimonyUncheckedUpdateWithoutCategoryInput>
+}
+
+export type TestimonyUpdateManyWithWhereWithoutCategoryInput = {
+  where: Prisma.TestimonyScalarWhereInput
+  data: Prisma.XOR<Prisma.TestimonyUpdateManyMutationInput, Prisma.TestimonyUncheckedUpdateManyWithoutCategoryInput>
+}
+
+export type TestimonyScalarWhereInput = {
+  AND?: Prisma.TestimonyScalarWhereInput | Prisma.TestimonyScalarWhereInput[]
+  OR?: Prisma.TestimonyScalarWhereInput[]
+  NOT?: Prisma.TestimonyScalarWhereInput | Prisma.TestimonyScalarWhereInput[]
+  id?: Prisma.IntFilter<"Testimony"> | number
+  title?: Prisma.StringFilter<"Testimony"> | string
+  content?: Prisma.StringFilter<"Testimony"> | string
+  status?: Prisma.EnumReviewStatusFilter<"Testimony"> | $Enums.ReviewStatus
+  createdAt?: Prisma.DateTimeFilter<"Testimony"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Testimony"> | Date | string
+  authorEmail?: Prisma.StringFilter<"Testimony"> | string
+  authorName?: Prisma.StringFilter<"Testimony"> | string
+  updatedByEmail?: Prisma.StringNullableFilter<"Testimony"> | string | null
+  isFeatured?: Prisma.BoolFilter<"Testimony"> | boolean
+  featuredAt?: Prisma.DateTimeNullableFilter<"Testimony"> | Date | string | null
+  views?: Prisma.IntFilter<"Testimony"> | number
+  shared?: Prisma.IntFilter<"Testimony"> | number
+  categoryId?: Prisma.IntFilter<"Testimony"> | number
+}
+
+export type TestimonyCreateManyCategoryInput = {
+  id?: number
+  title: string
+  content: string
+  status?: $Enums.ReviewStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  authorEmail: string
+  authorName: string
+  updatedByEmail?: string | null
+  isFeatured?: boolean
+  featuredAt?: Date | string | null
+  views?: number
+  shared?: number
+}
+
+export type TestimonyUpdateWithoutCategoryInput = {
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  authorEmail?: Prisma.StringFieldUpdateOperationsInput | string
+  authorName?: Prisma.StringFieldUpdateOperationsInput | string
+  updatedByEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  views?: Prisma.IntFieldUpdateOperationsInput | number
+  shared?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
+export type TestimonyUncheckedUpdateWithoutCategoryInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  authorEmail?: Prisma.StringFieldUpdateOperationsInput | string
+  authorName?: Prisma.StringFieldUpdateOperationsInput | string
+  updatedByEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  views?: Prisma.IntFieldUpdateOperationsInput | number
+  shared?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
+export type TestimonyUncheckedUpdateManyWithoutCategoryInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  authorEmail?: Prisma.StringFieldUpdateOperationsInput | string
+  authorName?: Prisma.StringFieldUpdateOperationsInput | string
+  updatedByEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  views?: Prisma.IntFieldUpdateOperationsInput | number
+  shared?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 
@@ -448,65 +766,104 @@ export type TestimonySelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   id?: boolean
   title?: boolean
   content?: boolean
-  authorEmail?: boolean
-  authorName?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  authorEmail?: boolean
+  authorName?: boolean
   updatedByEmail?: boolean
+  isFeatured?: boolean
+  featuredAt?: boolean
+  views?: boolean
+  shared?: boolean
+  categoryId?: boolean
+  category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["testimony"]>
 
 export type TestimonySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   title?: boolean
   content?: boolean
-  authorEmail?: boolean
-  authorName?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  authorEmail?: boolean
+  authorName?: boolean
   updatedByEmail?: boolean
+  isFeatured?: boolean
+  featuredAt?: boolean
+  views?: boolean
+  shared?: boolean
+  categoryId?: boolean
+  category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["testimony"]>
 
 export type TestimonySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   title?: boolean
   content?: boolean
-  authorEmail?: boolean
-  authorName?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  authorEmail?: boolean
+  authorName?: boolean
   updatedByEmail?: boolean
+  isFeatured?: boolean
+  featuredAt?: boolean
+  views?: boolean
+  shared?: boolean
+  categoryId?: boolean
+  category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["testimony"]>
 
 export type TestimonySelectScalar = {
   id?: boolean
   title?: boolean
   content?: boolean
-  authorEmail?: boolean
-  authorName?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  authorEmail?: boolean
+  authorName?: boolean
   updatedByEmail?: boolean
+  isFeatured?: boolean
+  featuredAt?: boolean
+  views?: boolean
+  shared?: boolean
+  categoryId?: boolean
 }
 
-export type TestimonyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "content" | "authorEmail" | "authorName" | "status" | "createdAt" | "updatedAt" | "updatedByEmail", ExtArgs["result"]["testimony"]>
+export type TestimonyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "content" | "status" | "createdAt" | "updatedAt" | "authorEmail" | "authorName" | "updatedByEmail" | "isFeatured" | "featuredAt" | "views" | "shared" | "categoryId", ExtArgs["result"]["testimony"]>
+export type TestimonyInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
+}
+export type TestimonyIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
+}
+export type TestimonyIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
+}
 
 export type $TestimonyPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Testimony"
-  objects: {}
+  objects: {
+    category: Prisma.$CategoryPayload<ExtArgs>
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     title: string
     content: string
-    authorEmail: string
-    authorName: string
     status: $Enums.ReviewStatus
     createdAt: Date
     updatedAt: Date
+    authorEmail: string
+    authorName: string
     updatedByEmail: string | null
+    isFeatured: boolean
+    featuredAt: Date | null
+    views: number
+    shared: number
+    categoryId: number
   }, ExtArgs["result"]["testimony"]>
   composites: {}
 }
@@ -901,6 +1258,7 @@ readonly fields: TestimonyFieldRefs;
  */
 export interface Prisma__TestimonyClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  category<T extends Prisma.CategoryDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CategoryDefaultArgs<ExtArgs>>): Prisma.Prisma__CategoryClient<runtime.Types.Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -933,12 +1291,17 @@ export interface TestimonyFieldRefs {
   readonly id: Prisma.FieldRef<"Testimony", 'Int'>
   readonly title: Prisma.FieldRef<"Testimony", 'String'>
   readonly content: Prisma.FieldRef<"Testimony", 'String'>
-  readonly authorEmail: Prisma.FieldRef<"Testimony", 'String'>
-  readonly authorName: Prisma.FieldRef<"Testimony", 'String'>
   readonly status: Prisma.FieldRef<"Testimony", 'ReviewStatus'>
   readonly createdAt: Prisma.FieldRef<"Testimony", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Testimony", 'DateTime'>
+  readonly authorEmail: Prisma.FieldRef<"Testimony", 'String'>
+  readonly authorName: Prisma.FieldRef<"Testimony", 'String'>
   readonly updatedByEmail: Prisma.FieldRef<"Testimony", 'String'>
+  readonly isFeatured: Prisma.FieldRef<"Testimony", 'Boolean'>
+  readonly featuredAt: Prisma.FieldRef<"Testimony", 'DateTime'>
+  readonly views: Prisma.FieldRef<"Testimony", 'Int'>
+  readonly shared: Prisma.FieldRef<"Testimony", 'Int'>
+  readonly categoryId: Prisma.FieldRef<"Testimony", 'Int'>
 }
     
 
@@ -955,6 +1318,10 @@ export type TestimonyFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Int
    * Omit specific fields from the Testimony
    */
   omit?: Prisma.TestimonyOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TestimonyInclude<ExtArgs> | null
   /**
    * Filter, which Testimony to fetch.
    */
@@ -974,6 +1341,10 @@ export type TestimonyFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensi
    */
   omit?: Prisma.TestimonyOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TestimonyInclude<ExtArgs> | null
+  /**
    * Filter, which Testimony to fetch.
    */
   where: Prisma.TestimonyWhereUniqueInput
@@ -991,6 +1362,10 @@ export type TestimonyFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Omit specific fields from the Testimony
    */
   omit?: Prisma.TestimonyOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TestimonyInclude<ExtArgs> | null
   /**
    * Filter, which Testimony to fetch.
    */
@@ -1040,6 +1415,10 @@ export type TestimonyFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensio
    */
   omit?: Prisma.TestimonyOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TestimonyInclude<ExtArgs> | null
+  /**
    * Filter, which Testimony to fetch.
    */
   where?: Prisma.TestimonyWhereInput
@@ -1088,6 +1467,10 @@ export type TestimonyFindManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    */
   omit?: Prisma.TestimonyOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TestimonyInclude<ExtArgs> | null
+  /**
    * Filter, which Testimonies to fetch.
    */
   where?: Prisma.TestimonyWhereInput
@@ -1131,6 +1514,10 @@ export type TestimonyCreateArgs<ExtArgs extends runtime.Types.Extensions.Interna
    */
   omit?: Prisma.TestimonyOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TestimonyInclude<ExtArgs> | null
+  /**
    * The data needed to create a Testimony.
    */
   data: Prisma.XOR<Prisma.TestimonyCreateInput, Prisma.TestimonyUncheckedCreateInput>
@@ -1164,6 +1551,10 @@ export type TestimonyCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Exten
    */
   data: Prisma.TestimonyCreateManyInput | Prisma.TestimonyCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TestimonyIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1178,6 +1569,10 @@ export type TestimonyUpdateArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Omit specific fields from the Testimony
    */
   omit?: Prisma.TestimonyOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TestimonyInclude<ExtArgs> | null
   /**
    * The data needed to update a Testimony.
    */
@@ -1230,6 +1625,10 @@ export type TestimonyUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Exten
    * Limit how many Testimonies to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TestimonyIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1244,6 +1643,10 @@ export type TestimonyUpsertArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Omit specific fields from the Testimony
    */
   omit?: Prisma.TestimonyOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TestimonyInclude<ExtArgs> | null
   /**
    * The filter to search for the Testimony to update in case it exists.
    */
@@ -1270,6 +1673,10 @@ export type TestimonyDeleteArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Omit specific fields from the Testimony
    */
   omit?: Prisma.TestimonyOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TestimonyInclude<ExtArgs> | null
   /**
    * Filter which Testimony to delete.
    */
@@ -1302,4 +1709,8 @@ export type TestimonyDefaultArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * Omit specific fields from the Testimony
    */
   omit?: Prisma.TestimonyOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TestimonyInclude<ExtArgs> | null
 }

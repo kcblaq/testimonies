@@ -8,7 +8,8 @@ import { PrismaService } from '../prisma/prisma.service';
 import { CreateTestimonyDto } from './dto/create-testimony.dto';
 import { UpdateTestimonyDto } from './dto/update-testimony.dto';
 import { TestimonyQueryDto } from './dto/testimony-query.dto';
-import { ReviewStatus } from '@prisma/client';
+import { ReviewStatus } from 'generated/prisma/enums';
+
 
 @Injectable()
 export class TestimoniesService {
@@ -298,5 +299,16 @@ export class TestimoniesService {
       throw new InternalServerErrorException('Failed to delete all testimonies. Please try again later.');
     }
     return { message: 'All testimonies deleted successfully' };
+  }
+
+  async featuredTestimonies() {
+    try {
+      return await this.prisma.testimony.findMany({
+        where: { isFeatured: true },
+        include: this.includeCategory,
+      });
+    } catch (error: unknown) {
+      throw new InternalServerErrorException('Failed to fetch featured testimonies. Please try again later.');
+    }
   }
 }

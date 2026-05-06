@@ -62,6 +62,9 @@ let AdminController = class AdminController {
     async resendVerificationToken(email) {
         return this.adminService.resendVerificationToken(email);
     }
+    async dashboardStats() {
+        return this.adminService.dashboarddata();
+    }
 };
 exports.AdminController = AdminController;
 __decorate([
@@ -180,6 +183,20 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], AdminController.prototype, "resendVerificationToken", null);
+__decorate([
+    (0, common_1.Post)('dashboard-stats'),
+    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
+    (0, swagger_1.ApiOperation)({
+        summary: 'Get dashboard statistics',
+        description: 'Returns statistics for dashboard including total testimonies, approved testimonies, rejected testimonies, pending testimonies, total categories, total admins, submissions this week, submissions today, submissions by category, total views, and total shares.',
+    }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Dashboard statistics retrieved successfully.' }),
+    (0, swagger_1.ApiResponse)({ status: 401, description: 'Not authenticated.' }),
+    (0, swagger_1.ApiResponse)({ status: 403, description: 'Not an admin.' }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], AdminController.prototype, "dashboardStats", null);
 exports.AdminController = AdminController = __decorate([
     (0, swagger_1.ApiTags)('admin'),
     (0, common_1.Controller)('admin'),

@@ -37,4 +37,29 @@ export declare class AdminController {
     resendVerificationToken(email: string): Promise<{
         message: string;
     }>;
+    dashboardStats(): Promise<{
+        totalTestimonies: number;
+        approvedTestimonies: number;
+        rejectedTestimonies: number;
+        pendingTestimonies: number;
+        totalCategories: number;
+        totalAdmins: number;
+        submitionsThisWeek: number;
+        submitionsToday: number;
+        totalViews: import("../generated/prisma/models").GetTestimonyAggregateType<{
+            _sum: {
+                views: true;
+            };
+        }>;
+        totalShares: import("../generated/prisma/models").GetTestimonyAggregateType<{
+            _sum: {
+                shared: true;
+            };
+        }>;
+        categorieswithcount: {
+            categoryId: number;
+            categoryName: string;
+            count: number;
+        }[];
+    }>;
 }
