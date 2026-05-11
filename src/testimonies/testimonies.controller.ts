@@ -107,6 +107,18 @@ export class TestimoniesController {
     return this.testimoniesService.findAllPending(query, resolvedId);
   }
 
+  @Get('featured')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({
+    summary: 'List featured testimonies',
+    description: 'Returns testimonies marked as featured.',
+  })
+  @ApiResponse({ status: 200, description: 'List of featured testimonies.' })
+  @ApiResponse({ status: 500, description: 'Server error.' })
+  async getFeaturedTestimonies() {
+    return await this.testimoniesService.featuredTestimonies();
+  }
+
   @Get(':id')
   @ApiOperation({ summary: 'Get a testimony by ID' })
   @ApiResponse({ status: 200, description: 'The testimony.' })
@@ -155,17 +167,5 @@ export class TestimoniesController {
   @ApiResponse({ status: 404, description: 'Testimony not found.' })
   async remove(@Param('id', ParseIntPipe) id: number) {
     await this.testimoniesService.remove(id);
-  }
-
-  @Get('featured')
-  @HttpCode(HttpStatus.OK)
-  @ApiOperation({
-    summary: 'List featured testimonies',
-    description: 'Returns testimonies marked as featured.',
-  })
-  @ApiResponse({ status: 200, description: 'List of featured testimonies.' })
-  @ApiResponse({ status: 500, description: 'Server error.' })
-  async getFeaturedTestimonies() {
-    return this.testimoniesService.featuredTestimonies();
   }
 }

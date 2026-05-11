@@ -204,7 +204,8 @@ let TestimoniesService = class TestimoniesService {
         catch (error) {
             if (error instanceof common_1.NotFoundException || error instanceof common_1.BadRequestException)
                 throw error;
-            throw new common_1.InternalServerErrorException('Failed to update testimony. Please try again later.');
+            const message = error instanceof Error ? error.message : 'Unknown error';
+            throw new common_1.InternalServerErrorException(message);
         }
     }
     async incrementShares(id) {
@@ -279,7 +280,9 @@ let TestimoniesService = class TestimoniesService {
         try {
             return await this.prisma.testimony.findMany({
                 where: { isFeatured: true },
+                orderBy: { updatedAt: "desc" },
                 include: this.includeCategory,
+                take: 6
             });
         }
         catch (error) {

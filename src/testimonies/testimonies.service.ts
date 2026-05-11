@@ -226,9 +226,8 @@ export class TestimoniesService {
       });
     } catch (error: unknown) {
       if (error instanceof NotFoundException || error instanceof BadRequestException) throw error;
-      throw new InternalServerErrorException(
-        'Failed to update testimony. Please try again later.',
-      );
+      const message = error instanceof Error ? error.message : 'Unknown error';
+      throw new InternalServerErrorException(message);
     }
   }
 
@@ -305,7 +304,9 @@ export class TestimoniesService {
     try {
       return await this.prisma.testimony.findMany({
         where: { isFeatured: true },
+        orderBy: { updatedAt: "desc"},
         include: this.includeCategory,
+        take: 6
       });
     } catch (error: unknown) {
       throw new InternalServerErrorException('Failed to fetch featured testimonies. Please try again later.');
