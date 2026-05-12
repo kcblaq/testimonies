@@ -12,11 +12,12 @@ export declare class TestimoniesController {
             slug: string;
         };
     } & {
-        title: string;
-        content: string;
-        status: import("../generated/prisma/enums").ReviewStatus;
+        id: number;
         createdAt: Date;
         updatedAt: Date;
+        status: import("../generated/prisma/enums").ReviewStatus;
+        title: string;
+        content: string;
         authorEmail: string;
         authorName: string;
         updatedByEmail: string | null;
@@ -24,7 +25,6 @@ export declare class TestimoniesController {
         featuredAt: Date | null;
         views: number;
         shared: number;
-        id: number;
         categoryId: number;
     }>;
     findAll(query: TestimonyQueryDto): Promise<{
@@ -35,11 +35,12 @@ export declare class TestimoniesController {
                 slug: string;
             };
         } & {
-            title: string;
-            content: string;
-            status: import("../generated/prisma/enums").ReviewStatus;
+            id: number;
             createdAt: Date;
             updatedAt: Date;
+            status: import("../generated/prisma/enums").ReviewStatus;
+            title: string;
+            content: string;
             authorEmail: string;
             authorName: string;
             updatedByEmail: string | null;
@@ -47,7 +48,6 @@ export declare class TestimoniesController {
             featuredAt: Date | null;
             views: number;
             shared: number;
-            id: number;
             categoryId: number;
         })[];
         meta: {
@@ -65,11 +65,12 @@ export declare class TestimoniesController {
                 slug: string;
             };
         } & {
-            title: string;
-            content: string;
-            status: import("../generated/prisma/enums").ReviewStatus;
+            id: number;
             createdAt: Date;
             updatedAt: Date;
+            status: import("../generated/prisma/enums").ReviewStatus;
+            title: string;
+            content: string;
             authorEmail: string;
             authorName: string;
             updatedByEmail: string | null;
@@ -77,7 +78,6 @@ export declare class TestimoniesController {
             featuredAt: Date | null;
             views: number;
             shared: number;
-            id: number;
             categoryId: number;
         })[];
         meta: {
@@ -95,11 +95,12 @@ export declare class TestimoniesController {
                 slug: string;
             };
         } & {
-            title: string;
-            content: string;
-            status: import("../generated/prisma/enums").ReviewStatus;
+            id: number;
             createdAt: Date;
             updatedAt: Date;
+            status: import("../generated/prisma/enums").ReviewStatus;
+            title: string;
+            content: string;
             authorEmail: string;
             authorName: string;
             updatedByEmail: string | null;
@@ -107,7 +108,6 @@ export declare class TestimoniesController {
             featuredAt: Date | null;
             views: number;
             shared: number;
-            id: number;
             categoryId: number;
         })[];
         meta: {
@@ -125,11 +125,12 @@ export declare class TestimoniesController {
                 slug: string;
             };
         } & {
-            title: string;
-            content: string;
-            status: import("../generated/prisma/enums").ReviewStatus;
+            id: number;
             createdAt: Date;
             updatedAt: Date;
+            status: import("../generated/prisma/enums").ReviewStatus;
+            title: string;
+            content: string;
             authorEmail: string;
             authorName: string;
             updatedByEmail: string | null;
@@ -137,7 +138,6 @@ export declare class TestimoniesController {
             featuredAt: Date | null;
             views: number;
             shared: number;
-            id: number;
             categoryId: number;
         })[];
         meta: {
@@ -154,11 +154,12 @@ export declare class TestimoniesController {
             slug: string;
         };
     } & {
-        title: string;
-        content: string;
-        status: import("../generated/prisma/enums").ReviewStatus;
+        id: number;
         createdAt: Date;
         updatedAt: Date;
+        status: import("../generated/prisma/enums").ReviewStatus;
+        title: string;
+        content: string;
         authorEmail: string;
         authorName: string;
         updatedByEmail: string | null;
@@ -166,7 +167,6 @@ export declare class TestimoniesController {
         featuredAt: Date | null;
         views: number;
         shared: number;
-        id: number;
         categoryId: number;
     })[]>;
     findOne(id: number, session: Record<string, any>): Promise<{
@@ -176,11 +176,12 @@ export declare class TestimoniesController {
             slug: string;
         };
     } & {
-        title: string;
-        content: string;
-        status: import("../generated/prisma/enums").ReviewStatus;
+        id: number;
         createdAt: Date;
         updatedAt: Date;
+        status: import("../generated/prisma/enums").ReviewStatus;
+        title: string;
+        content: string;
         authorEmail: string;
         authorName: string;
         updatedByEmail: string | null;
@@ -188,7 +189,6 @@ export declare class TestimoniesController {
         featuredAt: Date | null;
         views: number;
         shared: number;
-        id: number;
         categoryId: number;
     }>;
     share(id: number): Promise<{
@@ -198,11 +198,12 @@ export declare class TestimoniesController {
             slug: string;
         };
     } & {
-        title: string;
-        content: string;
-        status: import("../generated/prisma/enums").ReviewStatus;
+        id: number;
         createdAt: Date;
         updatedAt: Date;
+        status: import("../generated/prisma/enums").ReviewStatus;
+        title: string;
+        content: string;
         authorEmail: string;
         authorName: string;
         updatedByEmail: string | null;
@@ -210,7 +211,6 @@ export declare class TestimoniesController {
         featuredAt: Date | null;
         views: number;
         shared: number;
-        id: number;
         categoryId: number;
     }>;
     update(id: number, updateTestimonyDto: UpdateTestimonyDto, req: {
@@ -224,11 +224,12 @@ export declare class TestimoniesController {
             slug: string;
         };
     } & {
-        title: string;
-        content: string;
-        status: import("../generated/prisma/enums").ReviewStatus;
+        id: number;
         createdAt: Date;
         updatedAt: Date;
+        status: import("../generated/prisma/enums").ReviewStatus;
+        title: string;
+        content: string;
         authorEmail: string;
         authorName: string;
         updatedByEmail: string | null;
@@ -236,7 +237,6 @@ export declare class TestimoniesController {
         featuredAt: Date | null;
         views: number;
         shared: number;
-        id: number;
         categoryId: number;
     }>;
     remove(id: number): Promise<void>;
