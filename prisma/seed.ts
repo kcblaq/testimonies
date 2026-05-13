@@ -1,4 +1,4 @@
-import { PrismaClient } from "generated/prisma/client";
+
 import bcrypt from 'bcrypt';
 import { PrismaService } from "src/prisma/prisma.service";
 
