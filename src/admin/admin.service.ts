@@ -8,7 +8,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
 import { randomBytes } from 'node:crypto';
 import { EmailService } from '../email/email.service';
-import { ReviewStatus } from 'generated/prisma/enums';
+import { ReviewStatus } from 'generated/enums';
 
 const VERIFICATION_TOKEN_BYTES = 32;
 const VERIFICATION_EXPIRY_HOURS = 24;

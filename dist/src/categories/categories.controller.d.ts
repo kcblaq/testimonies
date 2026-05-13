@@ -13,11 +13,11 @@ export declare class CategoriesController {
         };
     } & {
         id: number;
-        createdAt: Date;
-        updatedAt: Date;
         name: string;
         slug: string;
         description: string | null;
+        createdAt: Date;
+        updatedAt: Date;
     })[]>;
     getCategoryTestimonies(idOrSlug: string, query: TestimonyQueryDto): Promise<{
         data: ({
@@ -27,10 +27,12 @@ export declare class CategoriesController {
                 slug: string;
             };
         } & {
+            status: import("../generated/prisma/enums").ReviewStatus;
+            views: number;
+            shared: number;
             id: number;
             createdAt: Date;
             updatedAt: Date;
-            status: import("../generated/prisma/enums").ReviewStatus;
             title: string;
             content: string;
             authorEmail: string;
@@ -38,8 +40,6 @@ export declare class CategoriesController {
             updatedByEmail: string | null;
             isFeatured: boolean;
             featuredAt: Date | null;
-            views: number;
-            shared: number;
             categoryId: number;
         })[];
         meta: {
@@ -57,10 +57,12 @@ export declare class CategoriesController {
                 slug: string;
             };
         } & {
+            status: import("../generated/prisma/enums").ReviewStatus;
+            views: number;
+            shared: number;
             id: number;
             createdAt: Date;
             updatedAt: Date;
-            status: import("../generated/prisma/enums").ReviewStatus;
             title: string;
             content: string;
             authorEmail: string;
@@ -68,8 +70,6 @@ export declare class CategoriesController {
             updatedByEmail: string | null;
             isFeatured: boolean;
             featuredAt: Date | null;
-            views: number;
-            shared: number;
             categoryId: number;
         })[];
         meta: {
@@ -87,10 +87,12 @@ export declare class CategoriesController {
                 slug: string;
             };
         } & {
+            status: import("../generated/prisma/enums").ReviewStatus;
+            views: number;
+            shared: number;
             id: number;
             createdAt: Date;
             updatedAt: Date;
-            status: import("../generated/prisma/enums").ReviewStatus;
             title: string;
             content: string;
             authorEmail: string;
@@ -98,8 +100,6 @@ export declare class CategoriesController {
             updatedByEmail: string | null;
             isFeatured: boolean;
             featuredAt: Date | null;
-            views: number;
-            shared: number;
             categoryId: number;
         })[];
         meta: {
@@ -117,10 +117,12 @@ export declare class CategoriesController {
                 slug: string;
             };
         } & {
+            status: import("../generated/prisma/enums").ReviewStatus;
+            views: number;
+            shared: number;
             id: number;
             createdAt: Date;
             updatedAt: Date;
-            status: import("../generated/prisma/enums").ReviewStatus;
             title: string;
             content: string;
             authorEmail: string;
@@ -128,8 +130,6 @@ export declare class CategoriesController {
             updatedByEmail: string | null;
             isFeatured: boolean;
             featuredAt: Date | null;
-            views: number;
-            shared: number;
             categoryId: number;
         })[];
         meta: {
@@ -145,28 +145,28 @@ export declare class CategoriesController {
         };
     } & {
         id: number;
-        createdAt: Date;
-        updatedAt: Date;
         name: string;
         slug: string;
         description: string | null;
+        createdAt: Date;
+        updatedAt: Date;
     }>;
     private resolveCategoryId;
     create(dto: CreateCategoryDto): Promise<{
         id: number;
-        createdAt: Date;
-        updatedAt: Date;
         name: string;
         slug: string;
         description: string | null;
+        createdAt: Date;
+        updatedAt: Date;
     }>;
     update(id: number, dto: UpdateCategoryDto): Promise<{
         id: number;
-        createdAt: Date;
-        updatedAt: Date;
         name: string;
         slug: string;
         description: string | null;
+        createdAt: Date;
+        updatedAt: Date;
     }>;
     remove(id: number): Promise<void>;
 }

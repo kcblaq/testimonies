@@ -2,6 +2,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import { CreateTestimonyDto } from './dto/create-testimony.dto';
 import { UpdateTestimonyDto } from './dto/update-testimony.dto';
 import { TestimonyQueryDto } from './dto/testimony-query.dto';
+import { ReviewStatus } from 'generated/enums';
 export declare class TestimoniesService {
     private readonly prisma;
     constructor(prisma: PrismaService);
@@ -17,7 +18,7 @@ export declare class TestimoniesService {
         id: number;
         createdAt: Date;
         updatedAt: Date;
-        status: import("../generated/prisma/enums").ReviewStatus;
+        status: ReviewStatus;
         title: string;
         content: string;
         authorEmail: string;
@@ -42,7 +43,7 @@ export declare class TestimoniesService {
             id: number;
             createdAt: Date;
             updatedAt: Date;
-            status: import("../generated/prisma/enums").ReviewStatus;
+            status: ReviewStatus;
             title: string;
             content: string;
             authorEmail: string;
@@ -72,7 +73,7 @@ export declare class TestimoniesService {
             id: number;
             createdAt: Date;
             updatedAt: Date;
-            status: import("../generated/prisma/enums").ReviewStatus;
+            status: ReviewStatus;
             title: string;
             content: string;
             authorEmail: string;
@@ -102,7 +103,7 @@ export declare class TestimoniesService {
             id: number;
             createdAt: Date;
             updatedAt: Date;
-            status: import("../generated/prisma/enums").ReviewStatus;
+            status: ReviewStatus;
             title: string;
             content: string;
             authorEmail: string;
@@ -132,7 +133,7 @@ export declare class TestimoniesService {
             id: number;
             createdAt: Date;
             updatedAt: Date;
-            status: import("../generated/prisma/enums").ReviewStatus;
+            status: ReviewStatus;
             title: string;
             content: string;
             authorEmail: string;
@@ -161,7 +162,7 @@ export declare class TestimoniesService {
         id: number;
         createdAt: Date;
         updatedAt: Date;
-        status: import("../generated/prisma/enums").ReviewStatus;
+        status: ReviewStatus;
         title: string;
         content: string;
         authorEmail: string;
@@ -183,7 +184,7 @@ export declare class TestimoniesService {
         id: number;
         createdAt: Date;
         updatedAt: Date;
-        status: import("../generated/prisma/enums").ReviewStatus;
+        status: ReviewStatus;
         title: string;
         content: string;
         authorEmail: string;
@@ -205,7 +206,7 @@ export declare class TestimoniesService {
         id: number;
         createdAt: Date;
         updatedAt: Date;
-        status: import("../generated/prisma/enums").ReviewStatus;
+        status: ReviewStatus;
         title: string;
         content: string;
         authorEmail: string;
@@ -227,7 +228,7 @@ export declare class TestimoniesService {
         id: number;
         createdAt: Date;
         updatedAt: Date;
-        status: import("../generated/prisma/enums").ReviewStatus;
+        status: ReviewStatus;
         title: string;
         content: string;
         authorEmail: string;
@@ -262,7 +263,7 @@ export declare class TestimoniesService {
         id: number;
         createdAt: Date;
         updatedAt: Date;
-        status: import("../generated/prisma/enums").ReviewStatus;
+        status: ReviewStatus;
         title: string;
         content: string;
         authorEmail: string;

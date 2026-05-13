@@ -8,7 +8,8 @@ import { PrismaService } from '../prisma/prisma.service';
 import { CreateTestimonyDto } from './dto/create-testimony.dto';
 import { UpdateTestimonyDto } from './dto/update-testimony.dto';
 import { TestimonyQueryDto } from './dto/testimony-query.dto';
-import { ReviewStatus } from 'generated/prisma/enums';
+import { ReviewStatus } from 'generated/enums';
+
 
 
 @Injectable()

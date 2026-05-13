@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.TestimoniesService = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../prisma/prisma.service");
-const enums_1 = require("../../generated/prisma/enums");
+const enums_1 = require("../generated/prisma/enums");
 let TestimoniesService = class TestimoniesService {
     prisma;
     constructor(prisma) {
