@@ -3,7 +3,8 @@ services:
     name: nestjs-app
     env: node
     plan: free
-    buildCommand: npm install && npm run seed && npm run build && npx prisma generate
+    buildCommand: npm install && npx prisma generate && npm run build
+    preDeployCommand: npm run migrate:deploy && npm run seed
     startCommand: npm run start:prod
     envVars:
       - key: DATABASE_URL
