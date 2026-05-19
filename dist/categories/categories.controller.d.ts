@@ -12,9 +12,9 @@ export declare class CategoriesController {
             testimonies: number;
         };
     } & {
+        id: number;
         createdAt: Date;
         updatedAt: Date;
-        id: number;
         name: string;
         slug: string;
         description: string | null;
@@ -27,12 +27,12 @@ export declare class CategoriesController {
                 slug: string;
             };
         } & {
+            id: number;
             createdAt: Date;
             updatedAt: Date;
-            id: number;
+            status: import("../generated/prisma/enums").ReviewStatus;
             title: string;
             content: string;
-            status: import("../generated/prisma/enums").ReviewStatus;
             authorEmail: string;
             authorName: string;
             updatedByEmail: string | null;
@@ -57,12 +57,12 @@ export declare class CategoriesController {
                 slug: string;
             };
         } & {
+            id: number;
             createdAt: Date;
             updatedAt: Date;
-            id: number;
+            status: import("../generated/prisma/enums").ReviewStatus;
             title: string;
             content: string;
-            status: import("../generated/prisma/enums").ReviewStatus;
             authorEmail: string;
             authorName: string;
             updatedByEmail: string | null;
@@ -87,12 +87,12 @@ export declare class CategoriesController {
                 slug: string;
             };
         } & {
+            id: number;
             createdAt: Date;
             updatedAt: Date;
-            id: number;
+            status: import("../generated/prisma/enums").ReviewStatus;
             title: string;
             content: string;
-            status: import("../generated/prisma/enums").ReviewStatus;
             authorEmail: string;
             authorName: string;
             updatedByEmail: string | null;
@@ -117,12 +117,12 @@ export declare class CategoriesController {
                 slug: string;
             };
         } & {
+            id: number;
             createdAt: Date;
             updatedAt: Date;
-            id: number;
+            status: import("../generated/prisma/enums").ReviewStatus;
             title: string;
             content: string;
-            status: import("../generated/prisma/enums").ReviewStatus;
             authorEmail: string;
             authorName: string;
             updatedByEmail: string | null;
@@ -144,26 +144,26 @@ export declare class CategoriesController {
             testimonies: number;
         };
     } & {
+        id: number;
         createdAt: Date;
         updatedAt: Date;
-        id: number;
         name: string;
         slug: string;
         description: string | null;
     }>;
     private resolveCategoryId;
     create(dto: CreateCategoryDto): Promise<{
+        id: number;
         createdAt: Date;
         updatedAt: Date;
-        id: number;
         name: string;
         slug: string;
         description: string | null;
     }>;
     update(id: number, dto: UpdateCategoryDto): Promise<{
+        id: number;
         createdAt: Date;
         updatedAt: Date;
-        id: number;
         name: string;
         slug: string;
         description: string | null;

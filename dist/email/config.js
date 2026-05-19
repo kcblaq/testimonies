@@ -1,8 +1,6 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const mailtrap_1 = require("mailtrap");
+import { MailtrapClient } from "mailtrap";
 const TOKEN = process.env.MAILTRAP_API_TOKEN ?? "";
-const client = new mailtrap_1.MailtrapClient({
+const client = new MailtrapClient({
     token: TOKEN,
 });
 const sender = {

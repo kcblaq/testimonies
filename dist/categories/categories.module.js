@@ -1,26 +1,23 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.CategoriesModule = void 0;
-const common_1 = require("@nestjs/common");
-const categories_service_1 = require("./categories.service");
-const categories_controller_1 = require("./categories.controller");
-const admin_module_1 = require("../admin/admin.module");
-const testimonies_module_1 = require("../testimonies/testimonies.module");
+import { Module } from '@nestjs/common';
+import { CategoriesService } from './categories.service';
+import { CategoriesController } from './categories.controller';
+import { AdminModule } from '../admin/admin.module';
+import { TestimoniesModule } from '../testimonies/testimonies.module';
 let CategoriesModule = class CategoriesModule {
 };
-exports.CategoriesModule = CategoriesModule;
-exports.CategoriesModule = CategoriesModule = __decorate([
-    (0, common_1.Module)({
-        imports: [admin_module_1.AdminModule, testimonies_module_1.TestimoniesModule],
-        controllers: [categories_controller_1.CategoriesController],
-        providers: [categories_service_1.CategoriesService],
-        exports: [categories_service_1.CategoriesService],
+CategoriesModule = __decorate([
+    Module({
+        imports: [AdminModule, TestimoniesModule],
+        controllers: [CategoriesController],
+        providers: [CategoriesService],
+        exports: [CategoriesService],
     })
 ], CategoriesModule);
+export { CategoriesModule };
 //# sourceMappingURL=categories.module.js.map

@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,52 +7,49 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.TestimonyQueryDto = void 0;
-const class_validator_1 = require("class-validator");
-const class_transformer_1 = require("class-transformer");
-const swagger_1 = require("@nestjs/swagger");
-class TestimonyQueryDto {
+import { IsOptional, IsString, IsInt, Min } from 'class-validator';
+import { Type } from 'class-transformer';
+import { ApiPropertyOptional } from '@nestjs/swagger';
+export class TestimonyQueryDto {
     categoryId;
     categorySlug;
     search;
     page = 1;
     limit = 10;
 }
-exports.TestimonyQueryDto = TestimonyQueryDto;
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by category ID', type: Number }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_transformer_1.Type)(() => Number),
-    (0, class_validator_1.IsInt)(),
+    ApiPropertyOptional({ description: 'Filter by category ID', type: Number }),
+    IsOptional(),
+    Type(() => Number),
+    IsInt(),
     __metadata("design:type", Number)
 ], TestimonyQueryDto.prototype, "categoryId", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by category slug', type: String }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
+    ApiPropertyOptional({ description: 'Filter by category slug', type: String }),
+    IsOptional(),
+    IsString(),
     __metadata("design:type", String)
 ], TestimonyQueryDto.prototype, "categorySlug", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Search term for title, content, authorName, or category name', type: String }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
+    ApiPropertyOptional({ description: 'Search term for title, content, authorName, or category name', type: String }),
+    IsOptional(),
+    IsString(),
     __metadata("design:type", String)
 ], TestimonyQueryDto.prototype, "search", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Page number', default: 1, type: Number }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_transformer_1.Type)(() => Number),
-    (0, class_validator_1.IsInt)(),
-    (0, class_validator_1.Min)(1),
+    ApiPropertyOptional({ description: 'Page number', default: 1, type: Number }),
+    IsOptional(),
+    Type(() => Number),
+    IsInt(),
+    Min(1),
     __metadata("design:type", Number)
 ], TestimonyQueryDto.prototype, "page", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Number of items per page', default: 10, type: Number }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_transformer_1.Type)(() => Number),
-    (0, class_validator_1.IsInt)(),
-    (0, class_validator_1.Min)(1),
+    ApiPropertyOptional({ description: 'Number of items per page', default: 10, type: Number }),
+    IsOptional(),
+    Type(() => Number),
+    IsInt(),
+    Min(1),
     __metadata("design:type", Number)
 ], TestimonyQueryDto.prototype, "limit", void 0);
 //# sourceMappingURL=testimony-query.dto.js.map

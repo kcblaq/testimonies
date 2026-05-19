@@ -1,20 +1,5 @@
-import * as runtime from "@prisma/client/runtime/client";
-export const PrismaClientKnownRequestError = runtime.PrismaClientKnownRequestError;
-export const PrismaClientUnknownRequestError = runtime.PrismaClientUnknownRequestError;
-export const PrismaClientRustPanicError = runtime.PrismaClientRustPanicError;
-export const PrismaClientInitializationError = runtime.PrismaClientInitializationError;
-export const PrismaClientValidationError = runtime.PrismaClientValidationError;
-export const sql = runtime.sqltag;
-export const empty = runtime.empty;
-export const join = runtime.join;
-export const raw = runtime.raw;
-export const Sql = runtime.Sql;
+import * as runtime from "@prisma/client/runtime/index-browser";
 export const Decimal = runtime.Decimal;
-export const getExtensionContext = runtime.Extensions.getExtensionContext;
-export const prismaVersion = {
-    client: "7.4.1",
-    engine: "55ae170b1ced7fc6ed07a15f110549408c501bb3"
-};
 export const NullTypes = {
     DbNull: runtime.NullTypes.DbNull,
     JsonNull: runtime.NullTypes.JsonNull,
@@ -81,5 +66,4 @@ export const NullsOrder = {
     first: 'first',
     last: 'last'
 };
-export const defineExtension = runtime.Extensions.defineExtension;
-//# sourceMappingURL=prismaNamespace.js.map
+//# sourceMappingURL=prismaNamespaceBrowser.js.map

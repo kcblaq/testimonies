@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,21 +7,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.VerifyEmailDto = void 0;
-const swagger_1 = require("@nestjs/swagger");
-const class_validator_1 = require("class-validator");
-class VerifyEmailDto {
+import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty, IsString } from 'class-validator';
+export class VerifyEmailDto {
     token;
 }
-exports.VerifyEmailDto = VerifyEmailDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({
+    ApiProperty({
         description: 'Verification token received after registration or when added as admin',
         example: 'a1b2c3d4e5f6...',
     }),
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsNotEmpty)({ message: 'Verification token is required' }),
+    IsString(),
+    IsNotEmpty({ message: 'Verification token is required' }),
     __metadata("design:type", String)
 ], VerifyEmailDto.prototype, "token", void 0);
 //# sourceMappingURL=verify-email.dto.js.map

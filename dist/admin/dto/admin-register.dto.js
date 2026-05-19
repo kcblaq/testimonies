@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,35 +7,32 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.AdminRegisterDto = void 0;
-const swagger_1 = require("@nestjs/swagger");
-const class_validator_1 = require("class-validator");
-class AdminRegisterDto {
+import { ApiProperty } from '@nestjs/swagger';
+import { IsEmail, IsNotEmpty, IsString, MinLength, MaxLength } from 'class-validator';
+export class AdminRegisterDto {
     name;
     email;
     password;
 }
-exports.AdminRegisterDto = AdminRegisterDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: 'Jane Admin', description: 'Full name of the admin' }),
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsNotEmpty)({ message: 'Name is required' }),
-    (0, class_validator_1.MinLength)(2, { message: 'Name must be at least 2 characters' }),
-    (0, class_validator_1.MaxLength)(100, { message: 'Name must be at most 100 characters' }),
+    ApiProperty({ example: 'Jane Admin', description: 'Full name of the admin' }),
+    IsString(),
+    IsNotEmpty({ message: 'Name is required' }),
+    MinLength(2, { message: 'Name must be at least 2 characters' }),
+    MaxLength(100, { message: 'Name must be at most 100 characters' }),
     __metadata("design:type", String)
 ], AdminRegisterDto.prototype, "name", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: 'admin@example.com', description: 'Admin email' }),
-    (0, class_validator_1.IsEmail)({}, { message: 'Please provide a valid email' }),
-    (0, class_validator_1.IsNotEmpty)(),
+    ApiProperty({ example: 'admin@example.com', description: 'Admin email' }),
+    IsEmail({}, { message: 'Please provide a valid email' }),
+    IsNotEmpty(),
     __metadata("design:type", String)
 ], AdminRegisterDto.prototype, "email", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: 'your-secure-password', description: 'Admin password', minLength: 6 }),
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsNotEmpty)({ message: 'Password is required' }),
-    (0, class_validator_1.MinLength)(6, { message: 'Password must be at least 6 characters' }),
+    ApiProperty({ example: 'your-secure-password', description: 'Admin password', minLength: 6 }),
+    IsString(),
+    IsNotEmpty({ message: 'Password is required' }),
+    MinLength(6, { message: 'Password must be at least 6 characters' }),
     __metadata("design:type", String)
 ], AdminRegisterDto.prototype, "password", void 0);
 //# sourceMappingURL=admin-register.dto.js.map

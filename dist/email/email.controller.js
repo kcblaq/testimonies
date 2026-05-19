@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,19 +7,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.EmailController = void 0;
-const common_1 = require("@nestjs/common");
-const email_service_1 = require("./email.service");
+import { Controller } from '@nestjs/common';
+import { EmailService } from './email.service';
 let EmailController = class EmailController {
     emailService;
     constructor(emailService) {
         this.emailService = emailService;
     }
 };
-exports.EmailController = EmailController;
-exports.EmailController = EmailController = __decorate([
-    (0, common_1.Controller)('email'),
-    __metadata("design:paramtypes", [email_service_1.EmailService])
+EmailController = __decorate([
+    Controller('email'),
+    __metadata("design:paramtypes", [EmailService])
 ], EmailController);
+export { EmailController };
 //# sourceMappingURL=email.controller.js.map

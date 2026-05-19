@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,47 +7,44 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.UpdateTestimonyDto = void 0;
-const swagger_1 = require("@nestjs/swagger");
-const class_validator_1 = require("class-validator");
-const class_transformer_1 = require("class-transformer");
-class UpdateTestimonyDto {
+import { ApiPropertyOptional } from '@nestjs/swagger';
+import { IsIn, IsOptional, IsInt, Min, IsBoolean } from 'class-validator';
+import { Type } from 'class-transformer';
+export class UpdateTestimonyDto {
     status;
     categoryId;
     isFeatured;
 }
-exports.UpdateTestimonyDto = UpdateTestimonyDto;
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({
+    ApiPropertyOptional({
         description: 'Review status: APPROVED or REJECTED',
         enum: ['APPROVED', 'REJECTED'],
         example: 'APPROVED',
     }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsIn)(['APPROVED', 'REJECTED'], {
+    IsOptional(),
+    IsIn(['APPROVED', 'REJECTED'], {
         message: 'Status must be either APPROVED or REJECTED',
     }),
     __metadata("design:type", String)
 ], UpdateTestimonyDto.prototype, "status", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({
+    ApiPropertyOptional({
         description: 'Category ID. Omit to leave unchanged.',
         example: 1,
     }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_transformer_1.Type)(() => Number),
-    (0, class_validator_1.IsInt)(),
-    (0, class_validator_1.Min)(1),
+    IsOptional(),
+    Type(() => Number),
+    IsInt(),
+    Min(1),
     __metadata("design:type", Number)
 ], UpdateTestimonyDto.prototype, "categoryId", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({
+    ApiPropertyOptional({
         description: 'Whether the testimony is featured (admin only)',
         example: true,
     }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsBoolean)(),
+    IsOptional(),
+    IsBoolean(),
     __metadata("design:type", Boolean)
 ], UpdateTestimonyDto.prototype, "isFeatured", void 0);
 //# sourceMappingURL=update-testimony.dto.js.map
