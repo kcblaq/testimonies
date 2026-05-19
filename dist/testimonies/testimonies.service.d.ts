@@ -2,7 +2,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import { CreateTestimonyDto } from './dto/create-testimony.dto';
 import { UpdateTestimonyDto } from './dto/update-testimony.dto';
 import { TestimonyQueryDto } from './dto/testimony-query.dto';
-import { ReviewStatus } from 'src/generated/prisma/enums';
+import { ReviewStatus } from "../generated/prisma/enums";
 export declare class TestimoniesService {
     private readonly prisma;
     constructor(prisma: PrismaService);
@@ -15,12 +15,12 @@ export declare class TestimoniesService {
             slug: string;
         };
     } & {
-        id: number;
         createdAt: Date;
         updatedAt: Date;
-        status: ReviewStatus;
+        id: number;
         title: string;
         content: string;
+        status: ReviewStatus;
         authorEmail: string;
         authorName: string;
         updatedByEmail: string | null;
@@ -40,12 +40,12 @@ export declare class TestimoniesService {
                 slug: string;
             };
         } & {
-            id: number;
             createdAt: Date;
             updatedAt: Date;
-            status: ReviewStatus;
+            id: number;
             title: string;
             content: string;
+            status: ReviewStatus;
             authorEmail: string;
             authorName: string;
             updatedByEmail: string | null;
@@ -70,12 +70,12 @@ export declare class TestimoniesService {
                 slug: string;
             };
         } & {
-            id: number;
             createdAt: Date;
             updatedAt: Date;
-            status: ReviewStatus;
+            id: number;
             title: string;
             content: string;
+            status: ReviewStatus;
             authorEmail: string;
             authorName: string;
             updatedByEmail: string | null;
@@ -100,12 +100,12 @@ export declare class TestimoniesService {
                 slug: string;
             };
         } & {
-            id: number;
             createdAt: Date;
             updatedAt: Date;
-            status: ReviewStatus;
+            id: number;
             title: string;
             content: string;
+            status: ReviewStatus;
             authorEmail: string;
             authorName: string;
             updatedByEmail: string | null;
@@ -130,12 +130,12 @@ export declare class TestimoniesService {
                 slug: string;
             };
         } & {
-            id: number;
             createdAt: Date;
             updatedAt: Date;
-            status: ReviewStatus;
+            id: number;
             title: string;
             content: string;
+            status: ReviewStatus;
             authorEmail: string;
             authorName: string;
             updatedByEmail: string | null;
@@ -159,12 +159,12 @@ export declare class TestimoniesService {
             slug: string;
         };
     } & {
-        id: number;
         createdAt: Date;
         updatedAt: Date;
-        status: ReviewStatus;
+        id: number;
         title: string;
         content: string;
+        status: ReviewStatus;
         authorEmail: string;
         authorName: string;
         updatedByEmail: string | null;
@@ -181,12 +181,12 @@ export declare class TestimoniesService {
             slug: string;
         };
     } & {
-        id: number;
         createdAt: Date;
         updatedAt: Date;
-        status: ReviewStatus;
+        id: number;
         title: string;
         content: string;
+        status: ReviewStatus;
         authorEmail: string;
         authorName: string;
         updatedByEmail: string | null;
@@ -203,12 +203,12 @@ export declare class TestimoniesService {
             slug: string;
         };
     } & {
-        id: number;
         createdAt: Date;
         updatedAt: Date;
-        status: ReviewStatus;
+        id: number;
         title: string;
         content: string;
+        status: ReviewStatus;
         authorEmail: string;
         authorName: string;
         updatedByEmail: string | null;
@@ -225,12 +225,12 @@ export declare class TestimoniesService {
             slug: string;
         };
     } & {
-        id: number;
         createdAt: Date;
         updatedAt: Date;
-        status: ReviewStatus;
+        id: number;
         title: string;
         content: string;
+        status: ReviewStatus;
         authorEmail: string;
         authorName: string;
         updatedByEmail: string | null;
@@ -260,12 +260,12 @@ export declare class TestimoniesService {
             slug: string;
         };
     } & {
-        id: number;
         createdAt: Date;
         updatedAt: Date;
-        status: ReviewStatus;
+        id: number;
         title: string;
         content: string;
+        status: ReviewStatus;
         authorEmail: string;
         authorName: string;
         updatedByEmail: string | null;

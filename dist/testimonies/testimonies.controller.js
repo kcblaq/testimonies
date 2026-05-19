@@ -1,3 +1,4 @@
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10,14 +11,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Req, Query, ParseIntPipe, HttpCode, HttpStatus, Session, } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
-import { TestimoniesService } from './testimonies.service';
-import { CreateTestimonyDto } from './dto/create-testimony.dto';
-import { UpdateTestimonyDto } from './dto/update-testimony.dto';
-import { TestimonyQueryDto } from './dto/testimony-query.dto';
-import { AdminGuard } from '../admin/admin.guard';
-import { JwtAuthGuard } from '../admin/jwt-auth.guard';
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.TestimoniesController = void 0;
+const common_1 = require("@nestjs/common");
+const swagger_1 = require("@nestjs/swagger");
+const testimonies_service_1 = require("./testimonies.service");
+const create_testimony_dto_1 = require("./dto/create-testimony.dto");
+const update_testimony_dto_1 = require("./dto/update-testimony.dto");
+const testimony_query_dto_1 = require("./dto/testimony-query.dto");
+const admin_guard_1 = require("../admin/admin.guard");
+const jwt_auth_guard_1 = require("../admin/jwt-auth.guard");
 let TestimoniesController = class TestimoniesController {
     testimoniesService;
     constructor(testimoniesService) {
@@ -65,146 +68,146 @@ let TestimoniesController = class TestimoniesController {
         await this.testimoniesService.remove(id);
     }
 };
+exports.TestimoniesController = TestimoniesController;
 __decorate([
-    Post(),
-    ApiOperation({
+    (0, common_1.Post)(),
+    (0, swagger_1.ApiOperation)({
         summary: 'Submit a testimony',
         description: 'Public endpoint. Anyone can submit a testimony. It will be created with status PENDING until an admin approves it.',
     }),
-    ApiResponse({ status: 201, description: 'Testimony submitted successfully.' }),
-    ApiResponse({ status: 400, description: 'Validation failed or invalid request.' }),
-    ApiResponse({ status: 500, description: 'Server error while creating testimony.' }),
-    __param(0, Body()),
+    (0, swagger_1.ApiResponse)({ status: 201, description: 'Testimony submitted successfully.' }),
+    (0, swagger_1.ApiResponse)({ status: 400, description: 'Validation failed or invalid request.' }),
+    (0, swagger_1.ApiResponse)({ status: 500, description: 'Server error while creating testimony.' }),
+    __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [CreateTestimonyDto]),
+    __metadata("design:paramtypes", [create_testimony_dto_1.CreateTestimonyDto]),
     __metadata("design:returntype", void 0)
 ], TestimoniesController.prototype, "create", null);
 __decorate([
-    Get(),
-    ApiOperation({
+    (0, common_1.Get)(),
+    (0, swagger_1.ApiOperation)({
         summary: 'List all testimonies',
         description: 'Filter by category using categoryId or categorySlug (slug takes precedence if both provided). Includes pagination and search filtering.',
     }),
-    ApiResponse({ status: 200, description: 'List of testimonies (each includes category) with pagination metadata.' }),
-    ApiResponse({ status: 404, description: 'Category not found (when using categorySlug).' }),
-    __param(0, Query()),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'List of testimonies (each includes category) with pagination metadata.' }),
+    (0, swagger_1.ApiResponse)({ status: 404, description: 'Category not found (when using categorySlug).' }),
+    __param(0, (0, common_1.Query)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [TestimonyQueryDto]),
+    __metadata("design:paramtypes", [testimony_query_dto_1.TestimonyQueryDto]),
     __metadata("design:returntype", Promise)
 ], TestimoniesController.prototype, "findAll", null);
 __decorate([
-    Get('approved'),
-    ApiOperation({
+    (0, common_1.Get)('approved'),
+    (0, swagger_1.ApiOperation)({
         summary: 'List approved testimonies',
         description: 'Returns only approved testimonies. Filter by categoryId or categorySlug. Includes pagination and search filtering.',
     }),
-    ApiResponse({ status: 200, description: 'List of approved testimonies with pagination metadata.' }),
-    ApiResponse({ status: 404, description: 'Category not found (when using categorySlug).' }),
-    ApiResponse({ status: 500, description: 'Server error.' }),
-    __param(0, Query()),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'List of approved testimonies with pagination metadata.' }),
+    (0, swagger_1.ApiResponse)({ status: 404, description: 'Category not found (when using categorySlug).' }),
+    (0, swagger_1.ApiResponse)({ status: 500, description: 'Server error.' }),
+    __param(0, (0, common_1.Query)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [TestimonyQueryDto]),
+    __metadata("design:paramtypes", [testimony_query_dto_1.TestimonyQueryDto]),
     __metadata("design:returntype", Promise)
 ], TestimoniesController.prototype, "findAllApproved", null);
 __decorate([
-    Get('rejected'),
-    ApiOperation({
+    (0, common_1.Get)('rejected'),
+    (0, swagger_1.ApiOperation)({
         summary: 'List rejected testimonies',
         description: 'Returns only rejected testimonies. Filter by categoryId or categorySlug. Includes pagination and search filtering.',
     }),
-    ApiResponse({ status: 200, description: 'List of rejected testimonies with pagination metadata.' }),
-    ApiResponse({ status: 404, description: 'Category not found (when using categorySlug).' }),
-    ApiResponse({ status: 500, description: 'Server error.' }),
-    __param(0, Query()),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'List of rejected testimonies with pagination metadata.' }),
+    (0, swagger_1.ApiResponse)({ status: 404, description: 'Category not found (when using categorySlug).' }),
+    (0, swagger_1.ApiResponse)({ status: 500, description: 'Server error.' }),
+    __param(0, (0, common_1.Query)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [TestimonyQueryDto]),
+    __metadata("design:paramtypes", [testimony_query_dto_1.TestimonyQueryDto]),
     __metadata("design:returntype", Promise)
 ], TestimoniesController.prototype, "findAllRejected", null);
 __decorate([
-    Get('pending'),
-    ApiOperation({
+    (0, common_1.Get)('pending'),
+    (0, swagger_1.ApiOperation)({
         summary: 'List pending testimonies',
         description: 'Returns only testimonies awaiting review. Filter by categoryId or categorySlug. Includes pagination and search filtering.',
     }),
-    ApiResponse({ status: 200, description: 'List of pending testimonies with pagination metadata.' }),
-    ApiResponse({ status: 404, description: 'Category not found (when using categorySlug).' }),
-    ApiResponse({ status: 500, description: 'Server error.' }),
-    __param(0, Query()),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'List of pending testimonies with pagination metadata.' }),
+    (0, swagger_1.ApiResponse)({ status: 404, description: 'Category not found (when using categorySlug).' }),
+    (0, swagger_1.ApiResponse)({ status: 500, description: 'Server error.' }),
+    __param(0, (0, common_1.Query)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [TestimonyQueryDto]),
+    __metadata("design:paramtypes", [testimony_query_dto_1.TestimonyQueryDto]),
     __metadata("design:returntype", Promise)
 ], TestimoniesController.prototype, "findAllPending", null);
 __decorate([
-    Get('featured'),
-    HttpCode(HttpStatus.OK),
-    ApiOperation({
+    (0, common_1.Get)('featured'),
+    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
+    (0, swagger_1.ApiOperation)({
         summary: 'List featured testimonies',
         description: 'Returns testimonies marked as featured.',
     }),
-    ApiResponse({ status: 200, description: 'List of featured testimonies.' }),
-    ApiResponse({ status: 500, description: 'Server error.' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'List of featured testimonies.' }),
+    (0, swagger_1.ApiResponse)({ status: 500, description: 'Server error.' }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], TestimoniesController.prototype, "getFeaturedTestimonies", null);
 __decorate([
-    Get(':id'),
-    ApiOperation({ summary: 'Get a testimony by ID' }),
-    ApiResponse({ status: 200, description: 'The testimony.' }),
-    ApiResponse({ status: 404, description: 'Testimony not found.' }),
-    __param(0, Param('id', ParseIntPipe)),
-    __param(1, Session()),
+    (0, common_1.Get)(':id'),
+    (0, swagger_1.ApiOperation)({ summary: 'Get a testimony by ID' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'The testimony.' }),
+    (0, swagger_1.ApiResponse)({ status: 404, description: 'Testimony not found.' }),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    __param(1, (0, common_1.Session)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number, Object]),
     __metadata("design:returntype", void 0)
 ], TestimoniesController.prototype, "findOne", null);
 __decorate([
-    Post(':id/share'),
-    HttpCode(HttpStatus.OK),
-    ApiOperation({ summary: 'Increment share count for a testimony' }),
-    ApiResponse({ status: 200, description: 'Share count incremented.' }),
-    ApiResponse({ status: 404, description: 'Testimony not found.' }),
-    __param(0, Param('id', ParseIntPipe)),
+    (0, common_1.Post)(':id/share'),
+    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
+    (0, swagger_1.ApiOperation)({ summary: 'Increment share count for a testimony' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Share count incremented.' }),
+    (0, swagger_1.ApiResponse)({ status: 404, description: 'Testimony not found.' }),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], TestimoniesController.prototype, "share", null);
 __decorate([
-    UseGuards(JwtAuthGuard, AdminGuard),
-    Patch(':id'),
-    ApiBearerAuth(),
-    ApiOperation({
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, admin_guard_1.AdminGuard),
+    (0, common_1.Patch)(':id'),
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, swagger_1.ApiOperation)({
         summary: 'Approve or reject a testimony (admin only)',
         description: 'Requires admin authentication. Set status to APPROVED or REJECTED.',
     }),
-    ApiResponse({ status: 200, description: 'Testimony updated.' }),
-    ApiResponse({ status: 403, description: 'Forbidden. Not an admin.' }),
-    ApiResponse({ status: 404, description: 'Testimony not found.' }),
-    __param(0, Param('id', ParseIntPipe)),
-    __param(1, Body()),
-    __param(2, Req()),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Testimony updated.' }),
+    (0, swagger_1.ApiResponse)({ status: 403, description: 'Forbidden. Not an admin.' }),
+    (0, swagger_1.ApiResponse)({ status: 404, description: 'Testimony not found.' }),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    __param(1, (0, common_1.Body)()),
+    __param(2, (0, common_1.Req)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, UpdateTestimonyDto, Object]),
+    __metadata("design:paramtypes", [Number, update_testimony_dto_1.UpdateTestimonyDto, Object]),
     __metadata("design:returntype", void 0)
 ], TestimoniesController.prototype, "update", null);
 __decorate([
-    UseGuards(JwtAuthGuard, AdminGuard),
-    Delete(':id'),
-    HttpCode(HttpStatus.NO_CONTENT),
-    ApiBearerAuth(),
-    ApiOperation({ summary: 'Delete a testimony (admin only)' }),
-    ApiResponse({ status: 204, description: 'Testimony deleted.' }),
-    ApiResponse({ status: 403, description: 'Forbidden. Not an admin.' }),
-    ApiResponse({ status: 404, description: 'Testimony not found.' }),
-    __param(0, Param('id', ParseIntPipe)),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, admin_guard_1.AdminGuard),
+    (0, common_1.Delete)(':id'),
+    (0, common_1.HttpCode)(common_1.HttpStatus.NO_CONTENT),
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, swagger_1.ApiOperation)({ summary: 'Delete a testimony (admin only)' }),
+    (0, swagger_1.ApiResponse)({ status: 204, description: 'Testimony deleted.' }),
+    (0, swagger_1.ApiResponse)({ status: 403, description: 'Forbidden. Not an admin.' }),
+    (0, swagger_1.ApiResponse)({ status: 404, description: 'Testimony not found.' }),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], TestimoniesController.prototype, "remove", null);
-TestimoniesController = __decorate([
-    ApiTags('testimonies'),
-    Controller('testimonies'),
-    __metadata("design:paramtypes", [TestimoniesService])
+exports.TestimoniesController = TestimoniesController = __decorate([
+    (0, swagger_1.ApiTags)('testimonies'),
+    (0, common_1.Controller)('testimonies'),
+    __metadata("design:paramtypes", [testimonies_service_1.TestimoniesService])
 ], TestimoniesController);
-export { TestimoniesController };
 //# sourceMappingURL=testimonies.controller.js.map

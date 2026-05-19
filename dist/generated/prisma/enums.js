@@ -1,4 +1,7 @@
-export const ReviewStatus = {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ReviewStatus = void 0;
+exports.ReviewStatus = {
     PENDING: 'PENDING',
     APPROVED: 'APPROVED',
     REJECTED: 'REJECTED'

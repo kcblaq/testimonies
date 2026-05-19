@@ -9,9 +9,9 @@ export declare class CategoriesService {
             testimonies: number;
         };
     } & {
-        id: number;
         createdAt: Date;
         updatedAt: Date;
+        id: number;
         name: string;
         slug: string;
         description: string | null;
@@ -21,9 +21,9 @@ export declare class CategoriesService {
             testimonies: number;
         };
     } & {
-        id: number;
         createdAt: Date;
         updatedAt: Date;
+        id: number;
         name: string;
         slug: string;
         description: string | null;
@@ -33,25 +33,25 @@ export declare class CategoriesService {
             testimonies: number;
         };
     } & {
-        id: number;
         createdAt: Date;
         updatedAt: Date;
+        id: number;
         name: string;
         slug: string;
         description: string | null;
     }>;
     create(dto: CreateCategoryDto): Promise<{
-        id: number;
         createdAt: Date;
         updatedAt: Date;
+        id: number;
         name: string;
         slug: string;
         description: string | null;
     }>;
     update(id: number, dto: UpdateCategoryDto): Promise<{
-        id: number;
         createdAt: Date;
         updatedAt: Date;
+        id: number;
         name: string;
         slug: string;
         description: string | null;

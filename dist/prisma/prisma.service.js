@@ -1,3 +1,4 @@
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,22 +9,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var PrismaService_1;
-import { Injectable, Logger } from '@nestjs/common';
-import { PrismaPg } from '@prisma/adapter-pg';
-import { Pool } from 'pg';
-import { PrismaClient } from '../generated/prisma/client';
-let PrismaService = PrismaService_1 = class PrismaService extends PrismaClient {
-    logger = new Logger(PrismaService_1.name);
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PrismaService = void 0;
+const common_1 = require("@nestjs/common");
+const adapter_pg_1 = require("@prisma/adapter-pg");
+const pg_1 = require("pg");
+const client_1 = require("../generated/prisma/client");
+let PrismaService = PrismaService_1 = class PrismaService extends client_1.PrismaClient {
+    logger = new common_1.Logger(PrismaService_1.name);
     constructor() {
         const connectionString = process.env.DATABASE_URL;
         if (!connectionString) {
             throw new Error('DATABASE_URL is not defined in environment variables');
         }
-        const pool = new Pool({ connectionString });
+        const pool = new pg_1.Pool({ connectionString });
         pool.on('error', (err) => {
             this.logger.error('Unexpected error on idle Supabase client', err.stack);
         });
-        const adapter = new PrismaPg(pool);
+        const adapter = new adapter_pg_1.PrismaPg(pool);
         super({ adapter });
     }
     async onModuleInit() {
@@ -47,9 +50,9 @@ let PrismaService = PrismaService_1 = class PrismaService extends PrismaClient {
         await this.$disconnect();
     }
 };
-PrismaService = PrismaService_1 = __decorate([
-    Injectable(),
+exports.PrismaService = PrismaService;
+exports.PrismaService = PrismaService = PrismaService_1 = __decorate([
+    (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [])
 ], PrismaService);
-export { PrismaService };
 //# sourceMappingURL=prisma.service.js.map

@@ -1,3 +1,4 @@
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -7,8 +8,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Injectable } from '@nestjs/common';
-import { MailtrapClient } from "mailtrap";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.EmailService = void 0;
+const common_1 = require("@nestjs/common");
+const mailtrap_1 = require("mailtrap");
 let EmailService = class EmailService {
     client;
     sender = {
@@ -16,7 +19,7 @@ let EmailService = class EmailService {
         name: process.env.MAILTRAP_SENDER_NAME ?? '',
     };
     constructor() {
-        this.client = new MailtrapClient({
+        this.client = new mailtrap_1.MailtrapClient({
             token: process.env.MAILTRAP_API_TOKEN ?? '',
         });
     }
@@ -37,9 +40,9 @@ let EmailService = class EmailService {
         }
     }
 };
-EmailService = __decorate([
-    Injectable(),
+exports.EmailService = EmailService;
+exports.EmailService = EmailService = __decorate([
+    (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [])
 ], EmailService);
-export { EmailService };
 //# sourceMappingURL=email.service.js.map

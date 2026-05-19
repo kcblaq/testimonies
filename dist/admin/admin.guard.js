@@ -1,3 +1,4 @@
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -7,8 +8,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { ForbiddenException, Injectable, UnauthorizedException, } from '@nestjs/common';
-import { AdminService } from './admin.service';
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AdminGuard = void 0;
+const common_1 = require("@nestjs/common");
+const admin_service_1 = require("./admin.service");
 let AdminGuard = class AdminGuard {
     adminService;
     constructor(adminService) {
@@ -18,18 +21,18 @@ let AdminGuard = class AdminGuard {
         const request = context.switchToHttp().getRequest();
         const email = request.user?.email;
         if (!email) {
-            throw new UnauthorizedException('Authentication required. Please log in.');
+            throw new common_1.UnauthorizedException('Authentication required. Please log in.');
         }
         const isAdmin = await this.adminService.isAdmin(email);
         if (!isAdmin) {
-            throw new ForbiddenException('Access denied. Not an admin.');
+            throw new common_1.ForbiddenException('Access denied. Not an admin.');
         }
         return true;
     }
 };
-AdminGuard = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [AdminService])
+exports.AdminGuard = AdminGuard;
+exports.AdminGuard = AdminGuard = __decorate([
+    (0, common_1.Injectable)(),
+    __metadata("design:paramtypes", [admin_service_1.AdminService])
 ], AdminGuard);
-export { AdminGuard };
 //# sourceMappingURL=admin.guard.js.map

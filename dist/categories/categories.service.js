@@ -1,3 +1,4 @@
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -7,8 +8,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Injectable, NotFoundException, ConflictException, InternalServerErrorException, } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CategoriesService = void 0;
+const common_1 = require("@nestjs/common");
+const prisma_service_1 = require("../prisma/prisma.service");
 function toSlug(name) {
     return name
         .trim()
@@ -29,7 +32,7 @@ let CategoriesService = class CategoriesService {
             });
         }
         catch {
-            throw new InternalServerErrorException('Failed to fetch categories.');
+            throw new common_1.InternalServerErrorException('Failed to fetch categories.');
         }
     }
     async findOne(id) {
@@ -38,7 +41,7 @@ let CategoriesService = class CategoriesService {
             include: { _count: { select: { testimonies: true } } },
         });
         if (!category) {
-            throw new NotFoundException(`Category with id ${id} not found.`);
+            throw new common_1.NotFoundException(`Category with id ${id} not found.`);
         }
         return category;
     }
@@ -48,7 +51,7 @@ let CategoriesService = class CategoriesService {
             include: { _count: { select: { testimonies: true } } },
         });
         if (!category) {
-            throw new NotFoundException(`Category with slug "${slug}" not found.`);
+            throw new common_1.NotFoundException(`Category with slug "${slug}" not found.`);
         }
         return category;
     }
@@ -65,7 +68,7 @@ let CategoriesService = class CategoriesService {
                 },
             });
             if (existing) {
-                throw new ConflictException(existing.name.toLowerCase() === dto.name.trim().toLowerCase()
+                throw new common_1.ConflictException(existing.name.toLowerCase() === dto.name.trim().toLowerCase()
                     ? 'A category with this name already exists.'
                     : 'A category with this slug already exists.');
             }
@@ -78,15 +81,15 @@ let CategoriesService = class CategoriesService {
             });
         }
         catch (error) {
-            if (error instanceof ConflictException)
+            if (error instanceof common_1.ConflictException)
                 throw error;
             if (error && typeof error === 'object' && 'code' in error) {
                 const code = error.code;
                 if (code === 'P2002') {
-                    throw new ConflictException('A category with this name or slug already exists.');
+                    throw new common_1.ConflictException('A category with this name or slug already exists.');
                 }
             }
-            throw new InternalServerErrorException('Failed to create category.');
+            throw new common_1.InternalServerErrorException('Failed to create category.');
         }
     }
     async update(id, dto) {
@@ -104,15 +107,15 @@ let CategoriesService = class CategoriesService {
             });
         }
         catch (error) {
-            if (error instanceof NotFoundException)
+            if (error instanceof common_1.NotFoundException)
                 throw error;
             if (error && typeof error === 'object' && 'code' in error) {
                 const code = error.code;
                 if (code === 'P2002') {
-                    throw new ConflictException('A category with this name or slug already exists.');
+                    throw new common_1.ConflictException('A category with this name or slug already exists.');
                 }
             }
-            throw new InternalServerErrorException('Failed to update category.');
+            throw new common_1.InternalServerErrorException('Failed to update category.');
         }
     }
     async remove(id) {
@@ -121,15 +124,15 @@ let CategoriesService = class CategoriesService {
             await this.prisma.category.delete({ where: { id } });
         }
         catch (error) {
-            if (error instanceof NotFoundException)
+            if (error instanceof common_1.NotFoundException)
                 throw error;
-            throw new InternalServerErrorException('Failed to delete category.');
+            throw new common_1.InternalServerErrorException('Failed to delete category.');
         }
     }
 };
-CategoriesService = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [PrismaService])
+exports.CategoriesService = CategoriesService;
+exports.CategoriesService = CategoriesService = __decorate([
+    (0, common_1.Injectable)(),
+    __metadata("design:paramtypes", [prisma_service_1.PrismaService])
 ], CategoriesService);
-export { CategoriesService };
 //# sourceMappingURL=categories.service.js.map

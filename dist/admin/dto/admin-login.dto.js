@@ -1,3 +1,4 @@
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -7,23 +8,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator';
-export class AdminLoginDto {
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AdminLoginDto = void 0;
+const swagger_1 = require("@nestjs/swagger");
+const class_validator_1 = require("class-validator");
+class AdminLoginDto {
     email;
     password;
 }
+exports.AdminLoginDto = AdminLoginDto;
 __decorate([
-    ApiProperty({ example: 'admin@example.com', description: 'Admin email' }),
-    IsEmail({}, { message: 'Please provide a valid email' }),
-    IsNotEmpty(),
+    (0, swagger_1.ApiProperty)({ example: 'admin@example.com', description: 'Admin email' }),
+    (0, class_validator_1.IsEmail)({}, { message: 'Please provide a valid email' }),
+    (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], AdminLoginDto.prototype, "email", void 0);
 __decorate([
-    ApiProperty({ example: 'your-secure-password', description: 'Admin password', minLength: 6 }),
-    IsString(),
-    IsNotEmpty({ message: 'Password is required' }),
-    MinLength(6, { message: 'Password must be at least 6 characters' }),
+    (0, swagger_1.ApiProperty)({ example: 'your-secure-password', description: 'Admin password', minLength: 6 }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)({ message: 'Password is required' }),
+    (0, class_validator_1.MinLength)(6, { message: 'Password must be at least 6 characters' }),
     __metadata("design:type", String)
 ], AdminLoginDto.prototype, "password", void 0);
 //# sourceMappingURL=admin-login.dto.js.map
