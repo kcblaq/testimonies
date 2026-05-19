@@ -3,9 +3,13 @@ services:
     name: nestjs-app
     env: node
     plan: free
-    buildCommand: npm install && npx prisma generate && npm run build
+    # npm ci + --include=dev: clean tree every build; dev deps hold @nestjs/cli → glob.
+    # If the dashboard overrides buildCommand, mirror this there or clear the override.
+    buildCommand: npm ci --include=dev && npx prisma generate && npm run build
     preDeployCommand: npm run migrate:deploy && npm run seed
     startCommand: npm run start:prod
     envVars:
+      - key: NODE_VERSION
+        value: "22.14.1"
       - key: DATABASE_URL
         sync: false
