@@ -1,8 +1,7 @@
 {
   "compilerOptions": {
-    "module": "nodenext",
-    "moduleResolution": "node16",
-    "resolvePackageJsonExports": true,
+    "module": "es2020",
+    "moduleResolution": "node",
     "esModuleInterop": true,
     "isolatedModules": true,
     "declaration": true,
@@ -16,7 +15,7 @@
     "rootDir": "./src",
     "baseUrl": "./",
     "paths": {
-      "generated/*": ["../generated/prisma/*"]
+      "generated/*": ["./generated/prisma/*"]
     },
     "incremental": true,
     "skipLibCheck": true,
