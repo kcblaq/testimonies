@@ -3,3 +3,4 @@ export declare class AdminRegisterDto {
     email: string;
     password: string;
 }
+//# sourceMappingURL=admin-register.dto.d.ts.map

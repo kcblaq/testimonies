@@ -5,3 +5,4 @@ export declare class TestimonyQueryDto {
     page?: number;
     limit?: number;
 }
+//# sourceMappingURL=testimony-query.dto.d.ts.map

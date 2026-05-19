@@ -338,3 +338,4 @@ export type NestedEnumReviewStatusWithAggregatesFilter<$PrismaModel = never> = {
     _min?: Prisma.NestedEnumReviewStatusFilter<$PrismaModel>;
     _max?: Prisma.NestedEnumReviewStatusFilter<$PrismaModel>;
 };
+//# sourceMappingURL=commonInputTypes.d.ts.map

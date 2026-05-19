@@ -23,8 +23,6 @@ const admin_login_dto_1 = require("./dto/admin-login.dto");
 const admin_register_dto_1 = require("./dto/admin-register.dto");
 const verify_email_dto_1 = require("./dto/verify-email.dto");
 let AdminController = class AdminController {
-    adminService;
-    jwtService;
     constructor(adminService, jwtService) {
         this.adminService = adminService;
         this.jwtService = jwtService;

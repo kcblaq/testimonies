@@ -52,13 +52,11 @@ const enums_1 = require("../generated/prisma/enums");
 const VERIFICATION_TOKEN_BYTES = 32;
 const VERIFICATION_EXPIRY_HOURS = 24;
 let AdminService = class AdminService {
-    prisma;
-    emailService;
     constructor(prisma, emailService) {
         this.prisma = prisma;
         this.emailService = emailService;
+        this.SALT_ROUNDS = 10;
     }
-    SALT_ROUNDS = 10;
     async isAdmin(email) {
         if (!email)
             return false;

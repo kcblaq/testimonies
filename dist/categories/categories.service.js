@@ -20,7 +20,6 @@ function toSlug(name) {
         .replace(/[^a-z0-9-]/g, '');
 }
 let CategoriesService = class CategoriesService {
-    prisma;
     constructor(prisma) {
         this.prisma = prisma;
     }

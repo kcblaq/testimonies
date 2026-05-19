@@ -13,10 +13,10 @@ exports.UpdateTestimonyDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
+/**
+ * DTO for admin to approve/reject a testimony or update its category.
+ */
 class UpdateTestimonyDto {
-    status;
-    categoryId;
-    isFeatured;
 }
 exports.UpdateTestimonyDto = UpdateTestimonyDto;
 __decorate([

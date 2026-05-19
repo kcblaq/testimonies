@@ -15,3 +15,4 @@ export declare class TestimonyEntity {
     updatedByEmail?: string;
     categoryId: number;
 }
+//# sourceMappingURL=testimony.entity.d.ts.map

@@ -27,12 +27,11 @@ export declare class CategoriesController {
                 slug: string;
             };
         } & {
-            createdAt: Date;
-            updatedAt: Date;
-            id: number;
             title: string;
             content: string;
             status: import("../generated/prisma/enums").ReviewStatus;
+            createdAt: Date;
+            updatedAt: Date;
             authorEmail: string;
             authorName: string;
             updatedByEmail: string | null;
@@ -40,6 +39,7 @@ export declare class CategoriesController {
             featuredAt: Date | null;
             views: number;
             shared: number;
+            id: number;
             categoryId: number;
         })[];
         meta: {
@@ -57,12 +57,11 @@ export declare class CategoriesController {
                 slug: string;
             };
         } & {
-            createdAt: Date;
-            updatedAt: Date;
-            id: number;
             title: string;
             content: string;
             status: import("../generated/prisma/enums").ReviewStatus;
+            createdAt: Date;
+            updatedAt: Date;
             authorEmail: string;
             authorName: string;
             updatedByEmail: string | null;
@@ -70,6 +69,7 @@ export declare class CategoriesController {
             featuredAt: Date | null;
             views: number;
             shared: number;
+            id: number;
             categoryId: number;
         })[];
         meta: {
@@ -87,12 +87,11 @@ export declare class CategoriesController {
                 slug: string;
             };
         } & {
-            createdAt: Date;
-            updatedAt: Date;
-            id: number;
             title: string;
             content: string;
             status: import("../generated/prisma/enums").ReviewStatus;
+            createdAt: Date;
+            updatedAt: Date;
             authorEmail: string;
             authorName: string;
             updatedByEmail: string | null;
@@ -100,6 +99,7 @@ export declare class CategoriesController {
             featuredAt: Date | null;
             views: number;
             shared: number;
+            id: number;
             categoryId: number;
         })[];
         meta: {
@@ -117,12 +117,11 @@ export declare class CategoriesController {
                 slug: string;
             };
         } & {
-            createdAt: Date;
-            updatedAt: Date;
-            id: number;
             title: string;
             content: string;
             status: import("../generated/prisma/enums").ReviewStatus;
+            createdAt: Date;
+            updatedAt: Date;
             authorEmail: string;
             authorName: string;
             updatedByEmail: string | null;
@@ -130,6 +129,7 @@ export declare class CategoriesController {
             featuredAt: Date | null;
             views: number;
             shared: number;
+            id: number;
             categoryId: number;
         })[];
         meta: {
@@ -170,3 +170,4 @@ export declare class CategoriesController {
     }>;
     remove(id: number): Promise<void>;
 }
+//# sourceMappingURL=categories.controller.d.ts.map

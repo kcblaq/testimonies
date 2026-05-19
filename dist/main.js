@@ -19,7 +19,7 @@ async function bootstrap() {
     }));
     app.enableCors({
         origin: "http://localhost:8080",
-        credentials: true,
+        credentials: true, // Need this if frontend uses cookies
     });
     app.use((0, express_session_1.default)({
         secret: process.env.SESSION_SECRET || 'my-secret-key',

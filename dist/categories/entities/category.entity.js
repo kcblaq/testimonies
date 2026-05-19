@@ -12,20 +12,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CategoryEntity = void 0;
 const swagger_1 = require("@nestjs/swagger");
 class CategoryCount {
-    testimonies;
 }
 __decorate([
     (0, swagger_1.ApiProperty)({ example: 5, description: 'Number of testimonies in this category' }),
     __metadata("design:type", Number)
 ], CategoryCount.prototype, "testimonies", void 0);
 class CategoryEntity {
-    id;
-    name;
-    slug;
-    description;
-    createdAt;
-    updatedAt;
-    _count;
 }
 exports.CategoryEntity = CategoryEntity;
 __decorate([

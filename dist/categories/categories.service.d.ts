@@ -58,3 +58,4 @@ export declare class CategoriesService {
     }>;
     remove(id: number): Promise<void>;
 }
+//# sourceMappingURL=categories.service.d.ts.map

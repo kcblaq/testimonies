@@ -5,3 +5,4 @@ export declare class AdminGuard implements CanActivate {
     constructor(adminService: AdminService);
     canActivate(context: ExecutionContext): Promise<boolean>;
 }
+//# sourceMappingURL=admin.guard.d.ts.map

@@ -11,31 +11,36 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var PrismaService_1;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PrismaService = void 0;
+// src/prisma/prisma.service.ts
 const common_1 = require("@nestjs/common");
 const adapter_pg_1 = require("@prisma/adapter-pg");
 const pg_1 = require("pg");
 const client_1 = require("../generated/prisma/client");
 let PrismaService = PrismaService_1 = class PrismaService extends client_1.PrismaClient {
-    logger = new common_1.Logger(PrismaService_1.name);
     constructor() {
+        // 1. Check if the URL exists before even trying to build the pool
         const connectionString = process.env.DATABASE_URL;
         if (!connectionString) {
             throw new Error('DATABASE_URL is not defined in environment variables');
         }
         const pool = new pg_1.Pool({ connectionString });
+        // Add an error listener to the PG Pool itself
         pool.on('error', (err) => {
             this.logger.error('Unexpected error on idle Supabase client', err.stack);
         });
         const adapter = new adapter_pg_1.PrismaPg(pool);
         super({ adapter });
+        this.logger = new common_1.Logger(PrismaService_1.name);
     }
     async onModuleInit() {
         try {
             this.logger.log('Attempting to connect to Supabase...');
+            // 2. This is where the actual connection is established
             await this.$connect();
             this.logger.log('✅ Prisma connected successfully to Supabase');
         }
         catch (error) {
+            // 3. Detailed error logging
             this.logger.error('❌ Prisma failed to connect to the database');
             this.logger.error(error.message);
             if (error.message.includes('password authentication failed')) {
@@ -44,6 +49,8 @@ let PrismaService = PrismaService_1 = class PrismaService extends client_1.Prism
             if (error.message.includes('ETIMEDOUT')) {
                 this.logger.warn('Connection timed out. Check if your IP is whitelisted in Supabase or if you are using the correct port.');
             }
+            // Optionally exit the process if the DB is critical
+            // process.exit(1); 
         }
     }
     async onModuleDestroy() {

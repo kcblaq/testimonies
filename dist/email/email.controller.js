@@ -13,7 +13,6 @@ exports.EmailController = void 0;
 const common_1 = require("@nestjs/common");
 const email_service_1 = require("./email.service");
 let EmailController = class EmailController {
-    emailService;
     constructor(emailService) {
         this.emailService = emailService;
     }

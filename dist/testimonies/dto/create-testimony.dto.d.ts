@@ -5,3 +5,4 @@ export declare class CreateTestimonyDto {
     authorEmail: string;
     categoryId: number;
 }
+//# sourceMappingURL=create-testimony.dto.d.ts.map

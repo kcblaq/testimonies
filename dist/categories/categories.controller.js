@@ -25,8 +25,6 @@ const category_entity_1 = require("./entities/category.entity");
 const testimony_entity_1 = require("../testimonies/entities/testimony.entity");
 const testimony_query_dto_1 = require("../testimonies/dto/testimony-query.dto");
 let CategoriesController = class CategoriesController {
-    categoriesService;
-    testimoniesService;
     constructor(categoriesService, testimoniesService) {
         this.categoriesService = categoriesService;
         this.testimoniesService = testimoniesService;

@@ -18,16 +18,6 @@ var ReviewStatus;
     ReviewStatus["REJECTED"] = "REJECTED";
 })(ReviewStatus || (exports.ReviewStatus = ReviewStatus = {}));
 class TestimonyEntity {
-    id;
-    title;
-    content;
-    status;
-    createdAt;
-    updatedAt;
-    authorEmail;
-    authorName;
-    updatedByEmail;
-    categoryId;
 }
 exports.TestimonyEntity = TestimonyEntity;
 __decorate([

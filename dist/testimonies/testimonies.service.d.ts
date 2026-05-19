@@ -7,7 +7,11 @@ export declare class TestimoniesService {
     private readonly prisma;
     constructor(prisma: PrismaService);
     private includeCategory;
+    /** Resolve categorySlug to category id. Throws if slug not found. */
     resolveCategoryId(categoryId?: number, categorySlug?: string): Promise<number | undefined>;
+    /**
+     * Create a new testimony (public). Status is always PENDING until admin approves.
+     */
     create(createTestimonyDto: CreateTestimonyDto): Promise<{
         category: {
             id: number;
@@ -15,12 +19,11 @@ export declare class TestimoniesService {
             slug: string;
         };
     } & {
-        createdAt: Date;
-        updatedAt: Date;
-        id: number;
         title: string;
         content: string;
         status: ReviewStatus;
+        createdAt: Date;
+        updatedAt: Date;
         authorEmail: string;
         authorName: string;
         updatedByEmail: string | null;
@@ -28,6 +31,7 @@ export declare class TestimoniesService {
         featuredAt: Date | null;
         views: number;
         shared: number;
+        id: number;
         categoryId: number;
     }>;
     private buildWhereClause;
@@ -40,12 +44,11 @@ export declare class TestimoniesService {
                 slug: string;
             };
         } & {
-            createdAt: Date;
-            updatedAt: Date;
-            id: number;
             title: string;
             content: string;
             status: ReviewStatus;
+            createdAt: Date;
+            updatedAt: Date;
             authorEmail: string;
             authorName: string;
             updatedByEmail: string | null;
@@ -53,6 +56,7 @@ export declare class TestimoniesService {
             featuredAt: Date | null;
             views: number;
             shared: number;
+            id: number;
             categoryId: number;
         })[];
         meta: {
@@ -70,12 +74,11 @@ export declare class TestimoniesService {
                 slug: string;
             };
         } & {
-            createdAt: Date;
-            updatedAt: Date;
-            id: number;
             title: string;
             content: string;
             status: ReviewStatus;
+            createdAt: Date;
+            updatedAt: Date;
             authorEmail: string;
             authorName: string;
             updatedByEmail: string | null;
@@ -83,6 +86,7 @@ export declare class TestimoniesService {
             featuredAt: Date | null;
             views: number;
             shared: number;
+            id: number;
             categoryId: number;
         })[];
         meta: {
@@ -100,12 +104,11 @@ export declare class TestimoniesService {
                 slug: string;
             };
         } & {
-            createdAt: Date;
-            updatedAt: Date;
-            id: number;
             title: string;
             content: string;
             status: ReviewStatus;
+            createdAt: Date;
+            updatedAt: Date;
             authorEmail: string;
             authorName: string;
             updatedByEmail: string | null;
@@ -113,6 +116,7 @@ export declare class TestimoniesService {
             featuredAt: Date | null;
             views: number;
             shared: number;
+            id: number;
             categoryId: number;
         })[];
         meta: {
@@ -130,12 +134,11 @@ export declare class TestimoniesService {
                 slug: string;
             };
         } & {
-            createdAt: Date;
-            updatedAt: Date;
-            id: number;
             title: string;
             content: string;
             status: ReviewStatus;
+            createdAt: Date;
+            updatedAt: Date;
             authorEmail: string;
             authorName: string;
             updatedByEmail: string | null;
@@ -143,6 +146,7 @@ export declare class TestimoniesService {
             featuredAt: Date | null;
             views: number;
             shared: number;
+            id: number;
             categoryId: number;
         })[];
         meta: {
@@ -159,12 +163,11 @@ export declare class TestimoniesService {
             slug: string;
         };
     } & {
-        createdAt: Date;
-        updatedAt: Date;
-        id: number;
         title: string;
         content: string;
         status: ReviewStatus;
+        createdAt: Date;
+        updatedAt: Date;
         authorEmail: string;
         authorName: string;
         updatedByEmail: string | null;
@@ -172,6 +175,7 @@ export declare class TestimoniesService {
         featuredAt: Date | null;
         views: number;
         shared: number;
+        id: number;
         categoryId: number;
     }>;
     findOneAndIncrementViews(id: number, viewedTestimonies: number[]): Promise<{
@@ -181,12 +185,11 @@ export declare class TestimoniesService {
             slug: string;
         };
     } & {
-        createdAt: Date;
-        updatedAt: Date;
-        id: number;
         title: string;
         content: string;
         status: ReviewStatus;
+        createdAt: Date;
+        updatedAt: Date;
         authorEmail: string;
         authorName: string;
         updatedByEmail: string | null;
@@ -194,6 +197,7 @@ export declare class TestimoniesService {
         featuredAt: Date | null;
         views: number;
         shared: number;
+        id: number;
         categoryId: number;
     }>;
     update(id: number, updateTestimonyDto: UpdateTestimonyDto, adminEmail?: string): Promise<{
@@ -203,12 +207,11 @@ export declare class TestimoniesService {
             slug: string;
         };
     } & {
-        createdAt: Date;
-        updatedAt: Date;
-        id: number;
         title: string;
         content: string;
         status: ReviewStatus;
+        createdAt: Date;
+        updatedAt: Date;
         authorEmail: string;
         authorName: string;
         updatedByEmail: string | null;
@@ -216,6 +219,7 @@ export declare class TestimoniesService {
         featuredAt: Date | null;
         views: number;
         shared: number;
+        id: number;
         categoryId: number;
     }>;
     incrementShares(id: number): Promise<{
@@ -225,12 +229,11 @@ export declare class TestimoniesService {
             slug: string;
         };
     } & {
-        createdAt: Date;
-        updatedAt: Date;
-        id: number;
         title: string;
         content: string;
         status: ReviewStatus;
+        createdAt: Date;
+        updatedAt: Date;
         authorEmail: string;
         authorName: string;
         updatedByEmail: string | null;
@@ -238,6 +241,7 @@ export declare class TestimoniesService {
         featuredAt: Date | null;
         views: number;
         shared: number;
+        id: number;
         categoryId: number;
     }>;
     remove(id: number): Promise<void>;
@@ -260,12 +264,11 @@ export declare class TestimoniesService {
             slug: string;
         };
     } & {
-        createdAt: Date;
-        updatedAt: Date;
-        id: number;
         title: string;
         content: string;
         status: ReviewStatus;
+        createdAt: Date;
+        updatedAt: Date;
         authorEmail: string;
         authorName: string;
         updatedByEmail: string | null;
@@ -273,6 +276,8 @@ export declare class TestimoniesService {
         featuredAt: Date | null;
         views: number;
         shared: number;
+        id: number;
         categoryId: number;
     })[]>;
 }
+//# sourceMappingURL=testimonies.service.d.ts.map

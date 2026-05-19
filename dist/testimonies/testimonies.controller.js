@@ -22,7 +22,6 @@ const testimony_query_dto_1 = require("./dto/testimony-query.dto");
 const admin_guard_1 = require("../admin/admin.guard");
 const jwt_auth_guard_1 = require("../admin/jwt-auth.guard");
 let TestimoniesController = class TestimoniesController {
-    testimoniesService;
     constructor(testimoniesService) {
         this.testimoniesService = testimoniesService;
     }

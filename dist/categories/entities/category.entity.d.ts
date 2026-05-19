@@ -11,3 +11,4 @@ export declare class CategoryEntity {
     _count?: CategoryCount;
 }
 export {};
+//# sourceMappingURL=category.entity.d.ts.map

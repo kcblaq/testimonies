@@ -4,3 +4,4 @@ export declare const ReviewStatus: {
     readonly REJECTED: "REJECTED";
 };
 export type ReviewStatus = (typeof ReviewStatus)[keyof typeof ReviewStatus];
+//# sourceMappingURL=enums.d.ts.map

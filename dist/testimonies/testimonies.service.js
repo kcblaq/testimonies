@@ -14,11 +14,11 @@ const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../prisma/prisma.service");
 const enums_1 = require("../generated/prisma/enums");
 let TestimoniesService = class TestimoniesService {
-    prisma;
     constructor(prisma) {
         this.prisma = prisma;
+        this.includeCategory = { category: { select: { id: true, name: true, slug: true } } };
     }
-    includeCategory = { category: { select: { id: true, name: true, slug: true } } };
+    /** Resolve categorySlug to category id. Throws if slug not found. */
     async resolveCategoryId(categoryId, categorySlug) {
         if (categorySlug != null && categorySlug.trim() !== '') {
             const category = await this.prisma.category.findUnique({
@@ -31,6 +31,9 @@ let TestimoniesService = class TestimoniesService {
         }
         return categoryId;
     }
+    /**
+     * Create a new testimony (public). Status is always PENDING until admin approves.
+     */
     async create(createTestimonyDto) {
         if (createTestimonyDto.categoryId != null) {
             const category = await this.prisma.category.findUnique({

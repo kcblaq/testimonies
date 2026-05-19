@@ -4,3 +4,4 @@ export declare class EmailService {
     constructor();
     sendMail(to: string, template_uuid: string, template_variables: any): Promise<import("mailtrap").SendResponse>;
 }
+//# sourceMappingURL=email.service.d.ts.map

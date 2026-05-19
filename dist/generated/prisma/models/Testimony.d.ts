@@ -1,6 +1,10 @@
 import type * as runtime from "@prisma/client/runtime/client";
 import type * as $Enums from "../enums.js";
 import type * as Prisma from "../internal/prismaNamespace.js";
+/**
+ * Model Testimony
+ *
+ */
 export type TestimonyModel = runtime.Types.Result.DefaultSelection<Prisma.$TestimonyPayload>;
 export type AggregateTestimony = {
     _count: TestimonyCountAggregateOutputType | null;
@@ -132,15 +136,63 @@ export type TestimonyCountAggregateInputType = {
     _all?: true;
 };
 export type TestimonyAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Filter which Testimony to aggregate.
+     */
     where?: Prisma.TestimonyWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of Testimonies to fetch.
+     */
     orderBy?: Prisma.TestimonyOrderByWithRelationInput | Prisma.TestimonyOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the start position
+     */
     cursor?: Prisma.TestimonyWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` Testimonies from the position of the cursor.
+     */
     take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` Testimonies.
+     */
     skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Count returned Testimonies
+    **/
     _count?: true | TestimonyCountAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to average
+    **/
     _avg?: TestimonyAvgAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to sum
+    **/
     _sum?: TestimonySumAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the minimum value
+    **/
     _min?: TestimonyMinAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the maximum value
+    **/
     _max?: TestimonyMaxAggregateInputType;
 };
 export type GetTestimonyAggregateType<T extends TestimonyAggregateArgs> = {
@@ -736,22 +788,290 @@ export interface TestimonyDelegate<ExtArgs extends runtime.Types.Extensions.Inte
             name: 'Testimony';
         };
     };
+    /**
+     * Find zero or one Testimony that matches the filter.
+     * @param {TestimonyFindUniqueArgs} args - Arguments to find a Testimony
+     * @example
+     * // Get one Testimony
+     * const testimony = await prisma.testimony.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
     findUnique<T extends TestimonyFindUniqueArgs>(args: Prisma.SelectSubset<T, TestimonyFindUniqueArgs<ExtArgs>>): Prisma.Prisma__TestimonyClient<runtime.Types.Result.GetResult<Prisma.$TestimonyPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Find one Testimony that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TestimonyFindUniqueOrThrowArgs} args - Arguments to find a Testimony
+     * @example
+     * // Get one Testimony
+     * const testimony = await prisma.testimony.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
     findUniqueOrThrow<T extends TestimonyFindUniqueOrThrowArgs>(args: Prisma.SelectSubset<T, TestimonyFindUniqueOrThrowArgs<ExtArgs>>): Prisma.Prisma__TestimonyClient<runtime.Types.Result.GetResult<Prisma.$TestimonyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Find the first Testimony that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TestimonyFindFirstArgs} args - Arguments to find a Testimony
+     * @example
+     * // Get one Testimony
+     * const testimony = await prisma.testimony.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
     findFirst<T extends TestimonyFindFirstArgs>(args?: Prisma.SelectSubset<T, TestimonyFindFirstArgs<ExtArgs>>): Prisma.Prisma__TestimonyClient<runtime.Types.Result.GetResult<Prisma.$TestimonyPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Find the first Testimony that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TestimonyFindFirstOrThrowArgs} args - Arguments to find a Testimony
+     * @example
+     * // Get one Testimony
+     * const testimony = await prisma.testimony.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
     findFirstOrThrow<T extends TestimonyFindFirstOrThrowArgs>(args?: Prisma.SelectSubset<T, TestimonyFindFirstOrThrowArgs<ExtArgs>>): Prisma.Prisma__TestimonyClient<runtime.Types.Result.GetResult<Prisma.$TestimonyPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Find zero or more Testimonies that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TestimonyFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Testimonies
+     * const testimonies = await prisma.testimony.findMany()
+     *
+     * // Get first 10 Testimonies
+     * const testimonies = await prisma.testimony.findMany({ take: 10 })
+     *
+     * // Only select the `id`
+     * const testimonyWithIdOnly = await prisma.testimony.findMany({ select: { id: true } })
+     *
+     */
     findMany<T extends TestimonyFindManyArgs>(args?: Prisma.SelectSubset<T, TestimonyFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TestimonyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>;
+    /**
+     * Create a Testimony.
+     * @param {TestimonyCreateArgs} args - Arguments to create a Testimony.
+     * @example
+     * // Create one Testimony
+     * const Testimony = await prisma.testimony.create({
+     *   data: {
+     *     // ... data to create a Testimony
+     *   }
+     * })
+     *
+     */
     create<T extends TestimonyCreateArgs>(args: Prisma.SelectSubset<T, TestimonyCreateArgs<ExtArgs>>): Prisma.Prisma__TestimonyClient<runtime.Types.Result.GetResult<Prisma.$TestimonyPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Create many Testimonies.
+     * @param {TestimonyCreateManyArgs} args - Arguments to create many Testimonies.
+     * @example
+     * // Create many Testimonies
+     * const testimony = await prisma.testimony.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     */
     createMany<T extends TestimonyCreateManyArgs>(args?: Prisma.SelectSubset<T, TestimonyCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>;
+    /**
+     * Create many Testimonies and returns the data saved in the database.
+     * @param {TestimonyCreateManyAndReturnArgs} args - Arguments to create many Testimonies.
+     * @example
+     * // Create many Testimonies
+     * const testimony = await prisma.testimony.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     * // Create many Testimonies and only return the `id`
+     * const testimonyWithIdOnly = await prisma.testimony.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     *
+     */
     createManyAndReturn<T extends TestimonyCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, TestimonyCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TestimonyPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>;
+    /**
+     * Delete a Testimony.
+     * @param {TestimonyDeleteArgs} args - Arguments to delete one Testimony.
+     * @example
+     * // Delete one Testimony
+     * const Testimony = await prisma.testimony.delete({
+     *   where: {
+     *     // ... filter to delete one Testimony
+     *   }
+     * })
+     *
+     */
     delete<T extends TestimonyDeleteArgs>(args: Prisma.SelectSubset<T, TestimonyDeleteArgs<ExtArgs>>): Prisma.Prisma__TestimonyClient<runtime.Types.Result.GetResult<Prisma.$TestimonyPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Update one Testimony.
+     * @param {TestimonyUpdateArgs} args - Arguments to update one Testimony.
+     * @example
+     * // Update one Testimony
+     * const testimony = await prisma.testimony.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     */
     update<T extends TestimonyUpdateArgs>(args: Prisma.SelectSubset<T, TestimonyUpdateArgs<ExtArgs>>): Prisma.Prisma__TestimonyClient<runtime.Types.Result.GetResult<Prisma.$TestimonyPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Delete zero or more Testimonies.
+     * @param {TestimonyDeleteManyArgs} args - Arguments to filter Testimonies to delete.
+     * @example
+     * // Delete a few Testimonies
+     * const { count } = await prisma.testimony.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     *
+     */
     deleteMany<T extends TestimonyDeleteManyArgs>(args?: Prisma.SelectSubset<T, TestimonyDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>;
+    /**
+     * Update zero or more Testimonies.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TestimonyUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Testimonies
+     * const testimony = await prisma.testimony.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     */
     updateMany<T extends TestimonyUpdateManyArgs>(args: Prisma.SelectSubset<T, TestimonyUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>;
+    /**
+     * Update zero or more Testimonies and returns the data updated in the database.
+     * @param {TestimonyUpdateManyAndReturnArgs} args - Arguments to update many Testimonies.
+     * @example
+     * // Update many Testimonies
+     * const testimony = await prisma.testimony.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     * // Update zero or more Testimonies and only return the `id`
+     * const testimonyWithIdOnly = await prisma.testimony.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     *
+     */
     updateManyAndReturn<T extends TestimonyUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, TestimonyUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TestimonyPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>;
+    /**
+     * Create or update one Testimony.
+     * @param {TestimonyUpsertArgs} args - Arguments to update or create a Testimony.
+     * @example
+     * // Update or create a Testimony
+     * const testimony = await prisma.testimony.upsert({
+     *   create: {
+     *     // ... data to create a Testimony
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Testimony we want to update
+     *   }
+     * })
+     */
     upsert<T extends TestimonyUpsertArgs>(args: Prisma.SelectSubset<T, TestimonyUpsertArgs<ExtArgs>>): Prisma.Prisma__TestimonyClient<runtime.Types.Result.GetResult<Prisma.$TestimonyPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Count the number of Testimonies.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TestimonyCountArgs} args - Arguments to filter Testimonies to count.
+     * @example
+     * // Count the number of Testimonies
+     * const count = await prisma.testimony.count({
+     *   where: {
+     *     // ... the filter for the Testimonies we want to count
+     *   }
+     * })
+    **/
     count<T extends TestimonyCountArgs>(args?: Prisma.Subset<T, TestimonyCountArgs>): Prisma.PrismaPromise<T extends runtime.Types.Utils.Record<'select', any> ? T['select'] extends true ? number : Prisma.GetScalarType<T['select'], TestimonyCountAggregateOutputType> : number>;
+    /**
+     * Allows you to perform aggregations operations on a Testimony.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TestimonyAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
     aggregate<T extends TestimonyAggregateArgs>(args: Prisma.Subset<T, TestimonyAggregateArgs>): Prisma.PrismaPromise<GetTestimonyAggregateType<T>>;
+    /**
+     * Group by Testimony.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TestimonyGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     *
+    **/
     groupBy<T extends TestimonyGroupByArgs, HasSelectOrTake extends Prisma.Or<Prisma.Extends<'skip', Prisma.Keys<T>>, Prisma.Extends<'take', Prisma.Keys<T>>>, OrderByArg extends Prisma.True extends HasSelectOrTake ? {
         orderBy: TestimonyGroupByArgs['orderBy'];
     } : {
@@ -770,15 +1090,44 @@ export interface TestimonyDelegate<ExtArgs extends runtime.Types.Extensions.Inte
     }[OrderFields] : 'Error: If you provide "skip", you also need to provide "orderBy"' : ByValid extends Prisma.True ? {} : {
         [P in OrderFields]: P extends ByFields ? never : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
     }[OrderFields]>(args: Prisma.SubsetIntersection<T, TestimonyGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTestimonyGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>;
+    /**
+     * Fields of the Testimony model
+     */
     readonly fields: TestimonyFieldRefs;
 }
+/**
+ * The delegate class that acts as a "Promise-like" for Testimony.
+ * Why is this prefixed with `Prisma__`?
+ * Because we want to prevent naming conflicts as mentioned in
+ * https://github.com/prisma/prisma-client-js/issues/707
+ */
 export interface Prisma__TestimonyClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise";
     category<T extends Prisma.CategoryDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CategoryDefaultArgs<ExtArgs>>): Prisma.Prisma__CategoryClient<runtime.Types.Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
     then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): runtime.Types.Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
     catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): runtime.Types.Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
     finally(onfinally?: (() => void) | undefined | null): runtime.Types.Utils.JsPromise<T>;
 }
+/**
+ * Fields of the Testimony model
+ */
 export interface TestimonyFieldRefs {
     readonly id: Prisma.FieldRef<"Testimony", 'Int'>;
     readonly title: Prisma.FieldRef<"Testimony", 'String'>;
@@ -795,109 +1144,399 @@ export interface TestimonyFieldRefs {
     readonly shared: Prisma.FieldRef<"Testimony", 'Int'>;
     readonly categoryId: Prisma.FieldRef<"Testimony", 'Int'>;
 }
+/**
+ * Testimony findUnique
+ */
 export type TestimonyFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Testimony
+     */
     select?: Prisma.TestimonySelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Testimony
+     */
     omit?: Prisma.TestimonyOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
     include?: Prisma.TestimonyInclude<ExtArgs> | null;
+    /**
+     * Filter, which Testimony to fetch.
+     */
     where: Prisma.TestimonyWhereUniqueInput;
 };
+/**
+ * Testimony findUniqueOrThrow
+ */
 export type TestimonyFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Testimony
+     */
     select?: Prisma.TestimonySelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Testimony
+     */
     omit?: Prisma.TestimonyOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
     include?: Prisma.TestimonyInclude<ExtArgs> | null;
+    /**
+     * Filter, which Testimony to fetch.
+     */
     where: Prisma.TestimonyWhereUniqueInput;
 };
+/**
+ * Testimony findFirst
+ */
 export type TestimonyFindFirstArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Testimony
+     */
     select?: Prisma.TestimonySelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Testimony
+     */
     omit?: Prisma.TestimonyOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
     include?: Prisma.TestimonyInclude<ExtArgs> | null;
+    /**
+     * Filter, which Testimony to fetch.
+     */
     where?: Prisma.TestimonyWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of Testimonies to fetch.
+     */
     orderBy?: Prisma.TestimonyOrderByWithRelationInput | Prisma.TestimonyOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for Testimonies.
+     */
     cursor?: Prisma.TestimonyWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` Testimonies from the position of the cursor.
+     */
     take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` Testimonies.
+     */
     skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of Testimonies.
+     */
     distinct?: Prisma.TestimonyScalarFieldEnum | Prisma.TestimonyScalarFieldEnum[];
 };
+/**
+ * Testimony findFirstOrThrow
+ */
 export type TestimonyFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Testimony
+     */
     select?: Prisma.TestimonySelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Testimony
+     */
     omit?: Prisma.TestimonyOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
     include?: Prisma.TestimonyInclude<ExtArgs> | null;
+    /**
+     * Filter, which Testimony to fetch.
+     */
     where?: Prisma.TestimonyWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of Testimonies to fetch.
+     */
     orderBy?: Prisma.TestimonyOrderByWithRelationInput | Prisma.TestimonyOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for Testimonies.
+     */
     cursor?: Prisma.TestimonyWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` Testimonies from the position of the cursor.
+     */
     take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` Testimonies.
+     */
     skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of Testimonies.
+     */
     distinct?: Prisma.TestimonyScalarFieldEnum | Prisma.TestimonyScalarFieldEnum[];
 };
+/**
+ * Testimony findMany
+ */
 export type TestimonyFindManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Testimony
+     */
     select?: Prisma.TestimonySelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Testimony
+     */
     omit?: Prisma.TestimonyOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
     include?: Prisma.TestimonyInclude<ExtArgs> | null;
+    /**
+     * Filter, which Testimonies to fetch.
+     */
     where?: Prisma.TestimonyWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of Testimonies to fetch.
+     */
     orderBy?: Prisma.TestimonyOrderByWithRelationInput | Prisma.TestimonyOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for listing Testimonies.
+     */
     cursor?: Prisma.TestimonyWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` Testimonies from the position of the cursor.
+     */
     take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` Testimonies.
+     */
     skip?: number;
     distinct?: Prisma.TestimonyScalarFieldEnum | Prisma.TestimonyScalarFieldEnum[];
 };
+/**
+ * Testimony create
+ */
 export type TestimonyCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Testimony
+     */
     select?: Prisma.TestimonySelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Testimony
+     */
     omit?: Prisma.TestimonyOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
     include?: Prisma.TestimonyInclude<ExtArgs> | null;
+    /**
+     * The data needed to create a Testimony.
+     */
     data: Prisma.XOR<Prisma.TestimonyCreateInput, Prisma.TestimonyUncheckedCreateInput>;
 };
+/**
+ * Testimony createMany
+ */
 export type TestimonyCreateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Testimonies.
+     */
     data: Prisma.TestimonyCreateManyInput | Prisma.TestimonyCreateManyInput[];
     skipDuplicates?: boolean;
 };
+/**
+ * Testimony createManyAndReturn
+ */
 export type TestimonyCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Testimony
+     */
     select?: Prisma.TestimonySelectCreateManyAndReturn<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Testimony
+     */
     omit?: Prisma.TestimonyOmit<ExtArgs> | null;
+    /**
+     * The data used to create many Testimonies.
+     */
     data: Prisma.TestimonyCreateManyInput | Prisma.TestimonyCreateManyInput[];
     skipDuplicates?: boolean;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
     include?: Prisma.TestimonyIncludeCreateManyAndReturn<ExtArgs> | null;
 };
+/**
+ * Testimony update
+ */
 export type TestimonyUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Testimony
+     */
     select?: Prisma.TestimonySelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Testimony
+     */
     omit?: Prisma.TestimonyOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
     include?: Prisma.TestimonyInclude<ExtArgs> | null;
+    /**
+     * The data needed to update a Testimony.
+     */
     data: Prisma.XOR<Prisma.TestimonyUpdateInput, Prisma.TestimonyUncheckedUpdateInput>;
+    /**
+     * Choose, which Testimony to update.
+     */
     where: Prisma.TestimonyWhereUniqueInput;
 };
+/**
+ * Testimony updateMany
+ */
 export type TestimonyUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Testimonies.
+     */
     data: Prisma.XOR<Prisma.TestimonyUpdateManyMutationInput, Prisma.TestimonyUncheckedUpdateManyInput>;
+    /**
+     * Filter which Testimonies to update
+     */
     where?: Prisma.TestimonyWhereInput;
+    /**
+     * Limit how many Testimonies to update.
+     */
     limit?: number;
 };
+/**
+ * Testimony updateManyAndReturn
+ */
 export type TestimonyUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Testimony
+     */
     select?: Prisma.TestimonySelectUpdateManyAndReturn<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Testimony
+     */
     omit?: Prisma.TestimonyOmit<ExtArgs> | null;
+    /**
+     * The data used to update Testimonies.
+     */
     data: Prisma.XOR<Prisma.TestimonyUpdateManyMutationInput, Prisma.TestimonyUncheckedUpdateManyInput>;
+    /**
+     * Filter which Testimonies to update
+     */
     where?: Prisma.TestimonyWhereInput;
+    /**
+     * Limit how many Testimonies to update.
+     */
     limit?: number;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
     include?: Prisma.TestimonyIncludeUpdateManyAndReturn<ExtArgs> | null;
 };
+/**
+ * Testimony upsert
+ */
 export type TestimonyUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Testimony
+     */
     select?: Prisma.TestimonySelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Testimony
+     */
     omit?: Prisma.TestimonyOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
     include?: Prisma.TestimonyInclude<ExtArgs> | null;
+    /**
+     * The filter to search for the Testimony to update in case it exists.
+     */
     where: Prisma.TestimonyWhereUniqueInput;
+    /**
+     * In case the Testimony found by the `where` argument doesn't exist, create a new Testimony with this data.
+     */
     create: Prisma.XOR<Prisma.TestimonyCreateInput, Prisma.TestimonyUncheckedCreateInput>;
+    /**
+     * In case the Testimony was found with the provided `where` argument, update it with this data.
+     */
     update: Prisma.XOR<Prisma.TestimonyUpdateInput, Prisma.TestimonyUncheckedUpdateInput>;
 };
+/**
+ * Testimony delete
+ */
 export type TestimonyDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Testimony
+     */
     select?: Prisma.TestimonySelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Testimony
+     */
     omit?: Prisma.TestimonyOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
     include?: Prisma.TestimonyInclude<ExtArgs> | null;
+    /**
+     * Filter which Testimony to delete.
+     */
     where: Prisma.TestimonyWhereUniqueInput;
 };
+/**
+ * Testimony deleteMany
+ */
 export type TestimonyDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Filter which Testimonies to delete
+     */
     where?: Prisma.TestimonyWhereInput;
+    /**
+     * Limit how many Testimonies to delete.
+     */
     limit?: number;
 };
+/**
+ * Testimony without action
+ */
 export type TestimonyDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Testimony
+     */
     select?: Prisma.TestimonySelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Testimony
+     */
     omit?: Prisma.TestimonyOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
     include?: Prisma.TestimonyInclude<ExtArgs> | null;
 };
 export {};
+//# sourceMappingURL=Testimony.d.ts.map

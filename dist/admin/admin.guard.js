@@ -13,7 +13,6 @@ exports.AdminGuard = void 0;
 const common_1 = require("@nestjs/common");
 const admin_service_1 = require("./admin.service");
 let AdminGuard = class AdminGuard {
-    adminService;
     constructor(adminService) {
         this.adminService = adminService;
     }

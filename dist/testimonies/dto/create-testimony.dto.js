@@ -14,11 +14,6 @@ const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
 class CreateTestimonyDto {
-    title;
-    content;
-    authorName;
-    authorEmail;
-    categoryId;
 }
 exports.CreateTestimonyDto = CreateTestimonyDto;
 __decorate([

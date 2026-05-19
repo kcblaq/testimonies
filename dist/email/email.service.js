@@ -13,12 +13,11 @@ exports.EmailService = void 0;
 const common_1 = require("@nestjs/common");
 const mailtrap_1 = require("mailtrap");
 let EmailService = class EmailService {
-    client;
-    sender = {
-        email: process.env.MAILTRAP_SENDER_EMAIL ?? '',
-        name: process.env.MAILTRAP_SENDER_NAME ?? '',
-    };
     constructor() {
+        this.sender = {
+            email: process.env.MAILTRAP_SENDER_EMAIL ?? '',
+            name: process.env.MAILTRAP_SENDER_NAME ?? '',
+        };
         this.client = new mailtrap_1.MailtrapClient({
             token: process.env.MAILTRAP_API_TOKEN ?? '',
         });
