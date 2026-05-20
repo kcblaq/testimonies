@@ -1,11 +1,10 @@
 generator client {
   provider = "prisma-client-js"
-  output   = "./src/generated/prisma"
-  // moduleFormat = "cjs"
 }
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Admin {
@@ -38,20 +37,20 @@ model Testimony {
   views          Int          @default(0)
   shared         Int          @default(0)
 
-  categoryId     Int
-  category       Category     @relation(fields: [categoryId], references: [id])
+  categoryId Int
+  category   Category @relation(fields: [categoryId], references: [id])
 
   @@index([status])
   @@index([createdAt])
 }
 
 model Category {
-  id          Int         @id @default(autoincrement())
-  name        String      @unique
-  slug        String      @unique
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  slug        String   @unique
   description String?
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   testimonies Testimony[]
 }

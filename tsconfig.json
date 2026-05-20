@@ -10,9 +10,6 @@
     "outDir": "./dist",
     "rootDir": "./src",
     "baseUrl": "./",
-    "paths": {
-      "generated/*": ["./generated/prisma/*"]
-    },
     "strict": false,
     "esModuleInterop": true,
     "skipLibCheck": true,
@@ -21,7 +18,7 @@
     "allowSyntheticDefaultImports": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "incremental": true,
+    "incremental": false,
     "preserveConstEnums": true
   },
   "include": ["src/**/*"],

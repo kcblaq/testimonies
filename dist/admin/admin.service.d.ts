@@ -48,12 +48,12 @@ export declare class AdminService {
         totalAdmins: number;
         submitionsThisWeek: number;
         submitionsToday: number;
-        totalViews: import("../generated/prisma/models").GetTestimonyAggregateType<{
+        totalViews: import(".prisma/client").Prisma.GetTestimonyAggregateType<{
             _sum: {
                 views: true;
             };
         }>;
-        totalShares: import("../generated/prisma/models").GetTestimonyAggregateType<{
+        totalShares: import(".prisma/client").Prisma.GetTestimonyAggregateType<{
             _sum: {
                 shared: true;
             };

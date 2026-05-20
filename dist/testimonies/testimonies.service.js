@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.TestimoniesService = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../prisma/prisma.service");
-const enums_1 = require("../generated/prisma/enums");
+const client_1 = require("@prisma/client");
 let TestimoniesService = class TestimoniesService {
     constructor(prisma) {
         this.prisma = prisma;
@@ -50,7 +50,7 @@ let TestimoniesService = class TestimoniesService {
                     content: createTestimonyDto.content.trim(),
                     authorName: createTestimonyDto.authorName.trim(),
                     authorEmail: createTestimonyDto.authorEmail.trim().toLowerCase(),
-                    status: enums_1.ReviewStatus.PENDING,
+                    status: client_1.ReviewStatus.PENDING,
                     categoryId: createTestimonyDto.categoryId ?? undefined,
                 },
                 include: this.includeCategory,
@@ -124,7 +124,7 @@ let TestimoniesService = class TestimoniesService {
     }
     async findAllApproved(query, categoryId) {
         try {
-            const where = this.buildWhereClause(query, enums_1.ReviewStatus.APPROVED, categoryId);
+            const where = this.buildWhereClause(query, client_1.ReviewStatus.APPROVED, categoryId);
             return await this.paginate(where, query);
         }
         catch {
@@ -133,7 +133,7 @@ let TestimoniesService = class TestimoniesService {
     }
     async findAllRejected(query, categoryId) {
         try {
-            const where = this.buildWhereClause(query, enums_1.ReviewStatus.REJECTED, categoryId);
+            const where = this.buildWhereClause(query, client_1.ReviewStatus.REJECTED, categoryId);
             return await this.paginate(where, query);
         }
         catch {
@@ -142,7 +142,7 @@ let TestimoniesService = class TestimoniesService {
     }
     async findAllPending(query, categoryId) {
         try {
-            const where = this.buildWhereClause(query, enums_1.ReviewStatus.PENDING, categoryId);
+            const where = this.buildWhereClause(query, client_1.ReviewStatus.PENDING, categoryId);
             return await this.paginate(where, query);
         }
         catch {
@@ -239,7 +239,7 @@ let TestimoniesService = class TestimoniesService {
         try {
             await this.prisma.testimony.updateMany({
                 where: { id: { in: ids } },
-                data: { status: enums_1.ReviewStatus.APPROVED },
+                data: { status: client_1.ReviewStatus.APPROVED },
             });
         }
         catch (error) {
@@ -251,7 +251,7 @@ let TestimoniesService = class TestimoniesService {
         try {
             await this.prisma.testimony.updateMany({
                 where: { id: { in: ids } },
-                data: { status: enums_1.ReviewStatus.REJECTED },
+                data: { status: client_1.ReviewStatus.REJECTED },
             });
         }
         catch (error) {

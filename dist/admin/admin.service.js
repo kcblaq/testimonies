@@ -48,7 +48,7 @@ const prisma_service_1 = require("../prisma/prisma.service");
 const bcrypt = __importStar(require("bcrypt"));
 const node_crypto_1 = require("node:crypto");
 const email_service_1 = require("../email/email.service");
-const enums_1 = require("../generated/prisma/enums");
+const client_1 = require("@prisma/client");
 const VERIFICATION_TOKEN_BYTES = 32;
 const VERIFICATION_EXPIRY_HOURS = 24;
 let AdminService = class AdminService {
@@ -210,13 +210,13 @@ let AdminService = class AdminService {
     async dashboarddata() {
         const totalTestimonies = await this.prisma.testimony.count();
         const approvedTestimonies = await this.prisma.testimony.count({
-            where: { status: enums_1.ReviewStatus.APPROVED },
+            where: { status: client_1.ReviewStatus.APPROVED },
         });
         const rejectedTestimonies = await this.prisma.testimony.count({
-            where: { status: enums_1.ReviewStatus.REJECTED },
+            where: { status: client_1.ReviewStatus.REJECTED },
         });
         const pendingTestimonies = await this.prisma.testimony.count({
-            where: { status: enums_1.ReviewStatus.PENDING },
+            where: { status: client_1.ReviewStatus.PENDING },
         });
         const totalCategories = await this.prisma.category.count();
         const totalAdmins = await this.prisma.admin.count();

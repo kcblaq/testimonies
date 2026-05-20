@@ -2,7 +2,6 @@ import { PrismaService } from '../prisma/prisma.service';
 import { CreateTestimonyDto } from './dto/create-testimony.dto';
 import { UpdateTestimonyDto } from './dto/update-testimony.dto';
 import { TestimonyQueryDto } from './dto/testimony-query.dto';
-import { ReviewStatus } from "../generated/prisma/enums";
 export declare class TestimoniesService {
     private readonly prisma;
     constructor(prisma: PrismaService);
@@ -19,11 +18,12 @@ export declare class TestimoniesService {
             slug: string;
         };
     } & {
-        title: string;
-        content: string;
-        status: ReviewStatus;
+        id: number;
         createdAt: Date;
         updatedAt: Date;
+        title: string;
+        content: string;
+        status: import(".prisma/client").$Enums.ReviewStatus;
         authorEmail: string;
         authorName: string;
         updatedByEmail: string | null;
@@ -31,7 +31,6 @@ export declare class TestimoniesService {
         featuredAt: Date | null;
         views: number;
         shared: number;
-        id: number;
         categoryId: number;
     }>;
     private buildWhereClause;
@@ -44,11 +43,12 @@ export declare class TestimoniesService {
                 slug: string;
             };
         } & {
-            title: string;
-            content: string;
-            status: ReviewStatus;
+            id: number;
             createdAt: Date;
             updatedAt: Date;
+            title: string;
+            content: string;
+            status: import(".prisma/client").$Enums.ReviewStatus;
             authorEmail: string;
             authorName: string;
             updatedByEmail: string | null;
@@ -56,7 +56,6 @@ export declare class TestimoniesService {
             featuredAt: Date | null;
             views: number;
             shared: number;
-            id: number;
             categoryId: number;
         })[];
         meta: {
@@ -74,11 +73,12 @@ export declare class TestimoniesService {
                 slug: string;
             };
         } & {
-            title: string;
-            content: string;
-            status: ReviewStatus;
+            id: number;
             createdAt: Date;
             updatedAt: Date;
+            title: string;
+            content: string;
+            status: import(".prisma/client").$Enums.ReviewStatus;
             authorEmail: string;
             authorName: string;
             updatedByEmail: string | null;
@@ -86,7 +86,6 @@ export declare class TestimoniesService {
             featuredAt: Date | null;
             views: number;
             shared: number;
-            id: number;
             categoryId: number;
         })[];
         meta: {
@@ -104,11 +103,12 @@ export declare class TestimoniesService {
                 slug: string;
             };
         } & {
-            title: string;
-            content: string;
-            status: ReviewStatus;
+            id: number;
             createdAt: Date;
             updatedAt: Date;
+            title: string;
+            content: string;
+            status: import(".prisma/client").$Enums.ReviewStatus;
             authorEmail: string;
             authorName: string;
             updatedByEmail: string | null;
@@ -116,7 +116,6 @@ export declare class TestimoniesService {
             featuredAt: Date | null;
             views: number;
             shared: number;
-            id: number;
             categoryId: number;
         })[];
         meta: {
@@ -134,11 +133,12 @@ export declare class TestimoniesService {
                 slug: string;
             };
         } & {
-            title: string;
-            content: string;
-            status: ReviewStatus;
+            id: number;
             createdAt: Date;
             updatedAt: Date;
+            title: string;
+            content: string;
+            status: import(".prisma/client").$Enums.ReviewStatus;
             authorEmail: string;
             authorName: string;
             updatedByEmail: string | null;
@@ -146,7 +146,6 @@ export declare class TestimoniesService {
             featuredAt: Date | null;
             views: number;
             shared: number;
-            id: number;
             categoryId: number;
         })[];
         meta: {
@@ -163,11 +162,12 @@ export declare class TestimoniesService {
             slug: string;
         };
     } & {
-        title: string;
-        content: string;
-        status: ReviewStatus;
+        id: number;
         createdAt: Date;
         updatedAt: Date;
+        title: string;
+        content: string;
+        status: import(".prisma/client").$Enums.ReviewStatus;
         authorEmail: string;
         authorName: string;
         updatedByEmail: string | null;
@@ -175,7 +175,6 @@ export declare class TestimoniesService {
         featuredAt: Date | null;
         views: number;
         shared: number;
-        id: number;
         categoryId: number;
     }>;
     findOneAndIncrementViews(id: number, viewedTestimonies: number[]): Promise<{
@@ -185,11 +184,12 @@ export declare class TestimoniesService {
             slug: string;
         };
     } & {
-        title: string;
-        content: string;
-        status: ReviewStatus;
+        id: number;
         createdAt: Date;
         updatedAt: Date;
+        title: string;
+        content: string;
+        status: import(".prisma/client").$Enums.ReviewStatus;
         authorEmail: string;
         authorName: string;
         updatedByEmail: string | null;
@@ -197,7 +197,6 @@ export declare class TestimoniesService {
         featuredAt: Date | null;
         views: number;
         shared: number;
-        id: number;
         categoryId: number;
     }>;
     update(id: number, updateTestimonyDto: UpdateTestimonyDto, adminEmail?: string): Promise<{
@@ -207,11 +206,12 @@ export declare class TestimoniesService {
             slug: string;
         };
     } & {
-        title: string;
-        content: string;
-        status: ReviewStatus;
+        id: number;
         createdAt: Date;
         updatedAt: Date;
+        title: string;
+        content: string;
+        status: import(".prisma/client").$Enums.ReviewStatus;
         authorEmail: string;
         authorName: string;
         updatedByEmail: string | null;
@@ -219,7 +219,6 @@ export declare class TestimoniesService {
         featuredAt: Date | null;
         views: number;
         shared: number;
-        id: number;
         categoryId: number;
     }>;
     incrementShares(id: number): Promise<{
@@ -229,11 +228,12 @@ export declare class TestimoniesService {
             slug: string;
         };
     } & {
-        title: string;
-        content: string;
-        status: ReviewStatus;
+        id: number;
         createdAt: Date;
         updatedAt: Date;
+        title: string;
+        content: string;
+        status: import(".prisma/client").$Enums.ReviewStatus;
         authorEmail: string;
         authorName: string;
         updatedByEmail: string | null;
@@ -241,7 +241,6 @@ export declare class TestimoniesService {
         featuredAt: Date | null;
         views: number;
         shared: number;
-        id: number;
         categoryId: number;
     }>;
     remove(id: number): Promise<void>;
@@ -264,11 +263,12 @@ export declare class TestimoniesService {
             slug: string;
         };
     } & {
-        title: string;
-        content: string;
-        status: ReviewStatus;
+        id: number;
         createdAt: Date;
         updatedAt: Date;
+        title: string;
+        content: string;
+        status: import(".prisma/client").$Enums.ReviewStatus;
         authorEmail: string;
         authorName: string;
         updatedByEmail: string | null;
@@ -276,7 +276,6 @@ export declare class TestimoniesService {
         featuredAt: Date | null;
         views: number;
         shared: number;
-        id: number;
         categoryId: number;
     })[]>;
 }

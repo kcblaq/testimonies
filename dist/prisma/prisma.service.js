@@ -5,52 +5,25 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
 var PrismaService_1;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PrismaService = void 0;
-// src/prisma/prisma.service.ts
 const common_1 = require("@nestjs/common");
-const adapter_pg_1 = require("@prisma/adapter-pg");
-const pg_1 = require("pg");
-const client_1 = require("../generated/prisma/client");
+const client_1 = require("@prisma/client");
 let PrismaService = PrismaService_1 = class PrismaService extends client_1.PrismaClient {
     constructor() {
-        // 1. Check if the URL exists before even trying to build the pool
-        const connectionString = process.env.DATABASE_URL;
-        if (!connectionString) {
-            throw new Error('DATABASE_URL is not defined in environment variables');
-        }
-        const pool = new pg_1.Pool({ connectionString });
-        // Add an error listener to the PG Pool itself
-        pool.on('error', (err) => {
-            this.logger.error('Unexpected error on idle Supabase client', err.stack);
-        });
-        const adapter = new adapter_pg_1.PrismaPg(pool);
-        super({ adapter });
+        super(...arguments);
         this.logger = new common_1.Logger(PrismaService_1.name);
     }
     async onModuleInit() {
         try {
-            this.logger.log('Attempting to connect to Supabase...');
-            // 2. This is where the actual connection is established
+            this.logger.log('Connecting to database...');
             await this.$connect();
-            this.logger.log('✅ Prisma connected successfully to Supabase');
+            this.logger.log('Prisma connected successfully');
         }
         catch (error) {
-            // 3. Detailed error logging
-            this.logger.error('❌ Prisma failed to connect to the database');
-            this.logger.error(error.message);
-            if (error.message.includes('password authentication failed')) {
-                this.logger.warn('Check if your database password is correct and URL-encoded.');
-            }
-            if (error.message.includes('ETIMEDOUT')) {
-                this.logger.warn('Connection timed out. Check if your IP is whitelisted in Supabase or if you are using the correct port.');
-            }
-            // Optionally exit the process if the DB is critical
-            // process.exit(1); 
+            this.logger.error('Prisma failed to connect to the database');
+            this.logger.error(error instanceof Error ? error.message : String(error));
         }
     }
     async onModuleDestroy() {
@@ -59,7 +32,6 @@ let PrismaService = PrismaService_1 = class PrismaService extends client_1.Prism
 };
 exports.PrismaService = PrismaService;
 exports.PrismaService = PrismaService = PrismaService_1 = __decorate([
-    (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [])
+    (0, common_1.Injectable)()
 ], PrismaService);
 //# sourceMappingURL=prisma.service.js.map
