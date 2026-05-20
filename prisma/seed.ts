@@ -1,6 +1,6 @@
 
 import bcrypt from 'bcrypt';
-import { PrismaService } from "src/prisma/prisma.service";
+import { PrismaService } from "../src/prisma/prisma.service";
 
 
 async function createAdminUser() {
