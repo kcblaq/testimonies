@@ -15,7 +15,9 @@ export class AdminGuard implements CanActivate {
     const request = context.switchToHttp().getRequest();
     const email = request.user?.email;
     if (!email) {
-      throw new UnauthorizedException('Authentication required. Please log in.');
+      throw new UnauthorizedException(
+        'Authentication required. Please log in.',
+      );
     }
     const isAdmin = await this.adminService.isAdmin(email);
     if (!isAdmin) {

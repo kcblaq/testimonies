@@ -25,23 +25,39 @@ __decorate([
     __metadata("design:type", Number)
 ], TestimonyEntity.prototype, "id", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: 'My Healing Story', description: 'Title of the testimony' }),
+    (0, swagger_1.ApiProperty)({
+        example: 'My Healing Story',
+        description: 'Title of the testimony',
+    }),
     __metadata("design:type", String)
 ], TestimonyEntity.prototype, "title", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: 'I was healed...', description: 'Content of the testimony' }),
+    (0, swagger_1.ApiProperty)({
+        example: 'I was healed...',
+        description: 'Content of the testimony',
+    }),
     __metadata("design:type", String)
 ], TestimonyEntity.prototype, "content", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ enum: ReviewStatus, example: ReviewStatus.PENDING, description: 'Current status' }),
+    (0, swagger_1.ApiProperty)({
+        enum: ReviewStatus,
+        example: ReviewStatus.PENDING,
+        description: 'Current status',
+    }),
     __metadata("design:type", String)
 ], TestimonyEntity.prototype, "status", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: '2026-04-15T10:00:00Z', description: 'Creation date' }),
+    (0, swagger_1.ApiProperty)({
+        example: '2026-04-15T10:00:00Z',
+        description: 'Creation date',
+    }),
     __metadata("design:type", Date)
 ], TestimonyEntity.prototype, "createdAt", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: '2026-04-15T10:00:00Z', description: 'Last update date' }),
+    (0, swagger_1.ApiProperty)({
+        example: '2026-04-15T10:00:00Z',
+        description: 'Last update date',
+    }),
     __metadata("design:type", Date)
 ], TestimonyEntity.prototype, "updatedAt", void 0);
 __decorate([
@@ -53,7 +69,10 @@ __decorate([
     __metadata("design:type", String)
 ], TestimonyEntity.prototype, "authorName", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ example: 'admin@example.com', description: 'Admin who updated it last' }),
+    (0, swagger_1.ApiPropertyOptional)({
+        example: 'admin@example.com',
+        description: 'Admin who updated it last',
+    }),
     __metadata("design:type", String)
 ], TestimonyEntity.prototype, "updatedByEmail", void 0);
 __decorate([

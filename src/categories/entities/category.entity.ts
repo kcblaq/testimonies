@@ -1,7 +1,10 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 class CategoryCount {
-  @ApiProperty({ example: 5, description: 'Number of testimonies in this category' })
+  @ApiProperty({
+    example: 5,
+    description: 'Number of testimonies in this category',
+  })
   testimonies: number;
 }
 
@@ -15,15 +18,27 @@ export class CategoryEntity {
   @ApiProperty({ example: 'healing', description: 'URL-friendly slug' })
   slug: string;
 
-  @ApiPropertyOptional({ example: 'Testimonies related to healing', description: 'Optional category description' })
+  @ApiPropertyOptional({
+    example: 'Testimonies related to healing',
+    description: 'Optional category description',
+  })
   description?: string;
 
-  @ApiProperty({ example: '2026-04-15T10:00:00Z', description: 'Creation date' })
+  @ApiProperty({
+    example: '2026-04-15T10:00:00Z',
+    description: 'Creation date',
+  })
   createdAt: Date;
 
-  @ApiProperty({ example: '2026-04-15T10:00:00Z', description: 'Last update date' })
+  @ApiProperty({
+    example: '2026-04-15T10:00:00Z',
+    description: 'Last update date',
+  })
   updatedAt: Date;
 
-  @ApiPropertyOptional({ description: 'Counts of related records', type: CategoryCount })
+  @ApiPropertyOptional({
+    description: 'Counts of related records',
+    type: CategoryCount,
+  })
   _count?: CategoryCount;
 }

@@ -101,7 +101,9 @@ let CategoriesService = class CategoriesService {
                 data: {
                     ...(dto.name && { name: dto.name.trim() }),
                     ...(normalizedSlug && { slug: normalizedSlug }),
-                    ...(dto.description !== undefined && { description: dto.description?.trim() || null }),
+                    ...(dto.description !== undefined && {
+                        description: dto.description?.trim() || null,
+                    }),
                 },
             });
         }

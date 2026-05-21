@@ -1,5 +1,11 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsNotEmpty, IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
 
 export class CreateCategoryDto {
   @ApiProperty({ example: 'Healing', description: 'Category display name' })
@@ -11,7 +17,8 @@ export class CreateCategoryDto {
 
   @ApiPropertyOptional({
     example: 'healing',
-    description: 'URL-friendly slug. Defaults to lowercased name if not provided.',
+    description:
+      'URL-friendly slug. Defaults to lowercased name if not provided.',
   })
   @IsOptional()
   @IsString()

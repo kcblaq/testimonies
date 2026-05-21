@@ -7,7 +7,11 @@ export class AdminLoginDto {
   @IsNotEmpty()
   email: string;
 
-  @ApiProperty({ example: 'your-secure-password', description: 'Admin password', minLength: 6 })
+  @ApiProperty({
+    example: 'your-secure-password',
+    description: 'Admin password',
+    minLength: 6,
+  })
   @IsString()
   @IsNotEmpty({ message: 'Password is required' })
   @MinLength(6, { message: 'Password must be at least 6 characters' })

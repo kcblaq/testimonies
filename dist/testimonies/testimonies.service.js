@@ -16,7 +16,9 @@ const client_1 = require("@prisma/client");
 let TestimoniesService = class TestimoniesService {
     constructor(prisma) {
         this.prisma = prisma;
-        this.includeCategory = { category: { select: { id: true, name: true, slug: true } } };
+        this.includeCategory = {
+            category: { select: { id: true, name: true, slug: true } },
+        };
     }
     /** Resolve categorySlug to category id. Throws if slug not found. */
     async resolveCategoryId(categoryId, categorySlug) {
@@ -191,21 +193,32 @@ let TestimoniesService = class TestimoniesService {
             return this.prisma.testimony.update({
                 where: { id },
                 data: {
-                    ...(updateTestimonyDto.status && { status: updateTestimonyDto.status }),
+                    ...(updateTestimonyDto.title !== undefined && {
+                        title: updateTestimonyDto.title.trim(),
+                    }),
+                    ...(updateTestimonyDto.content !== undefined && {
+                        content: updateTestimonyDto.content.trim(),
+                    }),
+                    ...(updateTestimonyDto.status && {
+                        status: updateTestimonyDto.status,
+                    }),
                     ...(adminEmail && { updatedByEmail: adminEmail }),
                     ...(updateTestimonyDto.categoryId !== undefined && {
                         categoryId: updateTestimonyDto.categoryId ?? null,
                     }),
                     ...(updateTestimonyDto.isFeatured !== undefined && {
                         isFeatured: updateTestimonyDto.isFeatured,
-                        ...(featuredAtUpdate !== undefined && { featuredAt: featuredAtUpdate }),
+                        ...(featuredAtUpdate !== undefined && {
+                            featuredAt: featuredAtUpdate,
+                        }),
                     }),
                 },
                 include: this.includeCategory,
             });
         }
         catch (error) {
-            if (error instanceof common_1.NotFoundException || error instanceof common_1.BadRequestException)
+            if (error instanceof common_1.NotFoundException ||
+                error instanceof common_1.BadRequestException)
                 throw error;
             const message = error instanceof Error ? error.message : 'Unknown error';
             throw new common_1.InternalServerErrorException(message);
@@ -283,9 +296,9 @@ let TestimoniesService = class TestimoniesService {
         try {
             return await this.prisma.testimony.findMany({
                 where: { isFeatured: true },
-                orderBy: { updatedAt: "desc" },
+                orderBy: { updatedAt: 'desc' },
                 include: this.includeCategory,
-                take: 6
+                take: 6,
             });
         }
         catch (error) {

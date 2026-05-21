@@ -3,7 +3,8 @@ import { IsNotEmpty, IsString } from 'class-validator';
 
 export class VerifyEmailDto {
   @ApiProperty({
-    description: 'Verification token received after registration or when added as admin',
+    description:
+      'Verification token received after registration or when added as admin',
     example: 'a1b2c3d4e5f6...',
   })
   @IsString()

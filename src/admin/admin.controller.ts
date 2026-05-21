@@ -7,7 +7,12 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiBearerAuth,
+} from '@nestjs/swagger';
 import { AdminService } from './admin.service';
 import { AdminGuard } from './admin.guard';
 import { JwtAuthGuard } from './jwt-auth.guard';
@@ -30,10 +35,19 @@ export class AdminController {
     description:
       'Authenticate with email and password. Email must be verified first. Returns a JWT for protected admin routes.',
   })
-  @ApiResponse({ status: 200, description: 'Login successful. Returns access_token.' })
-  @ApiResponse({ status: 401, description: 'Invalid credentials or email not verified.' })
+  @ApiResponse({
+    status: 200,
+    description: 'Login successful. Returns access_token.',
+  })
+  @ApiResponse({
+    status: 401,
+    description: 'Invalid credentials or email not verified.',
+  })
   async login(@Body() dto: AdminLoginDto): Promise<{ access_token: string }> {
-    const admin = await this.adminService.validateAdmin(dto.email, dto.password);
+    const admin = await this.adminService.validateAdmin(
+      dto.email,
+      dto.password,
+    );
     const access_token = this.jwtService.sign({
       email: admin.email,
       sub: admin.email,
@@ -48,7 +62,10 @@ export class AdminController {
     description:
       'Call this with the verification token received after registration or when added by another admin. Required before the new admin can log in.',
   })
-  @ApiResponse({ status: 200, description: 'Email verified. Admin can now log in.' })
+  @ApiResponse({
+    status: 200,
+    description: 'Email verified. Admin can now log in.',
+  })
   @ApiResponse({ status: 400, description: 'Token missing.' })
   @ApiResponse({ status: 401, description: 'Invalid or expired token.' })
   async verifyEmail(@Body() dto: VerifyEmailDto) {
@@ -62,8 +79,14 @@ export class AdminController {
     description:
       'Only works when no admins exist. Creates an admin who must verify their email (using the returned token) before logging in.',
   })
-  @ApiResponse({ status: 201, description: 'First admin created. Verify email before login.' })
-  @ApiResponse({ status: 400, description: 'Admins already exist or invalid input.' })
+  @ApiResponse({
+    status: 201,
+    description: 'First admin created. Verify email before login.',
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Admins already exist or invalid input.',
+  })
   @ApiResponse({ status: 409, description: 'Email already registered.' })
   async register(@Body() dto: AdminRegisterDto) {
     return this.adminService.register(dto.name, dto.email, dto.password);
@@ -77,7 +100,10 @@ export class AdminController {
     description:
       'Create a new admin with name, email, and password. The new admin must verify their email (using the returned token) before they can log in.',
   })
-  @ApiResponse({ status: 201, description: 'Admin added. Share verification token with them.' })
+  @ApiResponse({
+    status: 201,
+    description: 'Admin added. Share verification token with them.',
+  })
   @ApiResponse({ status: 401, description: 'Not authenticated.' })
   @ApiResponse({ status: 403, description: 'Not an admin.' })
   @ApiResponse({ status: 409, description: 'Email already an admin.' })
@@ -132,7 +158,10 @@ export class AdminController {
     description:
       'Resend verification token to an admin who has not verified their email. The admin must have been added by another admin or registered previously.',
   })
-  @ApiResponse({ status: 200, description: 'Verification token resent successfully.' })
+  @ApiResponse({
+    status: 200,
+    description: 'Verification token resent successfully.',
+  })
   @ApiResponse({ status: 400, description: 'Email is required.' })
   @ApiResponse({ status: 404, description: 'Admin not found.' })
   async resendVerificationToken(@Body('email') email: string) {
@@ -146,7 +175,10 @@ export class AdminController {
     description:
       'Returns statistics for dashboard including total testimonies, approved testimonies, rejected testimonies, pending testimonies, total categories, total admins, submissions this week, submissions today, submissions by category, total views, and total shares.',
   })
-  @ApiResponse({ status: 200, description: 'Dashboard statistics retrieved successfully.' })
+  @ApiResponse({
+    status: 200,
+    description: 'Dashboard statistics retrieved successfully.',
+  })
   @ApiResponse({ status: 401, description: 'Not authenticated.' })
   @ApiResponse({ status: 403, description: 'Not an admin.' })
   async dashboardStats() {

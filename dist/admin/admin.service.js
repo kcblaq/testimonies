@@ -86,7 +86,11 @@ let AdminService = class AdminService {
         const token = (0, node_crypto_1.randomBytes)(VERIFICATION_TOKEN_BYTES).toString('hex');
         const expiresAt = new Date();
         expiresAt.setHours(expiresAt.getHours() + VERIFICATION_EXPIRY_HOURS);
-        this.emailService.sendMail(email, 'dff86133-65ec-4d5c-b8fc-ba2d669382f5', { token, name, expiresAt });
+        this.emailService.sendMail(email, 'dff86133-65ec-4d5c-b8fc-ba2d669382f5', {
+            token,
+            name,
+            expiresAt,
+        });
         return { token, expiresAt };
     }
     async register(name, email, password) {
@@ -155,7 +159,8 @@ let AdminService = class AdminService {
         if (!admin) {
             throw new common_1.UnauthorizedException('Invalid or expired verification token.');
         }
-        if (admin.emailVerificationTokenExpiresAt && admin.emailVerificationTokenExpiresAt < new Date()) {
+        if (admin.emailVerificationTokenExpiresAt &&
+            admin.emailVerificationTokenExpiresAt < new Date()) {
             throw new common_1.UnauthorizedException('Verification token has expired. Request a new one.');
         }
         await this.prisma.admin.update({
@@ -221,7 +226,9 @@ let AdminService = class AdminService {
         const totalCategories = await this.prisma.category.count();
         const totalAdmins = await this.prisma.admin.count();
         const submitionsThisWeek = await this.prisma.testimony.count({
-            where: { createdAt: { gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) } },
+            where: {
+                createdAt: { gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) },
+            },
         });
         const submitionsToday = await this.prisma.testimony.count({
             where: { createdAt: { gte: new Date(Date.now() - 24 * 60 * 60 * 1000) } },
@@ -254,7 +261,19 @@ let AdminService = class AdminService {
                 shared: true,
             },
         });
-        return { totalTestimonies, approvedTestimonies, rejectedTestimonies, pendingTestimonies, totalCategories, totalAdmins, submitionsThisWeek, submitionsToday, totalViews, totalShares, categorieswithcount };
+        return {
+            totalTestimonies,
+            approvedTestimonies,
+            rejectedTestimonies,
+            pendingTestimonies,
+            totalCategories,
+            totalAdmins,
+            submitionsThisWeek,
+            submitionsToday,
+            totalViews,
+            totalShares,
+            categorieswithcount,
+        };
     }
 };
 exports.AdminService = AdminService;

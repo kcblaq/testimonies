@@ -17,7 +17,7 @@ async function bootstrap() {
   );
 
   app.enableCors({
-    origin: ["http://localhost:8080", "https://ffitestimonies.netlify.app"], 
+    origin: ['http://localhost:8080', 'https://ffitestimonies.netlify.app'],
     credentials: true, // Need this if frontend uses cookies
   });
 
@@ -28,7 +28,7 @@ async function bootstrap() {
       saveUninitialized: false,
     }),
   );
- 
+
   const config = new DocumentBuilder()
     .setTitle('Testimonies API')
     .setDescription(

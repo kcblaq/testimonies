@@ -9,9 +9,16 @@ import { ConfigModule } from '@nestjs/config';
 import { EmailModule } from './email/email.module';
 
 @Module({
-  imports: [ConfigModule.forRoot({
-    isGlobal: true,
-  }), PrismaModule, AdminModule, CategoriesModule, TestimoniesModule, EmailModule],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    PrismaModule,
+    AdminModule,
+    CategoriesModule,
+    TestimoniesModule,
+    EmailModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

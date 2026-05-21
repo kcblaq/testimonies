@@ -22,7 +22,11 @@ __decorate([
     __metadata("design:type", String)
 ], AdminLoginDto.prototype, "email", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: 'your-secure-password', description: 'Admin password', minLength: 6 }),
+    (0, swagger_1.ApiProperty)({
+        example: 'your-secure-password',
+        description: 'Admin password',
+        minLength: 6,
+    }),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)({ message: 'Password is required' }),
     (0, class_validator_1.MinLength)(6, { message: 'Password must be at least 6 characters' }),

@@ -84,7 +84,9 @@ export class CategoriesService {
       if (error && typeof error === 'object' && 'code' in error) {
         const code = (error as { code?: string }).code;
         if (code === 'P2002') {
-          throw new ConflictException('A category with this name or slug already exists.');
+          throw new ConflictException(
+            'A category with this name or slug already exists.',
+          );
         }
       }
       throw new InternalServerErrorException('Failed to create category.');
@@ -101,7 +103,9 @@ export class CategoriesService {
         data: {
           ...(dto.name && { name: dto.name.trim() }),
           ...(normalizedSlug && { slug: normalizedSlug }),
-          ...(dto.description !== undefined && { description: dto.description?.trim() || null }),
+          ...(dto.description !== undefined && {
+            description: dto.description?.trim() || null,
+          }),
         },
       });
     } catch (error: unknown) {
@@ -109,7 +113,9 @@ export class CategoriesService {
       if (error && typeof error === 'object' && 'code' in error) {
         const code = (error as { code?: string }).code;
         if (code === 'P2002') {
-          throw new ConflictException('A category with this name or slug already exists.');
+          throw new ConflictException(
+            'A category with this name or slug already exists.',
+          );
         }
       }
       throw new InternalServerErrorException('Failed to update category.');

@@ -243,7 +243,7 @@ Authorization: Bearer <token>
 
 **Response `200`:** `[{ "email", "name", "emailVerified" }, ...]`
 
-#### Approve or reject a testimony
+#### Approve, reject or edit a testimony
 
 ```http
 PATCH /testimonies/:id
@@ -255,6 +255,8 @@ Content-Type: application/json
 
 | Field      | Type   | Required | Description                              |
 |------------|--------|----------|------------------------------------------|
+| title      | string | no       | Title of the testimony (5–200 characters) |
+| content    | string | no       | Testimony content (20–5000 characters)   |
 | status     | string | no       | `APPROVED` or `REJECTED`                 |
 | categoryId | number | no       | Category ID; use `null` to clear        |
 

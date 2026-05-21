@@ -14,7 +14,10 @@ const swagger_1 = require("@nestjs/swagger");
 class CategoryCount {
 }
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: 5, description: 'Number of testimonies in this category' }),
+    (0, swagger_1.ApiProperty)({
+        example: 5,
+        description: 'Number of testimonies in this category',
+    }),
     __metadata("design:type", Number)
 ], CategoryCount.prototype, "testimonies", void 0);
 class CategoryEntity {
@@ -33,19 +36,31 @@ __decorate([
     __metadata("design:type", String)
 ], CategoryEntity.prototype, "slug", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ example: 'Testimonies related to healing', description: 'Optional category description' }),
+    (0, swagger_1.ApiPropertyOptional)({
+        example: 'Testimonies related to healing',
+        description: 'Optional category description',
+    }),
     __metadata("design:type", String)
 ], CategoryEntity.prototype, "description", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: '2026-04-15T10:00:00Z', description: 'Creation date' }),
+    (0, swagger_1.ApiProperty)({
+        example: '2026-04-15T10:00:00Z',
+        description: 'Creation date',
+    }),
     __metadata("design:type", Date)
 ], CategoryEntity.prototype, "createdAt", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: '2026-04-15T10:00:00Z', description: 'Last update date' }),
+    (0, swagger_1.ApiProperty)({
+        example: '2026-04-15T10:00:00Z',
+        description: 'Last update date',
+    }),
     __metadata("design:type", Date)
 ], CategoryEntity.prototype, "updatedAt", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Counts of related records', type: CategoryCount }),
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Counts of related records',
+        type: CategoryCount,
+    }),
     __metadata("design:type", CategoryCount)
 ], CategoryEntity.prototype, "_count", void 0);
 //# sourceMappingURL=category.entity.js.map

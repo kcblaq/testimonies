@@ -14,7 +14,10 @@ export class TestimonyQueryDto {
   @IsString()
   categorySlug?: string;
 
-  @ApiPropertyOptional({ description: 'Search term for title, content, authorName, or category name', type: String })
+  @ApiPropertyOptional({
+    description: 'Search term for title, content, authorName, or category name',
+    type: String,
+  })
   @IsOptional()
   @IsString()
   search?: string;
@@ -26,7 +29,11 @@ export class TestimonyQueryDto {
   @Min(1)
   page?: number = 1;
 
-  @ApiPropertyOptional({ description: 'Number of items per page', default: 10, type: Number })
+  @ApiPropertyOptional({
+    description: 'Number of items per page',
+    default: 10,
+    type: Number,
+  })
   @IsOptional()
   @Type(() => Number)
   @IsInt()

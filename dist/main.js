@@ -18,7 +18,7 @@ async function bootstrap() {
         transformOptions: { enableImplicitConversion: true },
     }));
     app.enableCors({
-        origin: "http://localhost:8080",
+        origin: ['http://localhost:8080', 'https://ffitestimonies.netlify.app'],
         credentials: true, // Need this if frontend uses cookies
     });
     app.use((0, express_session_1.default)({

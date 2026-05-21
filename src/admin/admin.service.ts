@@ -18,7 +18,7 @@ export class AdminService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly emailService: EmailService,
-    ) {}
+  ) {}
 
   private readonly SALT_ROUNDS = 10;
 
@@ -56,11 +56,15 @@ export class AdminService {
   generateVerificationToken(
     email: string,
     name: string,
-  ): { token: string; expiresAt: Date} {
+  ): { token: string; expiresAt: Date } {
     const token = randomBytes(VERIFICATION_TOKEN_BYTES).toString('hex');
     const expiresAt = new Date();
     expiresAt.setHours(expiresAt.getHours() + VERIFICATION_EXPIRY_HOURS);
-    this.emailService.sendMail(email, 'dff86133-65ec-4d5c-b8fc-ba2d669382f5', {token, name, expiresAt})
+    this.emailService.sendMail(email, 'dff86133-65ec-4d5c-b8fc-ba2d669382f5', {
+      token,
+      name,
+      expiresAt,
+    });
     return { token, expiresAt };
   }
 
@@ -143,8 +147,13 @@ export class AdminService {
     if (!admin) {
       throw new UnauthorizedException('Invalid or expired verification token.');
     }
-    if (admin.emailVerificationTokenExpiresAt && admin.emailVerificationTokenExpiresAt < new Date()) {
-      throw new UnauthorizedException('Verification token has expired. Request a new one.');
+    if (
+      admin.emailVerificationTokenExpiresAt &&
+      admin.emailVerificationTokenExpiresAt < new Date()
+    ) {
+      throw new UnauthorizedException(
+        'Verification token has expired. Request a new one.',
+      );
     }
     await this.prisma.admin.update({
       where: { id: admin.id },
@@ -165,7 +174,9 @@ export class AdminService {
     return result.count > 0;
   }
 
-  async getAllAdmins(): Promise<{ email: string; name: string; emailVerified: boolean }[]> {
+  async getAllAdmins(): Promise<
+    { email: string; name: string; emailVerified: boolean }[]
+  > {
     const admins = await this.prisma.admin.findMany({
       select: { email: true, name: true, emailVerified: true },
       orderBy: { email: 'asc' },
@@ -188,7 +199,10 @@ export class AdminService {
     if (admin.emailVerified) {
       throw new UnauthorizedException('Email already verified.');
     }
-    const { token, expiresAt } = this.generateVerificationToken(admin.email, admin.name);
+    const { token, expiresAt } = this.generateVerificationToken(
+      admin.email,
+      admin.name,
+    );
     await this.prisma.admin.update({
       where: { id: admin.id },
       data: {
@@ -197,11 +211,15 @@ export class AdminService {
       },
     });
 
-    this.emailService.sendMail(admin.email, 'dff86133-65ec-4d5c-b8fc-ba2d669382f5', {name: admin.name, token, expiresAt})
+    this.emailService.sendMail(
+      admin.email,
+      'dff86133-65ec-4d5c-b8fc-ba2d669382f5',
+      { name: admin.name, token, expiresAt },
+    );
     return { message: 'Verification token resent successfully.' };
   }
 
-  async dashboarddata(){
+  async dashboarddata() {
     const totalTestimonies = await this.prisma.testimony.count();
     const approvedTestimonies = await this.prisma.testimony.count({
       where: { status: ReviewStatus.APPROVED },
@@ -215,7 +233,9 @@ export class AdminService {
     const totalCategories = await this.prisma.category.count();
     const totalAdmins = await this.prisma.admin.count();
     const submitionsThisWeek = await this.prisma.testimony.count({
-      where: { createdAt: { gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) } },
+      where: {
+        createdAt: { gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) },
+      },
     });
     const submitionsToday = await this.prisma.testimony.count({
       where: { createdAt: { gte: new Date(Date.now() - 24 * 60 * 60 * 1000) } },
@@ -230,8 +250,10 @@ export class AdminService {
       },
       where: { categoryId: { in: categories.map((category) => category.id) } },
     });
-    const categorieswithcount=categories.map((category) => {
-      const count = submitionByCategory.find((submition) => submition.categoryId === category.id);
+    const categorieswithcount = categories.map((category) => {
+      const count = submitionByCategory.find(
+        (submition) => submition.categoryId === category.id,
+      );
       return {
         categoryId: category.id,
         categoryName: category.name,
@@ -248,10 +270,18 @@ export class AdminService {
         shared: true,
       },
     });
-    return { totalTestimonies, approvedTestimonies, rejectedTestimonies, pendingTestimonies, totalCategories, totalAdmins, submitionsThisWeek, submitionsToday, totalViews, totalShares, categorieswithcount};
+    return {
+      totalTestimonies,
+      approvedTestimonies,
+      rejectedTestimonies,
+      pendingTestimonies,
+      totalCategories,
+      totalAdmins,
+      submitionsThisWeek,
+      submitionsToday,
+      totalViews,
+      totalShares,
+      categorieswithcount,
+    };
   }
-  
 }
-
-
-

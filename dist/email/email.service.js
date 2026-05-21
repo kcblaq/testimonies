@@ -26,11 +26,9 @@ let EmailService = class EmailService {
         try {
             return this.client.send({
                 from: this.sender,
-                to: [
-                    { email: to }
-                ],
+                to: [{ email: to }],
                 template_uuid: template_uuid,
-                template_variables: template_variables
+                template_variables: template_variables,
             });
         }
         catch (error) {

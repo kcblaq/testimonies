@@ -25,7 +25,8 @@ export class CreateTestimonyDto {
 
   @ApiProperty({
     description: 'Full content of the testimony',
-    example: 'I am grateful for the support I received. It made a real difference.',
+    example:
+      'I am grateful for the support I received. It made a real difference.',
   })
   @IsString()
   @IsNotEmpty({ message: 'Content is required' })
@@ -54,7 +55,8 @@ export class CreateTestimonyDto {
   authorEmail: string;
 
   @ApiProperty({
-    description: 'ID of the category this testimony belongs to. Use GET /categories to list options.',
+    description:
+      'ID of the category this testimony belongs to. Use GET /categories to list options.',
     example: 1,
   })
   @IsNotEmpty({ message: 'Category is required' })

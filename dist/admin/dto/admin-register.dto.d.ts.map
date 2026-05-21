@@ -1,1 +1,1 @@
-{"version":3,"file":"admin-register.dto.d.ts","sourceRoot":"","sources":["../../../src/admin/dto/admin-register.dto.ts"],"names":[],"mappings":"AAGA,qBAAa,gBAAgB;IAM3B,IAAI,EAAE,MAAM,CAAC;IAKb,KAAK,EAAE,MAAM,CAAC;IAMd,QAAQ,EAAE,MAAM,CAAC;CAClB"}
+{"version":3,"file":"admin-register.dto.d.ts","sourceRoot":"","sources":["../../../src/admin/dto/admin-register.dto.ts"],"names":[],"mappings":"AASA,qBAAa,gBAAgB;IAM3B,IAAI,EAAE,MAAM,CAAC;IAKb,KAAK,EAAE,MAAM,CAAC;IAUd,QAAQ,EAAE,MAAM,CAAC;CAClB"}
