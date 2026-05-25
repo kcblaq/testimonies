@@ -36,11 +36,13 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'Full content of the testimony',
         example: 'I am grateful for the support I received. It made a real difference.',
+        minLength: 20,
+        maxLength: 20000,
     }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.MinLength)(20, { message: 'Content must be at least 20 characters' }),
-    (0, class_validator_1.MaxLength)(5000, { message: 'Content must be at most 5000 characters' }),
+    (0, class_validator_1.MaxLength)(20000, { message: 'Content must be at most 20000 characters' }),
     __metadata("design:type", String)
 ], UpdateTestimonyDto.prototype, "content", void 0);
 __decorate([

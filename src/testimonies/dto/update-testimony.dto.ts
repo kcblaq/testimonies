@@ -31,11 +31,13 @@ export class UpdateTestimonyDto {
     description: 'Full content of the testimony',
     example:
       'I am grateful for the support I received. It made a real difference.',
+    minLength: 20,
+    maxLength: 20000,
   })
   @IsOptional()
   @IsString()
   @MinLength(20, { message: 'Content must be at least 20 characters' })
-  @MaxLength(5000, { message: 'Content must be at most 5000 characters' })
+  @MaxLength(20000, { message: 'Content must be at most 20000 characters' })
   content?: string;
 
   @ApiPropertyOptional({
